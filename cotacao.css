@@ -73,3 +73,40 @@ body.quote-open .quote-sheet { transform: translate(-50%, 0); }
 
 .qf .ac-list button.is-active { background: rgba(57,181,74,0.22); }
 .qf .ok { border-color: #39b54a !important; box-shadow: 0 0 0 2px rgba(57,181,74,0.18); }
+
+/* ===== TAPIA: dourado, pilares e chat ===== */
+:root { --gold: #c9a75b; --gold2: #f3d98d; }
+.kicker.gold { color: var(--gold2); }
+.gold-text { color: var(--gold2); }
+.pillars { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.pillars li { padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(201,167,91,0.3); background: rgba(201,167,91,0.06); }
+.pillars b { display: block; font-family: var(--display); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold2); margin-bottom: 4px; }
+.pillars span { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.traits { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.traits span { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(201,167,91,0.4); color: var(--gold2); font-family: var(--display); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+.tapia-avatar .tag { background: linear-gradient(135deg, var(--gold2), var(--gold)); color: #1a1405; }
+.tapia-bubble { border-color: rgba(201,167,91,0.45); }
+.tapia-bubble b { color: var(--gold2); }
+.tapia-chat { position: absolute; right: 0; bottom: calc(100% + 12px); width: min(360px, calc(100vw - 28px)); background: linear-gradient(180deg, #0b2a20, #061410); border: 1px solid rgba(201,167,91,0.45); border-radius: 22px; box-shadow: 0 30px 80px rgba(0,0,0,0.55); overflow: hidden; display: none; flex-direction: column; animation: fade .35s ease; }
+.tapia-chat.is-on { display: flex; }
+.tc-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid rgba(201,167,91,0.25); background: rgba(201,167,91,0.06); }
+.tc-head img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: 50% 25%; border: 2px solid var(--gold); }
+.tc-head b { display: block; font-family: var(--display); font-size: 14px; letter-spacing: .08em; color: var(--gold2); }
+.tc-head span { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+.tc-head span i { width: 7px; height: 7px; border-radius: 50%; background: #39b54a; box-shadow: 0 0 8px #39b54a; }
+.tc-close { margin-left: auto; width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(242,247,243,0.2); background: transparent; color: #f2f7f3; cursor: pointer; font-size: 16px; }
+.tc-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; max-height: 50vh; overflow-y: auto; }
+.tc-msg { align-self: flex-start; max-width: 92%; padding: 10px 14px; border-radius: 14px 14px 14px 4px; background: #f2f7f3; color: #08150f; font-size: 13px; line-height: 1.5; }
+.tc-msg.me { align-self: flex-end; border-radius: 14px 14px 4px 14px; background: rgba(57,181,74,0.25); color: #f2f7f3; }
+.tc-msg b { color: #136337; }
+.tc-msg.me b { color: #9df0a8; }
+.tc-actions { display: grid; gap: 6px; }
+.tc-actions button { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(201,167,91,0.35); background: rgba(255,255,255,0.03); color: #f2f7f3; font-family: var(--body); font-size: 13px; text-align: left; cursor: pointer; transition: all .2s; }
+.tc-actions button:hover { border-color: var(--gold2); background: rgba(201,167,91,0.12); transform: translateX(2px); }
+.tc-actions button span { width: 26px; height: 26px; border-radius: 8px; background: rgba(201,167,91,0.15); display: grid; place-items: center; font-size: 13px; }
+.tc-input { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid rgba(201,167,91,0.25); }
+.tc-input input { flex: 1; padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(242,247,243,0.18); background: rgba(255,255,255,0.05); color: #f2f7f3; font-family: var(--body); font-size: 13px; outline: none; }
+.tc-input input:focus { border-color: var(--gold); }
+.tc-input button { width: 40px; height: 40px; border-radius: 50%; border: 0; background: linear-gradient(135deg, var(--gold2), var(--gold)); color: #1a1405; cursor: pointer; font-size: 14px; }
+body.quote-open .tapia-chat { display: none; }
+@media (max-width: 720px) { .pillars { grid-template-columns: 1fr; } .tapia-chat { right: -14px; width: calc(100vw - 20px); } }

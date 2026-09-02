@@ -1,0 +1,46 @@
+# TAP Express
+
+> Transportadora de cargas e encomendas expressas fundada em 2001 em Presidente Prudente (SP). Slogan: "Precisão regional. Velocidade que move negócios." Atende 104 localidades em São Paulo, Paraná e Mato Grosso do Sul a partir de 20 unidades e bases. Entrega em até 18 horas, rastreamento via satélite, seguro de carga incluso, centro de distribuição 24h.
+
+## Contato
+- Telefone central: (18) 3918-7777
+- WhatsApp central: +5518991096441
+- E-mail: recepcao@taptransportes.com.br
+- Rastreamento (portal oficial): https://ssw.inf.br/2/rastreamento
+- Cotação online: https://tap.amodesenvolvimento.com.br/#cotacao
+- Assistente virtual: TAPIA ("Inteligência que move") · orienta cotação, rastreamento e atendimento humano.
+
+## Serviços
+- Encomendas expressas (coleta ágil, entrega em até 18h)
+- Malotes e documentos corporativos
+- Cargas fracionadas (frota própria e parceiros homologados)
+- Rastreamento via satélite em todos os veículos
+- Seguro de carga incluso
+- Área do cliente (acompanhamento e boletos), SAC 24h
+
+## Unidades e cobertura
+- [Regente Feijó · SP](https://tap.amodesenvolvimento.com.br/unidades/regente-feijo/): Rod. SP 270 Raposo Tavares, km 556 · (18) 3918-7777 · atende Presidente Prudente, Álvares Machado, Caiuá, Euclides da Cunha Paulista, Indiana, João Ramalho, Martinópolis, Mirante do Paranapanema, Piquerobi, Pirapozinho, Presidente Bernardes, Presidente Epitácio, Presidente Venceslau, Quatá, Rancharia, Rosana, Santo Anastácio, Teodoro Sampaio
+- [Araçatuba · SP](https://tap.amodesenvolvimento.com.br/unidades/aracatuba/): Rua Clibas de Almeida Prado, 5450 · Centenário · (18) 3608-6423 · atende Birigui, Coroados, Guararapes
+- [Bauru · SP](https://tap.amodesenvolvimento.com.br/unidades/bauru/): Rua Irmã Arminda, 12-22 · Vila Galvão · (14) 3208-0777 · atende Agudos, Lençóis Paulista, Macatuba, Pederneiras, Piratininga
+- [Marília · SP](https://tap.amodesenvolvimento.com.br/unidades/marilia/): Av. Manoel Pereira, 82 · Jardim Morumbi · (14) 3413-1748 · atende Garça, Oriente, Pompéia, Vera Cruz
+- [Ribeirão Preto · SP](https://tap.amodesenvolvimento.com.br/unidades/ribeirao-preto/): R. Armando Tarozo, 72 · Pq. Ind. Lagoinha · (16) 3618-0510 · atende Cravinhos (terça, quinta), Sertãozinho (segunda, quarta, sexta), Jardinópolis (terça, quinta)
+- [São José do Rio Preto · SP](https://tap.amodesenvolvimento.com.br/unidades/sao-jose-do-rio-preto/): Rua Percy Gandini, 4065 · Vila Toninho · (17) 3238-3921 · atende Bady Bassitt, Catanduva, Cedral, Jaci, Mirassol
+- [Araraquara · SP](https://tap.amodesenvolvimento.com.br/unidades/araraquara/): Av. André Onofrio, 50 · Guaianases · (16) 3010-3501 · atende Américo Brasiliense, Matão
+- [Assis · SP](https://tap.amodesenvolvimento.com.br/unidades/assis/): Rua Ferruccio Ciciliato, 265 · Portal São Francisco · (18) 3324-9599 · atende Cândido Mota, Maracaí (terça, quinta), Palmital, Paraguaçu Paulista, Tarumã
+- [Jaú · SP](https://tap.amodesenvolvimento.com.br/unidades/jau/): Rua Ernani Brandão Tofano, 270 · Quinta da Colina · (14) 3624-9565 · atende Bariri (segunda, quarta, sexta), Barra Bonita (segunda, quarta, sexta), Dois Córregos (terça, quinta), Igaraçu do Tietê (segunda, quarta, sexta), Itapuí (segunda, quarta, sexta), Mineiros do Tietê (terça, quinta)
+- [Andradina · SP](https://tap.amodesenvolvimento.com.br/unidades/andradina/): Rua Piauí, 1274 · Bairro Piscina · (18) 3721-1292 · atende Castilho, Guaraçaí, Mirandópolis, Murutinga do Sul
+- [Dracena · SP](https://tap.amodesenvolvimento.com.br/unidades/dracena/): Rua Mato Grosso, 278 · Vila Metrópole · (18) 3822-6898 · atende Irapuru (segunda, quarta), Junqueirópolis, Ouro Verde (terça, quinta), Tupi Paulista
+- [Osvaldo Cruz · SP](https://tap.amodesenvolvimento.com.br/unidades/osvaldo-cruz/): Av. Pedro Ciciliati, 2835 · Distrito Industrial · (18) 3529-2126 · atende Adamantina, Bastos, Flórida Paulista, Iacri, Inúbia Paulista, Lucélia, Pacaembu, Parapuã, Rinópolis
+- [Tupã · SP](https://tap.amodesenvolvimento.com.br/unidades/tupa/): Rua J. Enrique Ari Fernandes, 2420 · Vila das Indústrias · (14) 99665-9450 · atende consulte a central
+- [Londrina · PR](https://tap.amodesenvolvimento.com.br/unidades/londrina/): Rua Roberto Romanelli, 1795 · Jardim Ana Eliza, Cambé · (43) 3323-8081 · atende Cambé, Ibiporã, Rolândia
+- [Maringá · PR](https://tap.amodesenvolvimento.com.br/unidades/maringa/): Av. Ademar Bornia, 473 · Barracão 06, Sarandi · (44) 3264-4735 · atende Marialva, Paiçandu, Sarandi
+- [Apucarana · PR](https://tap.amodesenvolvimento.com.br/unidades/apucarana/): Rua Prof. Edwaldo Conezin Tosh, 403 · Vila Feliz · (43) 99681-4851 · atende consulte a central
+- [Arapongas · PR](https://tap.amodesenvolvimento.com.br/unidades/arapongas/): Rua Gralha Azul, 301, Box 04 · Vila Edio · (43) 3276-7517 · atende Astorga (terça, quinta), Sabáudia (terça, quinta)
+- [Três Lagoas · MS](https://tap.amodesenvolvimento.com.br/unidades/tres-lagoas/): Av. Cap. Olinto Mancini, 2955 · Jardim Alvorada · (67) 2104-6776 · atende consulte a central
+- [Penápolis · SP](https://tap.amodesenvolvimento.com.br/unidades/penapolis/): Rua Dr. Mario Sábino, 1707A · Jardim Guanabara · (18) 99755-5502 · atende Lins (segunda, quarta, sexta), Promissão (segunda, quarta, sexta)
+- [Ourinhos · SP](https://tap.amodesenvolvimento.com.br/unidades/ourinhos/): Base de atendimento · endereço sob confirmação · (18) 3918-7777 · atende Canitar, Chavantes, Ibirarema, Ipaussu, Salto Grande, Santa Cruz do Rio Pardo
+
+## Páginas
+- [Início](https://tap.amodesenvolvimento.com.br/)
+- [Mapa da rede](https://tap.amodesenvolvimento.com.br/#unidades)
+- [Sitemap](https://tap.amodesenvolvimento.com.br/sitemap.xml)

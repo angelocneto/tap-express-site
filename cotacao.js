@@ -3,6 +3,7 @@
   const body = document.body, sheet = document.getElementById("quoteSheet"), backdrop = document.getElementById("quoteBackdrop");
   if (!sheet) return;
   const fab = document.getElementById("tapiaFab"), bubble = document.getElementById("tapiaBubble"), avatarVideo = document.getElementById("tapiaWave");
+  document.addEventListener("click", (e) => { const ch = document.getElementById("tapiaChat"); if (ch && ch.classList.contains("is-on") && !e.target.closest(".tapia-fab")) ch.classList.remove("is-on"); });
   const steps = [...sheet.querySelectorAll(".quote-step")], prog = sheet.querySelector(".quote-progress i");
   const btnPrev = document.getElementById("qPrev"), btnNext = document.getElementById("qNext"), errEl = document.getElementById("qErr");
   const form = document.getElementById("quoteForm");
@@ -41,7 +42,34 @@
     setTimeout(() => sheet.querySelector(".quote-step.is-on input")?.focus(), 500);
   }
   function close() { body.classList.remove("quote-open"); if (window.__lenis) window.__lenis.start(); }
-  document.querySelectorAll("[data-open-quote], .tapia-avatar, .tapia-bubble").forEach(el => el.addEventListener("click", (e) => { if (e.target.classList.contains("x")) return; e.preventDefault(); open(el.dataset.openQuote || el.id); }));
+  document.querySelectorAll("[data-open-quote]").forEach(el => el.addEventListener("click", (e) => { e.preventDefault(); open(el.dataset.openQuote); }));
+
+  /* ---- chat TAPIA (launcher) ---- */
+  const chat = document.getElementById("tapiaChat"), chatBody = document.getElementById("tapiaChatBody"), chatForm = document.getElementById("tapiaChatForm"), chatText = document.getElementById("tapiaChatText");
+  const WA = (window.TAP_REDE && window.TAP_REDE.wa) || "5518991096441";
+  function say(html, me) { const d = document.createElement("div"); d.className = "tc-msg" + (me ? " me" : ""); d.innerHTML = html; chatBody.appendChild(d); chatBody.scrollTop = chatBody.scrollHeight; }
+  function toggleChat(force) { const on = force !== undefined ? force : !chat.classList.contains("is-on"); chat.classList.toggle("is-on", on); bubble.classList.remove("is-on"); sessionStorage.setItem("tapiaBubbleClosed", "1"); if (on) setTimeout(() => chatText.focus(), 300); }
+  document.querySelector(".tapia-avatar").addEventListener("click", () => toggleChat());
+  bubble.addEventListener("click", (e) => { if (e.target.classList.contains("x")) return; toggleChat(true); });
+  document.getElementById("tapiaChatClose").addEventListener("click", () => toggleChat(false));
+  chatBody.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tapia]"); if (!b) return;
+    const a = b.dataset.tapia;
+    if (a === "cotar") { say("Quero cotar um envio.", true); say("Perfeito! Vou abrir a cotação em 3 passos. Me diga de onde para onde vai a sua encomenda."); setTimeout(() => { toggleChat(false); open("tapia-chat"); }, 700); }
+    if (a === "rastrear") { say("Quero rastrear uma encomenda.", true); say("O rastreamento acontece no portal oficial da TAP. Vou abrir para você em uma nova aba: informe o código da encomenda ou a nota fiscal."); setTimeout(() => window.open("https://ssw.inf.br/2/rastreamento", "_blank", "noopener"), 900); }
+    if (a === "especialista") { say("Quero falar com um especialista.", true); say("Claro! Nossa equipe atende pelo WhatsApp central em horário comercial. Vou te levar para lá com o contexto desta conversa."); setTimeout(() => window.open(`https://wa.me/${WA}?text=${encodeURIComponent("Olá! Vim pelo site da TAP Express, falando com a TAPIA, e quero falar com um especialista.")}`, "_blank", "noopener"), 900); }
+    if (a === "coleta") { say("Quero programar coletas.", true); say("Coletas programadas são combinadas com a unidade da sua região. Vou abrir a cotação: escreva a frequência desejada nas observações que a equipe monta a rotina com você."); setTimeout(() => { toggleChat(false); open("tapia-coleta"); const obs = form.elements["observacoes"]; if (obs && !obs.value) obs.value = "Coleta programada: "; }, 900); }
+  });
+  chatForm.addEventListener("submit", (e) => {
+    e.preventDefault(); const t = chatText.value.trim(); if (!t) return; chatText.value = "";
+    say(t.replace(/</g, "&lt;"), true);
+    const n = t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    if (/cota|preco|preço|valor|frete|envio|enviar|mandar/.test(n)) { say("Posso preparar a cotação agora mesmo. Abrindo os 3 passos…"); setTimeout(() => { toggleChat(false); open("tapia-chat"); }, 800); return; }
+    if (/rastre|onde esta|cadê|cade|encomenda|nota/.test(n)) { say("Para rastrear, use o portal oficial da TAP. Abrindo em nova aba…"); setTimeout(() => window.open("https://ssw.inf.br/2/rastreamento", "_blank", "noopener"), 800); return; }
+    if (/unidade|cidade|atende|cobertura|regiao|região/.test(n)) { say("Nossa rede tem 20 unidades e 104 localidades. Vou te mostrar no mapa: digite a cidade na busca para ver quem atende."); setTimeout(() => { toggleChat(false); if (window.__lenis) window.__lenis.scrollTo(document.querySelector(".mapwrap"), { offset: -90 }); const s = document.getElementById("citySearch"); if (s) { s.value = ""; setTimeout(() => s.focus(), 1200); } }, 800); return; }
+    say("Anotei. Para não te deixar sem resposta, vou encaminhar sua mensagem ao atendimento humano no WhatsApp com todo o contexto.");
+    setTimeout(() => window.open(`https://wa.me/${WA}?text=${encodeURIComponent("Olá! Vim pelo site da TAP Express (TAPIA). Minha mensagem: " + t)}`, "_blank", "noopener"), 1200);
+  });
   backdrop.addEventListener("click", close);
   sheet.querySelector(".close").addEventListener("click", close);
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && body.classList.contains("quote-open")) close(); });
@@ -49,11 +77,11 @@
   /* ---- city autocomplete (rede TAP) ---- */
   const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const places = [];
-  if (window.TAP_REDE) window.TAP_REDE.units.forEach(u => { places.push({ n: u.n, uf: u.uf, via: u.n }); u.cities.forEach(c => { if (norm(c.n) !== norm(u.n)) places.push({ n: c.n, uf: u.uf, via: u.n }); }); });
+  if (window.TAP_REDE) window.TAP_REDE.units.forEach(u => { places.push({ n: u.n, uf: u.uf, via: u.n }); u.cities.forEach(c => { if (norm(c.n) !== norm(u.n)) places.push({ n: c.n, uf: u.uf, via: u.n, d: c.d }); }); });
   sheet.querySelectorAll(".ac").forEach(box => {
     const input = box.querySelector("input"), list = box.querySelector(".ac-list"), hint = box.querySelector(".hint");
     let items = [], idx = -1;
-    function choose(p) { input.value = p.n; list.classList.remove("is-open"); input.classList.add("ok"); hint.textContent = "✓ Cidade atendida pela rede TAP" + (p.via !== p.n ? " · via " + p.via : "") + " · " + p.uf; }
+    function choose(p) { input.value = p.n; list.classList.remove("is-open"); input.classList.add("ok"); hint.textContent = "✓ Cidade atendida pela rede TAP" + (p.via !== p.n ? " · via " + p.via : "") + " · " + p.uf + (p.d ? " · atendimento " + p.d.split(",").join("/") : ""); }
     function render() {
       const q = norm(input.value.trim()); hint.textContent = ""; input.classList.remove("ok"); idx = -1;
       if (q.length < 1) { list.classList.remove("is-open"); items = []; return; }

@@ -37,9 +37,9 @@
   const places = [];
   UNITS.forEach(u => {
     places.push({ n: u.n, uf: u.uf, c: u.c, unit: u, isUnit: true });
-    u.cities.forEach(c => { if (norm(c.n) !== norm(u.n)) places.push({ n: c.n, uf: u.uf, c: c.c, unit: u, isUnit: false }); });
+    u.cities.forEach(c => { if (norm(c.n) !== norm(u.n)) places.push({ n: c.n, uf: u.uf, c: c.c, unit: u, isUnit: false, d: c.d }); });
   });
-  const citiesFC = () => ({ type: "FeatureCollection", features: places.filter(p => !p.isUnit).map(p => ({ type: "Feature", properties: { n: p.n, uf: p.uf, unit: p.unit.id, unitName: p.unit.n }, geometry: { type: "Point", coordinates: p.c } })) });
+  const citiesFC = () => ({ type: "FeatureCollection", features: places.filter(p => !p.isUnit).map(p => ({ type: "Feature", properties: { n: p.n, uf: p.uf, unit: p.unit.id, unitName: p.unit.n, d: p.d || "" }, geometry: { type: "Point", coordinates: p.c } })) });
   const routesFC = (t = 1) => ({ type: "FeatureCollection", features: routes.map(r => {
     const n = Math.max(2, Math.round(r.pts.length * t));
     return { type: "Feature", properties: { unit: r.id, uf: r.uf }, geometry: { type: "LineString", coordinates: r.pts.slice(0, n) } };
@@ -131,7 +131,8 @@
 
   /* ---------- interaction ---------- */
   let activeUnit = null, popup = null;
-  function cityChips(u) { return u.cities.length ? `<div class="cities">${u.cities.map(c => `<span data-lng="${c.c[0]}" data-lat="${c.c[1]}">${c.n}</span>`).join("")}</div>` : ""; }
+  const diasTxt = (d) => d ? d.split(",").map(x => ({ seg: "seg", ter: "ter", qua: "qua", qui: "qui", sex: "sex" }[x] || x)).join(" · ") : "";
+  function cityChips(u) { return u.cities.length ? `<div class="cities">${u.cities.map(c => `<span data-lng="${c.c[0]}" data-lat="${c.c[1]}" data-d="${c.d || ""}" title="${c.d ? "Atendimento: " + diasTxt(c.d) : "Atendimento diário"}">${c.n}${c.d ? `<i>${diasTxt(c.d)}</i>` : ""}</span>`).join("")}</div>` : ""; }
   function renderDetail(u, city) {
     const d = u.hub ? "Centro de distribuição · matriz" : `${Math.round(km(HUB, u.c))} km do hub · Presidente Prudente`;
     const legenda = u.fotoTipo === "aerea" ? "Vista territorial da região" : "Unidade TAP Express · " + u.n;
@@ -148,7 +149,7 @@
     if (fig) fig.addEventListener("click", () => openLightbox(fig.dataset.src, fig.dataset.cap));
     detail.querySelectorAll(".cities span").forEach(s => s.addEventListener("click", () => {
       const c = [parseFloat(s.dataset.lng), parseFloat(s.dataset.lat)];
-      flyTo(c, 9.2); showPopup(c, `<b>${s.textContent}</b><br/>Atendida pela unidade ${u.n}`);
+      flyTo(c, 9.2); showPopup(c, `<b>${s.firstChild.textContent}</b><br/>Atendida pela unidade ${u.n}${s.dataset.d ? "<br/>Atendimento: " + diasTxt(s.dataset.d) : ""}`);
     }));
   }
   function showPopup(c, html, closeButton = true) {
@@ -184,7 +185,7 @@
   map.on("click", "cities-dot", (e) => {
     const p = e.features[0].properties, u = UNITS.find(x => x.id === p.unit);
     stopTour(); focusUnit(u, false); renderDetail(u, p.n);
-    showPopup(e.features[0].geometry.coordinates, `<b>${p.n}</b><br/>Atendida pela unidade ${p.unitName}`);
+    showPopup(e.features[0].geometry.coordinates, `<b>${p.n}</b><br/>Atendida pela unidade ${p.unitName}${p.d ? "<br/>Atendimento: " + diasTxt(p.d) : ""}`);
   });
   map.on("mouseenter", "cities-dot", () => map.getCanvas().style.cursor = "pointer");
   map.on("mouseleave", "cities-dot", () => map.getCanvas().style.cursor = "");
@@ -224,7 +225,7 @@
     stopTour(); search.value = p.n; suggest.classList.remove("is-open");
     if (p.isUnit) { focusUnit(p.unit, true); return; }
     focusUnit(p.unit, false); renderDetail(p.unit, p.n);
-    flyTo(p.c, 9.4); showPopup(p.c, `<b>${p.n}</b><br/>Atendida pela unidade ${p.unit.n}`);
+    flyTo(p.c, 9.4); showPopup(p.c, `<b>${p.n}</b><br/>Atendida pela unidade ${p.unit.n}${p.d ? "<br/>Atendimento: " + diasTxt(p.d) : ""}`);
   }
   search.addEventListener("input", () => renderSuggest(search.value));
   search.addEventListener("keydown", (e) => {
