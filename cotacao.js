@@ -11,7 +11,17 @@
   /* ---- Tap.IA bubble ---- */
   setTimeout(() => { if (!sessionStorage.getItem("tapiaBubbleClosed")) bubble.classList.add("is-on"); }, 2800);
   bubble.querySelector(".x").addEventListener("click", (e) => { e.stopPropagation(); bubble.classList.remove("is-on"); sessionStorage.setItem("tapiaBubbleClosed", "1"); });
-  if (avatarVideo) { avatarVideo.muted = true; avatarVideo.loop = true; avatarVideo.play().catch(() => {}); }
+  if (avatarVideo) {
+    // Safari toca HEVC com alpha (.mov); os demais, WebM VP9 com alpha
+    const ua = navigator.userAgent, isSafari = /safari/i.test(ua) && !/chrome|chromium|crios|android|edg/i.test(ua);
+    const src = document.createElement("source");
+    src.src = isSafari ? "assets/tapia-wave.mov" : "assets/tapia-wave.webm";
+    src.type = isSafari ? 'video/mp4; codecs="hvc1"' : "video/webm";
+    avatarVideo.appendChild(src);
+    avatarVideo.muted = true; avatarVideo.loop = true;
+    avatarVideo.addEventListener("error", () => { avatarVideo.hidden = true; const img = new Image(); img.src = "assets/tapia-wave-poster.png"; img.alt = "Tap.IA"; avatarVideo.parentElement.insertBefore(img, avatarVideo); }, { once: true });
+    avatarVideo.play().catch(() => {});
+  }
 
   /* ---- open / close ---- */
   function open(source) {
