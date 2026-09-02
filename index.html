@@ -9,7 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="map.css" />
 </head>
 <body>
 
@@ -199,9 +201,46 @@
     <div class="wrap">
       <div class="section-head reveal">
         <p class="kicker">Onde estamos</p>
-        <h2>18 unidades. <span>92 cidades.</span> Três estados.</h2>
-        <p class="sub">Distribuição a partir de Presidente Prudente e unidades em cidades-chave do oeste paulista, norte do Paraná e Mato Grosso do Sul.</p>
+        <h2>TAP sempre <span>por perto.</span></h2>
+        <p class="sub">Distribuição a partir de Presidente Prudente e unidades em cidades-chave do oeste paulista, norte do Paraná e Mato Grosso do Sul. Explore a rede: busque sua cidade, filtre por estado ou faça o tour.</p>
       </div>
+    </div>
+
+    <div class="mapwrap reveal" data-lenis-prevent>
+      <div id="map"></div>
+      <div class="map-grid"></div>
+      <div class="map-scan"></div>
+      <div class="map-hud tl">Rede TAP · <b>SP · PR · MS</b></div>
+      <div class="map-hud tr" id="mapCoords">LAT <b>-22.218</b> · LNG <b>-51.305</b></div>
+      <div class="map-hud bl">Hub <b>Presidente Prudente</b> · rotas em tempo real</div>
+      <div class="map-note" id="mapNote">Mapa base indisponível no momento · exibindo apenas a rede TAP</div>
+      <aside class="map-panel">
+        <div class="map-search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="citySearch" type="text" placeholder="Sua cidade é atendida? Digite o nome" autocomplete="off" />
+          <div class="map-suggest" id="citySuggest"></div>
+        </div>
+        <div class="map-chips">
+          <button data-uf="all" class="is-active">Todos</button>
+          <button data-uf="SP">SP</button>
+          <button data-uf="PR">PR</button>
+          <button data-uf="MS">MS</button>
+        </div>
+        <div class="map-stats">
+          <div><b id="mUnits">18</b><span>unidades</span></div>
+          <div><b id="mCities">92</b><span>cidades</span></div>
+          <div><b id="mKm">0</b><span>km de rotas</span></div>
+        </div>
+        <div class="map-detail" id="mapDetail"></div>
+        <div class="map-actions">
+          <button class="primary" id="tourBtn">▶ Tour pelas unidades</button>
+          <button class="ghost" id="resetBtn">Recentrar</button>
+        </div>
+      </aside>
+    </div>
+
+    <div class="wrap">
+      <h3 class="units-list-head">Lista completa de unidades</h3>
 
       <div class="tabs reveal">
         <button class="tab is-active" data-tab="sp">São Paulo <small>13</small></button>
@@ -309,5 +348,9 @@
     ];
   </script>
   <script src="app.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="data/rede.js"></script>
+  <script src="data/estados.js"></script>
+  <script src="map.js"></script>
 </body>
 </html>
