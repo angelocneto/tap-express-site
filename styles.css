@@ -229,3 +229,10 @@ h2 span { color: var(--green); }
   .stage-foot { bottom: 84px; font-size: 10px; letter-spacing: .24em; }
   .scroll-hint { display: none; }
 }
+@media (max-width: 720px) {
+  .telemetry.tr { display: none; }
+  .telemetry.tl { left: 50%; right: auto; transform: translateX(-50%); white-space: nowrap; top: 90px; }
+  .overlay .eyebrow { top: 118px; }
+  .stage-foot { bottom: auto; top: calc(50% + 150px); font-size: 10px; }
+  .progress { bottom: 24px; }
+}
