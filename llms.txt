@@ -8,7 +8,7 @@
 - E-mail: recepcao@taptransportes.com.br
 - Rastreamento (portal oficial): https://ssw.inf.br/2/rastreamento
 - Cotação online: https://tap.amodesenvolvimento.com.br/#cotacao
-- Assistente virtual: TAPIA ("Inteligência que move") · orienta cotação, rastreamento e atendimento humano.
+- Assistente virtual: TAPIA ("Inteligência que move") — orienta cotação, rastreamento e atendimento humano.
 
 ## Serviços
 - Encomendas expressas (coleta ágil, entrega em até 18h)
