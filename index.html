@@ -23,10 +23,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=202609021919" />
-  <link rel="stylesheet" href="map.css?v=202609021919" />
-  <link rel="stylesheet" href="cotacao.css?v=202609021919" />
-  <link rel="stylesheet" href="theme.css?v=202609021919" />
+  <link rel="stylesheet" href="styles.css?v=202609021924" />
+  <link rel="stylesheet" href="map.css?v=202609021924" />
+  <link rel="stylesheet" href="cotacao.css?v=202609021924" />
+  <link rel="stylesheet" href="theme.css?v=202609021924" />
 </head>
 <body data-theme="dark">
   <div class="aurora"></div>
@@ -216,6 +216,28 @@
     <div class="sticky">
       <canvas></canvas>
       <div class="vignette"></div>
+      <div class="fx" aria-hidden="true">
+        <svg class="fx-scene fx-fleet" data-in="-0.30" data-out="0.30" data-kin="0" data-kout="0.24" viewBox="0 0 1200 600">
+          <g class="fx-tiles"><rect x="60" y="120" width="110" height="86" rx="14" style="--i:0"/><rect x="198" y="120" width="110" height="86" rx="14" style="--i:1"/><rect x="336" y="120" width="110" height="86" rx="14" style="--i:2"/><rect x="474" y="120" width="110" height="86" rx="14" style="--i:3"/><rect x="612" y="120" width="110" height="86" rx="14" style="--i:4"/><rect x="750" y="120" width="110" height="86" rx="14" style="--i:5"/><rect x="888" y="120" width="110" height="86" rx="14" style="--i:6"/><rect x="1026" y="120" width="110" height="86" rx="14" style="--i:7"/><rect x="60" y="250" width="110" height="86" rx="14" style="--i:8"/><rect x="198" y="250" width="110" height="86" rx="14" style="--i:9"/><rect x="336" y="250" width="110" height="86" rx="14" style="--i:10"/><rect x="474" y="250" width="110" height="86" rx="14" style="--i:11"/><rect x="612" y="250" width="110" height="86" rx="14" style="--i:12"/><rect x="750" y="250" width="110" height="86" rx="14" style="--i:13"/><rect x="888" y="250" width="110" height="86" rx="14" style="--i:14"/><rect x="1026" y="250" width="110" height="86" rx="14" style="--i:15"/><rect x="60" y="380" width="110" height="86" rx="14" style="--i:16"/><rect x="198" y="380" width="110" height="86" rx="14" style="--i:17"/><rect x="336" y="380" width="110" height="86" rx="14" style="--i:18"/><rect x="474" y="380" width="110" height="86" rx="14" style="--i:19"/><rect x="612" y="380" width="110" height="86" rx="14" style="--i:20"/><rect x="750" y="380" width="110" height="86" rx="14" style="--i:21"/><rect x="888" y="380" width="110" height="86" rx="14" style="--i:22"/><rect x="1026" y="380" width="110" height="86" rx="14" style="--i:23"/></g>
+          <g class="fx-shield"><path d="M600 300 l0 0" /><path class="sh" d="M600 220 l70 26 v70 c0 60 -40 96 -70 110 c-30 -14 -70 -50 -70 -110 v-70 z" pathLength="100"/><polyline class="ck" points="565,318 590,343 638,292" pathLength="100"/></g>
+        </svg>
+        <svg class="fx-scene fx-sat" data-in="0.34" data-out="0.64" data-kin="0.36" data-kout="0.58" viewBox="0 0 600 600">
+          <defs><path id="fxOrbit" d="M300 130 a250 90 0 1 0 0.01 0"/></defs>
+          <ellipse class="orbit" cx="300" cy="220" rx="250" ry="90"/>
+          <g class="target"><circle cx="300" cy="430" r="26"/><circle cx="300" cy="430" r="52"/><line x1="240" y1="430" x2="360" y2="430"/><line x1="300" y1="370" x2="300" y2="490"/></g>
+          <circle class="ping" cx="300" cy="430" r="26"/><circle class="ping p2" cx="300" cy="430" r="26"/>
+          <line class="beam" x1="300" y1="140" x2="300" y2="420"/>
+          <circle class="truck" cx="300" cy="430" r="8"/>
+          <g class="satellite"><rect x="-15" y="-11" width="30" height="22" rx="5"/><rect x="-58" y="-7" width="36" height="14" rx="2"/><rect x="22" y="-7" width="36" height="14" rx="2"/><animateMotion dur="7s" repeatCount="indefinite" rotate="auto"><mpath href="#fxOrbit"/></animateMotion></g>
+          <line class="ground" x1="60" y1="470" x2="540" y2="470"/>
+        </svg>
+        <svg class="fx-scene fx-go" data-in="0.68" data-out="1.30" data-kin="0.72" data-kout="0.96" viewBox="0 0 1200 600">
+          <g class="fx-lines"><line x1="0" y1="140" x2="260" y2="140"/><line x1="0" y1="210" x2="180" y2="210"/><line x1="0" y1="300" x2="320" y2="300"/><line x1="0" y1="380" x2="200" y2="380"/><line x1="0" y1="460" x2="280" y2="460"/><line x1="0" y1="520" x2="150" y2="520"/></g>
+          <g class="fx-gochev"><polyline points="380,130 470,300 380,470" pathLength="100" style="--i:0"/><polyline points="500,130 590,300 500,470" pathLength="100" style="--i:1"/><polyline points="620,130 710,300 620,470" pathLength="100" style="--i:2"/><polyline points="740,130 830,300 740,470" pathLength="100" style="--i:3"/><polyline points="860,130 950,300 860,470" pathLength="100" style="--i:4"/></g>
+          <rect class="track" x="200" y="540" width="800" height="6" rx="3"/><rect class="bar" x="200" y="540" width="800" height="6" rx="3"/>
+        </svg>
+      </div>
+
       <div class="overlay">
         <p class="eyebrow reveal-line" data-in="-0.30" data-out="0.30">Nossa frota · Presidente Prudente</p>
         <h1 class="line reveal-line" data-in="-0.30" data-out="0.30">Frota própria e <em>parceiros homologados.</em></h1>
@@ -512,11 +534,11 @@
       { section: "#frota", frameCount: 180, bg: "#07140e", framePath: (i) => `frames/frota/frame_${String(i).padStart(4, "0")}.jpg` }
     ];
   </script>
-  <script src="app.js?v=202609021919"></script>
+  <script src="app.js?v=202609021924"></script>
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="data/rede.js?v=202609021919"></script>
-  <script src="data/estados.js?v=202609021919"></script>
-  <script src="map.js?v=202609021919"></script>
-  <script src="cotacao.js?v=202609021919"></script>
+  <script src="data/rede.js?v=202609021924"></script>
+  <script src="data/estados.js?v=202609021924"></script>
+  <script src="map.js?v=202609021924"></script>
+  <script src="cotacao.js?v=202609021924"></script>
 </body>
 </html>

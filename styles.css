@@ -278,3 +278,26 @@ h2 span { color: var(--green); }
   .fx-chev polyline { stroke-width: 26; }
 }
 @media (prefers-reduced-motion: reduce) { .fx-sweep, .fx-routes line, .fx-blips .ping, .fx-lines line, .fx-sec { animation: none; } }
+
+/* ===== Frota FX ===== */
+.fx-fleet, .fx-go { width: min(150vw, 1300px); height: min(78vh, 640px); }
+.fx-tiles rect { fill: rgba(57,181,74,0.16); stroke: #9df0a8; stroke-width: 1.6; opacity: clamp(0, calc(var(--k) * 26 - var(--i)), 1); transition: opacity .15s linear; }
+.fx-shield .sh { fill: rgba(7,20,14,0.35); stroke: #39b54a; stroke-width: 5; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: calc(100 - 100 * var(--k)); filter: drop-shadow(0 0 14px rgba(57,181,74,0.8)); }
+.fx-shield .ck { fill: none; stroke: #fff; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: calc(100 - 100 * clamp(0, calc(var(--k) * 2 - 1), 1)); }
+.fx-sat .orbit { fill: none; stroke: rgba(157,240,168,0.7); stroke-width: 2.2; stroke-dasharray: 6 8; }
+.fx-sat .target circle { fill: none; stroke: rgba(157,240,168,0.6); stroke-width: 1.6; }
+.fx-sat .target line { stroke: rgba(157,240,168,0.6); stroke-width: 1.6; }
+.fx-sat .target { transform-origin: 300px 430px; transform: scale(calc(0.5 + 0.5 * var(--k))); }
+.fx-sat .ping { fill: none; stroke: #39b54a; stroke-width: 2; transform-origin: 300px 430px; animation: fxPingTarget 2.6s ease-out infinite; }
+.fx-sat .ping.p2 { animation-delay: 1.3s; }
+.fx-sat .beam { stroke: #9df0a8; stroke-width: 2; stroke-dasharray: 4 10; opacity: .7; animation: fxDash .8s linear infinite; }
+.fx-sat .truck { fill: #fff; filter: drop-shadow(0 0 10px rgba(57,181,74,1)); }
+.fx-sat .satellite rect { fill: #9df0a8; }
+.fx-sat .satellite rect:first-child { fill: #fff; }
+.fx-sat .satellite { filter: drop-shadow(0 0 12px rgba(157,240,168,1)); transform-box: fill-box; }
+.fx-sat .ground { stroke: rgba(157,240,168,0.35); stroke-width: 2; stroke-dasharray: 2 10; }
+.fx-gochev polyline { fill: none; stroke: #39b54a; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; opacity: clamp(0.08, calc(var(--k) * 6 - var(--i)), 0.85); filter: drop-shadow(0 0 14px rgba(57,181,74,0.6)); }
+.fx-go .track { fill: rgba(157,240,168,0.2); }
+.fx-go .bar { fill: #39b54a; transform-origin: 200px 543px; transform: scaleX(var(--k)); filter: drop-shadow(0 0 10px rgba(57,181,74,0.9)); }
+@keyframes fxPingTarget { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(5); opacity: 0; } }
+@media (max-width: 720px) { .fx-fleet, .fx-go { width: 175vw; } .fx-gochev polyline { stroke-width: 16; } }
