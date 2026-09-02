@@ -20,6 +20,16 @@
     avatarVideo.appendChild(src);
     avatarVideo.muted = true; avatarVideo.loop = true;
     avatarVideo.addEventListener("error", () => { avatarVideo.hidden = true; const img = new Image(); img.src = "assets/tapia-wave-poster.png"; img.alt = "Tap.IA"; avatarVideo.parentElement.insertBefore(img, avatarVideo); }, { once: true });
+    // se o navegador tocar sem transparência (canto opaco), troca pela imagem recortada
+    avatarVideo.addEventListener("loadeddata", () => {
+      try {
+        const c = document.createElement("canvas"); c.width = 8; c.height = 8;
+        const ctx = c.getContext("2d", { willReadFrequently: true });
+        ctx.drawImage(avatarVideo, 0, 0, 40, 40, 0, 0, 8, 8);
+        const a = ctx.getImageData(0, 0, 1, 1).data[3];
+        if (a > 200) { avatarVideo.pause(); avatarVideo.hidden = true; const img = new Image(); img.src = "assets/tapia-wave-poster.png"; img.alt = "Tap.IA"; avatarVideo.parentElement.insertBefore(img, avatarVideo); }
+      } catch (e) {}
+    }, { once: true });
     avatarVideo.play().catch(() => {});
   }
 
