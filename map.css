@@ -84,3 +84,29 @@
   .map-hud.tl { font-size: 9px; letter-spacing: .18em; }
   .map-panel .map-detail { animation: none; }
 }
+
+/* mobile: o HUD inferior fica dentro do mapa, não sobre o painel */
+@media (max-width: 900px) {
+  .map-hud.bl { display: none; }
+  .map-note { bottom: auto; top: 48px; right: 12px; }
+}
+
+/* foto da unidade no painel */
+.map-photo { margin: -14px -14px 12px; border-radius: 14px 14px 0 0; overflow: hidden; cursor: zoom-in; position: relative; aspect-ratio: 16/9; background: #07140e; }
+.map-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+.map-photo:hover img { transform: scale(1.04); }
+.map-photo figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 12px 8px; font-size: 11px; color: rgba(242,247,243,0.9); background: linear-gradient(180deg, transparent, rgba(4,14,10,0.85)); display: flex; justify-content: space-between; }
+.map-photo figcaption span { color: #9df0a8; font-family: var(--display); letter-spacing: .08em; text-transform: uppercase; font-size: 10px; }
+.map-contacts { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 8px; align-items: center; }
+.map-contacts a { font-size: 13px; color: var(--ink); }
+.map-contacts a.wa { padding: 5px 10px; border-radius: 999px; background: #25d366; color: #05150b; font-family: var(--display); font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.map-contacts a.mail { color: var(--muted); font-size: 12px; }
+.map-detail a.phone { margin-top: 0; }
+.pp { width: 180px; }
+.pp img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; display: block; margin-bottom: 6px; }
+.map-lightbox { position: fixed; inset: 0; z-index: 120; background: rgba(3,11,8,0.92); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 24px; }
+.map-lightbox.is-on { display: flex; animation: fade .3s ease; }
+.map-lightbox figure { max-width: min(1100px, 100%); max-height: 100%; display: flex; flex-direction: column; gap: 10px; }
+.map-lightbox img { max-width: 100%; max-height: 82vh; border-radius: 16px; border: 1px solid rgba(57,181,74,0.4); box-shadow: 0 40px 100px rgba(0,0,0,0.6); object-fit: contain; }
+.map-lightbox figcaption { text-align: center; color: var(--muted); font-size: 13px; }
+.map-lightbox .lb-close { position: absolute; top: 18px; right: 22px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(242,247,243,0.3); background: rgba(6,20,16,0.8); color: #f2f7f3; font-size: 22px; cursor: pointer; }

@@ -95,7 +95,9 @@
     const d = document.createElement("div");
     d.className = "mk" + (u.hub ? " hub" : "");
     d.innerHTML = `<span class="lbl">${u.hub ? "HUB · " : ""}${u.n}</span>`;
-    d.addEventListener("click", (ev) => { ev.stopPropagation(); stopTour(); focusUnit(u, true); });
+    d.addEventListener("click", (ev) => { ev.stopPropagation(); stopTour(); focusUnit(u, true); if (window.innerWidth <= 900) detail.scrollIntoView({ behavior: "smooth", block: "center" }); });
+    d.addEventListener("mouseenter", () => { if (u.foto) showPopup(u.c, `<div class="pp"><img src="${u.foto}" alt="${u.n}" /><b>${u.n}</b><br/>${u.hub ? "Hub de distribuição" : "Unidade " + u.uf} · clique para ver</div>`, false); });
+    d.addEventListener("mouseleave", () => { if (popup && popup._hover) popup.remove(); });
     markers[u.id] = new maplibregl.Marker({ element: d, anchor: "center" }).setLngLat(u.c).addTo(map);
   });
 
@@ -120,26 +122,39 @@
     requestAnimationFrame(frame);
   }
 
+  /* ---------- lightbox ---------- */
+  const lb = document.createElement("div"); lb.className = "map-lightbox"; lb.innerHTML = `<button class="lb-close" aria-label="Fechar">×</button><figure><img alt="" /><figcaption></figcaption></figure>`; document.body.appendChild(lb);
+  function openLightbox(src, cap) { lb.querySelector("img").src = src; lb.querySelector("figcaption").textContent = cap; lb.classList.add("is-on"); if (window.__lenis) window.__lenis.stop(); }
+  function closeLightbox() { lb.classList.remove("is-on"); if (window.__lenis) window.__lenis.start(); }
+  lb.addEventListener("click", (e) => { if (e.target === lb || e.target.classList.contains("lb-close")) closeLightbox(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+
   /* ---------- interaction ---------- */
   let activeUnit = null, popup = null;
   function cityChips(u) { return u.cities.length ? `<div class="cities">${u.cities.map(c => `<span data-lng="${c.c[0]}" data-lat="${c.c[1]}">${c.n}</span>`).join("")}</div>` : ""; }
   function renderDetail(u, city) {
     const d = u.hub ? "Centro de distribuição · matriz" : `${Math.round(km(HUB, u.c))} km do hub · Presidente Prudente`;
+    const legenda = u.fotoTipo === "aerea" ? "Vista territorial da região" : "Unidade TAP Express · " + u.n;
+    const wa = REDE.wa ? `https://wa.me/${REDE.wa}?text=${encodeURIComponent("Olá! Estou no site da TAP Express e quero atendimento sobre a unidade de " + u.n + ".")}` : "";
     detail.innerHTML = `
+      ${u.foto ? `<figure class="map-photo" data-src="${u.foto}" data-cap="${legenda}"><img src="${u.foto}" alt="${legenda}" loading="lazy" /><figcaption>${legenda} <span>ampliar ⤢</span></figcaption></figure>` : ""}
       <p class="kicker">${city ? "Cidade atendida" : (u.hub ? "Hub de distribuição" : "Unidade " + u.uf)}</p>
       <h4>${city ? city + " <small style='color:var(--green);font-size:12px'>· via " + u.n + "</small>" : u.n}</h4>
       <p>${u.addr}</p>
-      <a class="phone" href="tel:${u.tel}">${u.phone}</a>
+      <div class="map-contacts"><a class="phone" href="tel:${u.tel}">${u.phone}</a>${wa ? `<a class="wa" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ""}${u.email ? `<a class="mail" href="mailto:${u.email}">${u.email}</a>` : ""}</div>
       ${cityChips(u)}
       <div class="dist">${d}</div>`;
+    const fig = detail.querySelector(".map-photo");
+    if (fig) fig.addEventListener("click", () => openLightbox(fig.dataset.src, fig.dataset.cap));
     detail.querySelectorAll(".cities span").forEach(s => s.addEventListener("click", () => {
       const c = [parseFloat(s.dataset.lng), parseFloat(s.dataset.lat)];
       flyTo(c, 9.2); showPopup(c, `<b>${s.textContent}</b><br/>Atendida pela unidade ${u.n}`);
     }));
   }
-  function showPopup(c, html) {
+  function showPopup(c, html, closeButton = true) {
     if (popup) popup.remove();
-    popup = new maplibregl.Popup({ offset: 14, closeButton: true }).setLngLat(c).setHTML(html).addTo(map);
+    popup = new maplibregl.Popup({ offset: 18, closeButton, closeOnClick: false }).setLngLat(c).setHTML(html).addTo(map);
+    popup._hover = !closeButton;
   }
   function flyTo(c, zoom = 8.6) { map.flyTo({ center: c, zoom, pitch: 50, bearing: -12, speed: 0.9, curve: 1.4, essential: true }); }
   function focusUnit(u, fly) {
