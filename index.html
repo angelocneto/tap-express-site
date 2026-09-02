@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TAP Express — Transporte de cargas e encomendas | Entrega em até 18 horas</title>
+  <meta name="description" content="Desde 2001 a TAP Express transporta cargas e encomendas para 92 cidades de São Paulo, Paraná e Mato Grosso do Sul. Rastreamento via satélite, seguro de carga e entrega em até 18 horas." />
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a class="nav-logo" href="#top" aria-label="TAP Express"><img src="assets/logo_branca.png" alt="TAP Express" /></a>
+    <nav class="nav-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#frota">Frota</a>
+      <a href="#tapia">Tap.IA</a>
+      <a href="#unidades">Unidades</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastrear</a>
+      <a class="btn btn-solid" href="tel:+551839187777">Cotação</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#servicos">Serviços</a>
+    <a href="#frota">Frota</a>
+    <a href="#tapia">Tap.IA</a>
+    <a href="#unidades">Unidades</a>
+    <a href="#contato">Contato</a>
+    <a class="btn btn-solid" href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastrear encomenda</a>
+  </div>
+
+  <!-- ===== HERO (scroll-scrubbed) ===== -->
+  <section class="cinematic" id="hero">
+    <div class="sticky">
+      <canvas></canvas>
+      <div class="vignette"></div>
+
+      <div class="overlay">
+        <p class="eyebrow reveal-line" data-in="-0.30" data-out="0.30">Transporte de cargas e encomendas · desde 2001</p>
+        <h1 class="line reveal-line" data-in="-0.30" data-out="0.30">Pensou encomendas <em>expressas?</em></h1>
+        <h1 class="line reveal-line" data-in="0.34" data-out="0.64">Pensou em <em>TAP Express.</em></h1>
+        <h1 class="line reveal-line" data-in="0.68" data-out="1.30">Entrega em até <em>18 horas.</em></h1>
+      </div>
+
+      <div class="telemetry tl">PRESIDENTE PRUDENTE · SP</div>
+      <div class="telemetry tr">92 CIDADES · 18 UNIDADES</div>
+      <div class="telemetry bl frame-readout">CENA 000 / 000</div>
+      <div class="telemetry br">SP · PR · MS</div>
+
+      <div class="progress"><div class="progress-fill"></div></div>
+      <div class="scroll-hint">ROLE PARA VER ▾</div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats" id="top">
+    <div class="wrap stats-grid">
+      <div class="stat reveal"><div class="stat-num" data-count="20" data-suffix="+">0</div><div class="stat-label">anos de estrada</div></div>
+      <div class="stat reveal"><div class="stat-num" data-count="92">0</div><div class="stat-label">cidades atendidas</div></div>
+      <div class="stat reveal"><div class="stat-num" data-count="18">0</div><div class="stat-label">unidades próprias</div></div>
+      <div class="stat reveal"><div class="stat-num" data-count="18" data-suffix="h">0</div><div class="stat-label">prazo de entrega</div></div>
+      <div class="stat reveal"><div class="stat-num" data-count="24" data-suffix="h">0</div><div class="stat-label">centro de distribuição</div></div>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section class="about" id="sobre">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <p class="kicker">Quem somos</p>
+        <h2>Ligando as maiores distâncias <span>no menor tempo possível.</span></h2>
+      </div>
+      <div class="about-copy reveal">
+        <p>A TAP Transportes nasceu em 2001, em Presidente Prudente, fundada por Paulo Barreto com um objetivo simples: facilitar a vida de pessoas e empresas com transporte rodoviário de qualidade e agilidade.</p>
+        <p>Hoje a TAP Express distribui a partir de Presidente Prudente e de unidades em cidades-chave do oeste paulista, do norte do Paraná e do Mato Grosso do Sul, atendendo 92 cidades das regiões Sudeste e Centro-Oeste.</p>
+        <ul class="values">
+          <li><b>Inovação</b> constante em processos e tecnologia</li>
+          <li><b>Rapidez</b> com segurança em cada entrega</li>
+          <li><b>Capital humano</b> e responsabilidade social</li>
+          <li><b>Sustentabilidade</b> e respeito ao meio ambiente</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVIÇOS ===== -->
+  <section class="services" id="servicos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="kicker">Serviços</p>
+        <h2>Tudo o que sua encomenda precisa <span>para chegar.</span></h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></div>
+          <h3>Encomendas expressas</h3>
+          <p>Pequenas e médias encomendas com coleta ágil e entrega em até 18 horas nas cidades atendidas.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 13h5"/></svg></div>
+          <h3>Malotes e documentos</h3>
+          <p>Transporte seguro de malotes corporativos e documentos entre unidades, filiais e clientes.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M1 8h13v8H1zM14 11h5l4 3v2h-9z"/><circle cx="5" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></div>
+          <h3>Cargas fracionadas</h3>
+          <p>Frota própria e parceiros homologados para cargas de todos os tamanhos, com rotas diárias.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="2"/></svg></div>
+          <h3>Rastreamento via satélite</h3>
+          <p>Todos os veículos monitorados. Acompanhe sua encomenda em tempo real pelo portal de rastreamento.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Seguro de carga incluso</h3>
+          <p>Sua mercadoria protegida do embarque à entrega, sem custo adicional.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+          <h3>Área do cliente</h3>
+          <p>Acompanhamento de cargas, segunda via de boletos e atendimento 24 horas pelo SAC.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FROTA (scroll-scrubbed, real yard) ===== -->
+  <section class="cinematic frota" id="frota">
+    <div class="sticky">
+      <canvas></canvas>
+      <div class="vignette"></div>
+      <div class="overlay">
+        <p class="eyebrow reveal-line" data-in="-0.30" data-out="0.30">Nossa frota · Presidente Prudente</p>
+        <h1 class="line reveal-line" data-in="-0.30" data-out="0.30">Frota própria e <em>parceiros homologados.</em></h1>
+        <h1 class="line reveal-line" data-in="0.34" data-out="0.64">Rastreamento via satélite <em>em todos os veículos.</em></h1>
+        <h1 class="line reveal-line" data-in="0.68" data-out="1.30">Prontos para sair. <em>Agora.</em></h1>
+      </div>
+      <div class="telemetry tl">FROTA TAP</div>
+      <div class="telemetry tr">ROTAS DIÁRIAS</div>
+      <div class="telemetry bl frame-readout">CENA 000 / 000</div>
+      <div class="telemetry br">CD 24H</div>
+      <div class="progress"><div class="progress-fill"></div></div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="wrap">
+      <div class="gallery-grid">
+        <figure class="reveal"><img src="assets/frota_01.jpg" alt="Caminhão baú TAP Express no pátio" loading="lazy" /></figure>
+        <figure class="reveal"><img src="assets/frota_06.jpg" alt="Frota TAP Express alinhada no centro de distribuição" loading="lazy" /></figure>
+        <figure class="reveal"><img src="assets/frota_03.jpg" alt="Carretas TAP Express nas docas" loading="lazy" /></figure>
+        <figure class="reveal"><img src="assets/frota_12.jpg" alt="Caminhões TAP Express prontos para rota" loading="lazy" /></figure>
+        <figure class="reveal"><img src="assets/frota_08.jpg" alt="Frota TAP Express" loading="lazy" /></figure>
+        <figure class="reveal"><img src="assets/frota_02.jpg" alt="Veículos de entrega TAP Express" loading="lazy" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TAP.IA ===== -->
+  <section class="tapia" id="tapia">
+    <div class="wrap tapia-grid">
+      <div class="tapia-video reveal">
+        <video id="tapiaVideo" playsinline preload="metadata" poster="assets/tapia-poster.jpg">
+          <source src="assets/tapia.mp4" type="video/mp4" />
+        </video>
+        <button class="play-btn" id="playBtn" aria-label="Reproduzir apresentação da Tap.IA">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+      <div class="tapia-copy reveal">
+        <p class="kicker">Conheça a Tap.IA</p>
+        <h2>Inteligência artificial com <span>20 anos de estrada.</span></h2>
+        <p class="lead">“Olá, sou a Tap.IA. A união da inteligência artificial em logística com mais de 20 anos de experiência da TAP Express, para trazer soluções ágeis para São Paulo, Paraná e Mato Grosso do Sul.”</p>
+        <ul class="checks">
+          <li>Cotações e prazos em segundos</li>
+          <li>Status da encomenda sem esperar na linha</li>
+          <li>Atendimento 24 horas, todos os dias</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-solid" href="tel:+551839187777">Falar com a TAP</a>
+          <a class="btn btn-ghost" href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastrear encomenda</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UNIDADES ===== -->
+  <section class="units" id="unidades">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="kicker">Onde estamos</p>
+        <h2>18 unidades. <span>92 cidades.</span> Três estados.</h2>
+        <p class="sub">Distribuição a partir de Presidente Prudente e unidades em cidades-chave do oeste paulista, norte do Paraná e Mato Grosso do Sul.</p>
+      </div>
+
+      <div class="tabs reveal">
+        <button class="tab is-active" data-tab="sp">São Paulo <small>13</small></button>
+        <button class="tab" data-tab="pr">Paraná <small>4</small></button>
+        <button class="tab" data-tab="ms">Mato Grosso do Sul <small>1</small></button>
+      </div>
+
+      <div class="tab-panel is-active" data-panel="sp">
+        <div class="unit-grid">
+          <div class="unit"><h4>Regente Feijó <span>Matriz · Presidente Prudente</span></h4><p>Rod. SP 270 Raposo Tavares, km 556</p><a href="tel:+551839187777">(18) 3918-7777</a><small>Presidente Prudente, Álvares Machado, Pirapozinho, Martinópolis, Rancharia, Presidente Venceslau, Presidente Epitácio e região</small></div>
+          <div class="unit"><h4>Araçatuba</h4><p>Rua Clibas de Almeida Prado, 5450 · Centenário</p><a href="tel:+551836086423">(18) 3608-6423</a><small>Birigui, Coroados, Guararapes</small></div>
+          <div class="unit"><h4>Bauru</h4><p>Rua Irmã Arminda, 12-22 · Vila Galvão</p><a href="tel:+551432080777">(14) 3208-0777</a><small>Agudos, Pederneiras, Piratininga, Macatuba, Lençóis Paulista</small></div>
+          <div class="unit"><h4>Marília</h4><p>Av. Manoel Pereira, 82 · Jardim Morumbi</p><a href="tel:+551434131748">(14) 3413-1748</a><small>Garça, Oriente, Pompéia, Vera Cruz</small></div>
+          <div class="unit"><h4>Ribeirão Preto</h4><p>R. Armando Tarozo, 72 · Pq. Ind. Lagoinha</p><a href="tel:+551636180510">(16) 3618-0510</a><small>Cravinhos, Sertãozinho</small></div>
+          <div class="unit"><h4>São José do Rio Preto</h4><p>Rua Percy Gandini, 4065 · Vila Toninho</p><a href="tel:+551732383921">(17) 3238-3921</a><small>Bady Bassit, Catanduva, Cedral, Mirassol</small></div>
+          <div class="unit"><h4>Araraquara</h4><p>Av. André Onofrio, 50 · Guaianases</p><a href="tel:+551630103501">(16) 3010-3501</a><small>Matão</small></div>
+          <div class="unit"><h4>Assis</h4><p>Rua Ferruccio Ciciliato, 265 · Portal São Francisco</p><a href="tel:+551833249599">(18) 3324-9599</a><small>Ourinhos, Cândido Mota, Paraguaçu Paulista, Palmital, Tarumã e região</small></div>
+          <div class="unit"><h4>Jaú</h4><p>Rua Ernani Brandão Tofano, 270 · Quinta da Colina</p><a href="tel:+551436249565">(14) 3624-9565</a><small>Barra Bonita, Bariri, Dois Córregos, Itapuí e região</small></div>
+          <div class="unit"><h4>Andradina</h4><p>Rua Piauí, 1274 · Bairro Piscina</p><a href="tel:+551837211292">(18) 3721-1292</a><small>Castilho, Guaraçaí, Mirandópolis, Murutinga do Sul</small></div>
+          <div class="unit"><h4>Dracena</h4><p>Rua Mato Grosso, 278 · Vila Metrópole</p><a href="tel:+551838226898">(18) 3822-6898</a><small>Irapuru, Junqueirópolis, Ouro Verde, Tupi Paulista</small></div>
+          <div class="unit"><h4>Osvaldo Cruz</h4><p>Av. Pedro Ciciliati, 2835 · Distrito Industrial</p><a href="tel:+551835292126">(18) 3529-2126</a><small>Adamantina, Lucélia, Parapuã, Rinópolis, Bastos e região</small></div>
+          <div class="unit"><h4>Tupã</h4><p>Rua J. Enrique Ari Fernandes, 2420 · Vila das Indústrias</p><a href="tel:+5514996659450">(14) 99665-9450</a></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="pr">
+        <div class="unit-grid">
+          <div class="unit"><h4>Londrina</h4><p>Rua Roberto Romanelli, 1795 · Jardim Ana Eliza, Cambé</p><a href="tel:+554333238081">(43) 3323-8081</a><small>Cambé, Ibiporã, Rolândia</small></div>
+          <div class="unit"><h4>Maringá</h4><p>Av. Ademar Bornia, 473 · Barracão 06, Sarandi</p><a href="tel:+554432644735">(44) 3264-4735</a><small>Marialva, Paiçandu, Sarandi</small></div>
+          <div class="unit"><h4>Apucarana</h4><p>Rua Prof. Edwaldo Conezin Tosh, 403 · Vila Feliz</p><a href="tel:+5543996814851">(43) 99681-4851</a></div>
+          <div class="unit"><h4>Arapongas</h4><p>Rua Gralha Azul, 301, Box 04 · Vila Edio</p><a href="tel:+554332767517">(43) 3276-7517</a><small>Astorga, Sabáudia</small></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-panel="ms">
+        <div class="unit-grid">
+          <div class="unit"><h4>Três Lagoas</h4><p>Av. Cap. Olinto Mancini, 2955 · Jardim Alvorada</p><a href="tel:+556721046776">(67) 2104-6776</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta" id="contato">
+    <div class="wrap cta-grid">
+      <div class="reveal">
+        <p class="kicker">Rastreamento</p>
+        <h2>Onde está minha <span>encomenda?</span></h2>
+        <p class="sub">Informe o código da sua encomenda e acompanhe cada etapa da entrega em tempo real.</p>
+        <form class="track-form" id="trackForm" action="https://ssw.inf.br/2/rastreamento" method="get" target="_blank">
+          <input type="text" name="codigo" placeholder="Código de rastreio ou nota fiscal" aria-label="Código de rastreio" />
+          <button class="btn btn-solid" type="submit">Rastrear</button>
+        </form>
+      </div>
+      <div class="contact-card reveal">
+        <p class="kicker">Fale com a TAP</p>
+        <a class="big-phone" href="tel:+551839187777">(18) 3918-7777</a>
+        <p>Atendimento 24 horas · SAC</p>
+        <p>Rod. SP 270 Raposo Tavares, km 556<br/>Regente Feijó · Presidente Prudente, SP</p>
+        <div class="btn-row">
+          <a class="btn btn-solid" href="tel:+551839187777">Solicitar cotação</a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/place/22%C2%B009'12.5%22S+51%C2%B023'28.2%22W/@-22.1534593,-51.393727,17z" target="_blank" rel="noopener">Como chegar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="assets/logo_branca.png" alt="TAP Express" />
+        <p>Transporte rodoviário de cargas e encomendas desde 2001. Presidente Prudente, SP.</p>
+      </div>
+      <div>
+        <h5>Navegação</h5>
+        <a href="#sobre">Sobre a empresa</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#unidades">Unidades</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <div>
+        <h5>Cliente</h5>
+        <a href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastreamento</a>
+        <a href="tel:+551839187777">Cotação</a>
+        <a href="tel:+551839187777">SAC 24h</a>
+      </div>
+      <div>
+        <h5>Redes</h5>
+        <a href="https://www.instagram.com/tap.transportes/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/taptransportes/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 TAP Express · Transportes</span>
+      <span>Pensou encomendas expressas? Pensou em TAP Express.</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
+  <script>
+    window.SCRUB_SECTIONS = [
+      { section: "#hero",  frameCount: 179,  bg: "#07140e", framePath: (i) => `frames/hero/frame_${String(i).padStart(4, "0")}.jpg` },
+      { section: "#frota", frameCount: 180, bg: "#07140e", framePath: (i) => `frames/frota/frame_${String(i).padStart(4, "0")}.jpg` }
+    ];
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
