@@ -236,3 +236,7 @@ h2 span { color: var(--green); }
   .stage-foot { bottom: auto; top: calc(50% + 150px); font-size: 10px; }
   .progress { bottom: 24px; }
 }
+/* play do vídeo da TAPIA no canto inferior direito */
+.play-btn { inset: auto 18px 18px auto; margin: 0; width: 64px; height: 64px; box-shadow: 0 0 0 8px rgba(57,181,74,0.18), 0 10px 30px rgba(0,0,0,0.4); }
+.play-btn svg { width: 26px; height: 26px; }
+@media (max-width: 720px) { .play-btn { width: 54px; height: 54px; inset: auto 12px 12px auto; } }
