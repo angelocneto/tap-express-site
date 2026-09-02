@@ -55,3 +55,9 @@ section[data-theme="dark"]:not(.cinematic) > * { position: relative; z-index: 1;
 
 /* guarda: as cenas cinematográficas precisam continuar sticky, custe o que custar */
 .cinematic > .sticky { position: sticky !important; top: 0 !important; }
+
+/* menu: itens em uma linha */
+.nav-links { gap: 22px; white-space: nowrap; }
+.nav-links a { white-space: nowrap; }
+@media (max-width: 1180px) { .nav-links { gap: 16px; font-size: 13px; } }
+@media (max-width: 1040px) { .nav-links { display: none; } .nav-burger { display: flex; } .nav-cta .btn-ghost { display: none; } }

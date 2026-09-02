@@ -37,11 +37,11 @@ def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero
 <body data-theme="{theme}">
   <header class="nav is-solid" id="nav">
     <a class="nav-logo" href="/" aria-label="TAP Express"><img class="light" src="/assets/logo_branca.png" alt="TAP Express" /><img class="dark" src="/assets/logo_cor.png" alt="TAP Express" /></a>
-    <nav class="nav-links"><a href="/servicos/">Serviços</a><a href="/sobre/">Sobre</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></nav>
+    <nav class="nav-links"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></nav>
     <div class="nav-cta"><a class="btn btn-ghost" href="/rastreamento/">Rastrear</a><a class="btn btn-solid" href="/cotacao/" data-open-quote="nav">Cotação</a></div>
     <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
   </header>
-  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/sobre/">Sobre</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/cidades/">Cidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a></div>
+  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a></div>
   <main>
     <section class="page-hero"><div class="wrap"><div class="crumbs">{crumb_html}</div>{body[0]}</div></section>
     {body[1]}
