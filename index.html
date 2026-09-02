@@ -23,10 +23,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=202609021738" />
-  <link rel="stylesheet" href="map.css?v=202609021738" />
-  <link rel="stylesheet" href="cotacao.css?v=202609021738" />
-  <link rel="stylesheet" href="theme.css?v=202609021738" />
+  <link rel="stylesheet" href="styles.css?v=202609021813" />
+  <link rel="stylesheet" href="map.css?v=202609021813" />
+  <link rel="stylesheet" href="cotacao.css?v=202609021813" />
+  <link rel="stylesheet" href="theme.css?v=202609021813" />
 </head>
 <body data-theme="dark">
   <div class="aurora"></div>
@@ -72,8 +72,7 @@
 
       <div class="telemetry tl">PRESIDENTE PRUDENTE · SP</div>
       <div class="telemetry tr">104 LOCALIDADES · 20 UNIDADES</div>
-      <div class="telemetry bl frame-readout">CENA 000 / 000</div>
-      <div class="telemetry br">SP · PR · MS</div>
+      <div class="stage-foot">SP · PR · MS</div>
 
       <div class="progress"><div class="progress-fill"></div></div>
       <div class="scroll-hint">ROLE PARA VER ▾</div>
@@ -184,8 +183,7 @@
       </div>
       <div class="telemetry tl">FROTA TAP</div>
       <div class="telemetry tr">ROTAS DIÁRIAS</div>
-      <div class="telemetry bl frame-readout">CENA 000 / 000</div>
-      <div class="telemetry br">CD 24H</div>
+      <div class="stage-foot">Frota própria · rastreada via satélite</div>
       <div class="progress"><div class="progress-fill"></div></div>
     </div>
   </section>
@@ -473,11 +471,11 @@
       { section: "#frota", frameCount: 180, bg: "#07140e", framePath: (i) => `frames/frota/frame_${String(i).padStart(4, "0")}.jpg` }
     ];
   </script>
-  <script src="app.js?v=202609021738"></script>
+  <script src="app.js?v=202609021813"></script>
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="data/rede.js?v=202609021738"></script>
-  <script src="data/estados.js?v=202609021738"></script>
-  <script src="map.js?v=202609021738"></script>
-  <script src="cotacao.js?v=202609021738"></script>
+  <script src="data/rede.js?v=202609021813"></script>
+  <script src="data/estados.js?v=202609021813"></script>
+  <script src="map.js?v=202609021813"></script>
+  <script src="cotacao.js?v=202609021813"></script>
 </body>
 </html>

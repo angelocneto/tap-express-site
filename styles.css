@@ -217,3 +217,15 @@ h2 span { color: var(--green); }
 .jcard p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 @media (max-width: 1024px) { .journey-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 720px) { .journey { padding: 80px 0; } .journey-grid { grid-template-columns: 1fr; } .jcard figure { aspect-ratio: 16/10; } }
+
+/* ---------- Cenas: rodapé centralizado e respiro no topo ---------- */
+.stage-foot { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); z-index: 12; font-family: var(--display); font-size: 11px; letter-spacing: 0.32em; color: rgba(157,240,168,0.9); text-transform: uppercase; white-space: nowrap; }
+.tl, .tr { top: 108px; }
+.overlay .eyebrow { top: 156px; }
+@media (max-width: 720px) {
+  .tl, .tr { top: 92px; font-size: 9px; }
+  .tl { left: 16px; } .tr { right: 16px; }
+  .overlay .eyebrow { top: 128px; }
+  .stage-foot { bottom: 84px; font-size: 10px; letter-spacing: .24em; }
+  .scroll-hint { display: none; }
+}
