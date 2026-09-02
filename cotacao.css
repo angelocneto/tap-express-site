@@ -112,7 +112,7 @@ body.quote-open .tapia-chat { display: none; }
 @media (max-width: 720px) { .pillars { grid-template-columns: 1fr; } .tapia-chat { right: -14px; width: calc(100vw - 20px); } }
 
 /* marca TAP.IA */
-.tapia-logo { width: min(340px, 78%); height: auto; margin-bottom: 14px; }
+.tapia-logo { width: min(300px, 70%); height: auto; margin: 0 0 18px; display: block; }
 .tc-logo { height: 20px; width: auto; display: block; margin-bottom: 3px; }
 .tapia-avatar .tag { background: rgba(6,20,16,0.92); border: 1px solid rgba(201,167,91,0.6); padding: 5px 12px; }
 .tapia-avatar .tag img { height: 14px; width: auto; display: block; }
