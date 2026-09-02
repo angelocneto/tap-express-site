@@ -23,10 +23,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=202609021823" />
-  <link rel="stylesheet" href="map.css?v=202609021823" />
-  <link rel="stylesheet" href="cotacao.css?v=202609021823" />
-  <link rel="stylesheet" href="theme.css?v=202609021823" />
+  <link rel="stylesheet" href="styles.css?v=202609021832" />
+  <link rel="stylesheet" href="map.css?v=202609021832" />
+  <link rel="stylesheet" href="cotacao.css?v=202609021832" />
+  <link rel="stylesheet" href="theme.css?v=202609021832" />
 </head>
 <body data-theme="dark">
   <div class="aurora"></div>
@@ -40,6 +40,7 @@
       <a href="#frota">Frota</a>
       <a href="#tapia">TAPIA</a>
       <a href="#unidades">Unidades</a>
+      <a href="/carreiras/">Carreiras</a>
       <a href="#contato">Contato</a>
     </nav>
     <div class="nav-cta">
@@ -53,6 +54,7 @@
     <a href="#frota">Frota</a>
     <a href="#tapia">TAPIA</a>
     <a href="#unidades">Unidades</a>
+    <a href="/carreiras/">Carreiras</a>
     <a href="#contato">Contato</a>
     <a class="btn btn-solid" href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastrear encomenda</a>
   </div>
@@ -216,13 +218,12 @@
         <img class="tapia-logo" src="assets/tapia-logo.png" alt="TAP.IA. Inteligência que move." />
         <h2>A inteligência que acompanha <span class="gold-text">cada movimento.</span></h2>
         <p class="lead" style="font-style:normal">A TAPIA junta inteligência artificial com os <span class="years-since">25</span> anos de estrada da TAP Express e orienta cada conversa, do primeiro contato até a entrega.</p>
-        <ul class="pillars">
-          <li><b>Onipresente</b><span>Presente em todos os canais, do primeiro contato à entrega.</span></li>
-          <li><b>Onisciente</b><span>Conhece a operação, as rotas, os prazos e as soluções.</span></li>
-          <li><b>Confiável</b><span>Respostas precisas e auditadas. Nunca inventa preço, prazo ou status.</span></li>
-          <li><b>Humana</b><span>Tecnologia com sensibilidade e proximidade reais.</span></li>
+        <ul class="tapia-benefits">
+          <li><i><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg></i><b>Cotação em 3 passos</b><span>Origem, destino e carga. Você recebe um protocolo e a equipe responde em horário comercial.</span></li>
+          <li><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 4v2.5M12 17.5V20M4 12h2.5M17.5 12H20"/></svg></i><b>Sua cidade é atendida?</b><span>Digite o nome e veja na hora a unidade responsável e os dias de atendimento.</span></li>
+          <li><i><svg viewBox="0 0 24 24"><path d="M1 8h13v8H1zM14 11h5l4 3v2h-9z"/><circle cx="5" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></i><b>Rastreio sem telefonema</b><span>A TAPIA leva você ao portal de rastreamento com o código da encomenda ou a nota fiscal.</span></li>
+          <li><i><svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0116 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19v1a2 2 0 01-2 2h-3"/></svg></i><b>Gente de verdade quando precisar</b><span>Um toque e a conversa segue no WhatsApp da equipe, já com o seu contexto. Nada de repetir tudo.</span></li>
         </ul>
-        <div class="traits"><span>Serena</span><span>Inteligente</span><span>Próxima</span><span>Precisa</span><span>Ágil</span><span>Confiável</span></div>
         <div class="btn-row">
           <a class="btn btn-solid" href="#cotacao" data-open-quote="tapia">Cotar um envio com a TAPIA</a>
           <a class="btn btn-ghost" href="https://wa.me/5518991096441?text=Ol%C3%A1!%20Estou%20no%20site%20da%20TAP%20Express%20e%20quero%20falar%20com%20o%20atendimento." target="_blank" rel="noopener">WhatsApp da TAP</a>
@@ -357,6 +358,7 @@
         <a href="#sobre">Sobre a empresa</a>
         <a href="#servicos">Serviços</a>
         <a href="#unidades">Unidades</a>
+        <a href="/carreiras/">Trabalhe conosco</a>
         <a href="#contato">Contato</a>
       </div>
       <div>
@@ -471,11 +473,11 @@
       { section: "#frota", frameCount: 180, bg: "#07140e", framePath: (i) => `frames/frota/frame_${String(i).padStart(4, "0")}.jpg` }
     ];
   </script>
-  <script src="app.js?v=202609021823"></script>
+  <script src="app.js?v=202609021832"></script>
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="data/rede.js?v=202609021823"></script>
-  <script src="data/estados.js?v=202609021823"></script>
-  <script src="map.js?v=202609021823"></script>
-  <script src="cotacao.js?v=202609021823"></script>
+  <script src="data/rede.js?v=202609021832"></script>
+  <script src="data/estados.js?v=202609021832"></script>
+  <script src="map.js?v=202609021832"></script>
+  <script src="cotacao.js?v=202609021832"></script>
 </body>
 </html>

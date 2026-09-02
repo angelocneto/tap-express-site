@@ -125,7 +125,7 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
 <?php else: ?>
   <div class="top"><a href="index.php"><img src="../assets/logo_branca.png" alt="TAP Express"/></a>
     <div class="who">Atendimento · <b><?= $h($user['nome']) ?></b></div>
-    <div><a class="btn" href="../" target="_blank">Ver site</a> <a class="btn" href="?a=csv">Exportar CSV</a> <a class="btn" href="?v=usuarios">Usuários</a> <a class="btn" href="?a=logout">Sair</a></div></div>
+    <div><a class="btn p" href="vagas.php">Vagas</a> <a class="btn p" href="candidatos.php">Candidatos</a> <a class="btn" href="../" target="_blank">Ver site</a> <a class="btn" href="?a=csv">Exportar CSV</a> <a class="btn" href="?v=usuarios">Usuários</a> <a class="btn" href="?a=logout">Sair</a></div></div>
   <?php if ($msg) echo "<div class='msg ok'>$h($msg)</div>"; if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
 
   <?php if ($view === 'ver'): $id = (int)($_GET['id'] ?? 0); $q = $pdo->prepare('SELECT * FROM cotacoes WHERE id = ?'); $q->execute([$id]); $c = $q->fetch(); if (!$c) { echo '<div class="empty">Cotação não encontrada.</div>'; } else {

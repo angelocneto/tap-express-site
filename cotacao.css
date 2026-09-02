@@ -130,3 +130,12 @@ body.quote-open .tapia-chat { display: none; }
 .tc-actions button span svg { width: 17px; height: 17px; fill: none; stroke: #e9d39a; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .tc-input button { font-size: 0; background: linear-gradient(135deg, #f3d98d, #c9a75b); position: relative; }
 .tc-input button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; border-top: 2px solid #1a1405; border-right: 2px solid #1a1405; transform: translate(-60%, -50%) rotate(45deg); }
+
+/* benefícios da TAPIA (para quem cota) */
+.tapia-benefits { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+.tapia-benefits li { display: grid; grid-template-columns: 40px 1fr; grid-template-rows: auto auto; column-gap: 12px; row-gap: 4px; padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(201,167,91,0.3); background: rgba(201,167,91,0.06); align-content: start; }
+.tapia-benefits i { grid-row: 1 / span 2; width: 40px; height: 40px; border-radius: 12px; background: rgba(201,167,91,0.12); border: 1px solid rgba(201,167,91,0.35); display: grid; place-items: center; }
+.tapia-benefits i svg { width: 20px; height: 20px; fill: none; stroke: #e9d39a; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.tapia-benefits b { font-family: var(--display); font-size: 14px; font-weight: 700; color: #f2f7f3; }
+.tapia-benefits span { color: var(--muted); font-size: 13px; line-height: 1.5; }
+@media (max-width: 720px) { .tapia-benefits { grid-template-columns: 1fr; } }

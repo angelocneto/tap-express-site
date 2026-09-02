@@ -37,3 +37,12 @@
 body[data-theme="light"] .nav-logo img.dark { display: none; } body[data-theme="light"] .nav-logo img.color { display: block; }
 .footer-logo-color { display: none; }
 @media (max-width: 900px) { .two-col, .cta-band .box { grid-template-columns: 1fr; } .side-photo { position: static; } .grid-3 { grid-template-columns: 1fr; } .grid-4 { grid-template-columns: repeat(2, 1fr); } .facts { grid-template-columns: 1fr; } .page-photo-strip { grid-template-columns: repeat(2, 1fr); } .page-hero { padding: 110px 0 40px; } }
+
+/* carreiras */
+.vaga h4 { font-family: var(--display); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--green); margin: 12px 0 4px; }
+.vaga ul { margin: 0 0 6px 18px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.vaga .loc { color: var(--ink); font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+.vaga .btn { margin-top: 14px; }
+section[data-theme="light"] .vaga { color: var(--ink); }
+#candForm select { width: 100%; padding: 13px 15px; border-radius: 14px; border: 1px solid rgba(242,247,243,0.18); background: rgba(255,255,255,0.05); color: #f2f7f3; font-family: var(--body); font-size: 15px; }
+#candForm input[type="file"] { padding: 10px; }

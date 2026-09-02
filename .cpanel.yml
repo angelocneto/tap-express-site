@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home1/angel772/tap.amodesenvolvimento.com.br/
-    - /bin/cp -R index.html .htaccess sitemap.xml robots.txt llms.txt pages.css unidades sobre servicos rastreamento cotacao tapia contato cidades styles.css app.js theme.css map.css map.js cotacao.css cotacao.js data api atendimento assets frames $DEPLOYPATH
+    - /bin/cp -R index.html .htaccess sitemap.xml robots.txt llms.txt pages.css unidades sobre servicos rastreamento cotacao tapia contato cidades styles.css app.js theme.css map.css map.js cotacao.css cotacao.js carreiras.js carreiras data api atendimento assets frames $DEPLOYPATH

@@ -16,7 +16,7 @@ WIDGET=WIDGET.replace('src="assets/','src="/assets/').replace('poster="assets/',
 V=re.search(r'\?v=(\d+)',index_html); V=V.group(1) if V else str(YEAR)
 PAGES=[]  # (url, priority, changefreq, title)
 
-def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero.jpg", crumbs=None):
+def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero.jpg", crumbs=None, extra_js=""):
     ldj=json.dumps(ld,ensure_ascii=False)
     crumb_html=''.join(f'<a href="{c[1]}">{esc(c[0])}</a><span>›</span>' for c in (crumbs or [("TAP Express","/")]))
     page=f'''<!DOCTYPE html>
@@ -37,11 +37,11 @@ def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero
 <body data-theme="{theme}">
   <header class="nav is-solid" id="nav">
     <a class="nav-logo" href="/" aria-label="TAP Express"><img class="light" src="/assets/logo_branca.png" alt="TAP Express" /><img class="dark" src="/assets/logo_cor.png" alt="TAP Express" /></a>
-    <nav class="nav-links"><a href="/servicos/">Serviços</a><a href="/sobre/">Sobre</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/cidades/">Cidades</a><a href="/contato/">Contato</a></nav>
+    <nav class="nav-links"><a href="/servicos/">Serviços</a><a href="/sobre/">Sobre</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></nav>
     <div class="nav-cta"><a class="btn btn-ghost" href="/rastreamento/">Rastrear</a><a class="btn btn-solid" href="/cotacao/" data-open-quote="nav">Cotação</a></div>
     <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
   </header>
-  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/sobre/">Sobre</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/cidades/">Cidades</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a></div>
+  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/sobre/">Sobre</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/cidades/">Cidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a></div>
   <main>
     <section class="page-hero"><div class="wrap"><div class="crumbs">{crumb_html}</div>{body[0]}</div></section>
     {body[1]}
@@ -49,13 +49,13 @@ def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero
   </main>
   <footer class="footer"><div class="wrap footer-grid">
     <div><img class="footer-logo" src="/assets/logo_branca.png" alt="TAP Express" /><p>Transporte rodoviário de cargas e encomendas desde 2001, a partir de Presidente Prudente, SP.</p></div>
-    <div><h5>Navegação</h5><a href="/sobre/">Sobre a empresa</a><a href="/servicos/">Serviços</a><a href="/unidades/">Unidades</a><a href="/cidades/">Cidades atendidas</a><a href="/tapia/">TAPIA</a><a href="/contato/">Contato</a></div>
+    <div><h5>Navegação</h5><a href="/sobre/">Sobre a empresa</a><a href="/servicos/">Serviços</a><a href="/unidades/">Unidades</a><a href="/cidades/">Cidades atendidas</a><a href="/tapia/">TAPIA</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></div>
     <div><h5>Cliente</h5><a href="/rastreamento/">Rastreamento</a><a href="/cotacao/">Cotação online</a><a href="tel:+551839187777">SAC (18) 3918-7777</a><a href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
     <div><h5>Redes</h5><a href="https://www.instagram.com/tap.transportes/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/taptransportes/" target="_blank" rel="noopener">Facebook</a></div>
   </div><div class="wrap footer-bottom"><span>© {YEAR} TAP Express · Transportes</span><span>Precisão regional. Velocidade que move negócios.</span></div></footer>
 {WIDGET}
   <script src="/data/rede.js?v={V}"></script>
-  <script src="/cotacao.js?v={V}"></script>
+  <script src="/cotacao.js?v={V}"></script>{extra_js}
   <script>document.getElementById("burger").addEventListener("click",()=>{{document.getElementById("burger").classList.toggle("is-open");document.getElementById("mobileMenu").classList.toggle("is-open")}});document.querySelectorAll('[data-open-quote]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));document.querySelectorAll('.years-since').forEach(e=>e.textContent={YEARS});</script>
 </body>
 </html>'''
@@ -137,7 +137,6 @@ faq_t=[("A TAPIA dá o preço do frete?","Não. Ela registra o pedido com protoc
 hero='<img class="tapia-logo" src="/assets/tapia-logo.png" alt="TAP.IA. Inteligência que move." /><h1>Conheça a <span class="gold-text">TAPIA.</span></h1><p class="sub">A inteligência da TAP Express que orienta cada conversa: cotação, rastreamento, cobertura por cidade e atendimento humano, sempre com contexto.</p>'
 body=f'''<section><div class="wrap two-col"><div class="prose"><h2>O que ela faz hoje</h2><ul><li>Abre a cotação em 3 passos e confere se a cidade está na rede.</li><li>Leva você ao portal de rastreamento.</li><li>Mostra no mapa qual unidade atende cada cidade e em que dias.</li><li>Encaminha ao WhatsApp da equipe com o resumo da conversa.</li></ul>
 <h2>O que ela nunca faz</h2><ul><li>Inventar preço, prazo, status de entrega ou unidade.</li><li>Prometer integrações que ainda não existem.</li><li>Substituir a pessoa que fecha o atendimento.</li></ul>
-<h2>Quatro pilares</h2><ul class="pillars"><li><b>Onipresente</b><span>Presente em todos os canais, do primeiro contato à entrega.</span></li><li><b>Onisciente</b><span>Conhece a operação, as rotas, os prazos e as soluções.</span></li><li><b>Confiável</b><span>Respostas precisas e auditadas.</span></li><li><b>Humana</b><span>Tecnologia com sensibilidade e proximidade reais.</span></li></ul>
 <h2>Perguntas frequentes</h2>{faq_html(faq_t)}</div><figure class="side-photo"><img src="/assets/tapia-poster.jpg" alt="TAPIA, assistente virtual da TAP Express" /><figcaption>TAPIA</figcaption></figure></div></section>'''
 write('tapia',BASE+'/tapia/',"TAPIA, a assistente inteligente da TAP Express","TAPIA orienta cotação, rastreamento e cobertura por cidade no site da TAP Express e encaminha ao atendimento humano com contexto. Inteligência que move.",hero,body,[{"@context":"https://schema.org","@type":"WebPage","name":"TAPIA","url":BASE+"/tapia/","about":{"@type":"SoftwareApplication","name":"TAPIA","applicationCategory":"BusinessApplication","operatingSystem":"Web","provider":ORG}},bc(("TAP Express",BASE+"/"),("TAPIA",BASE+"/tapia/")),faq_ld(faq_t)],prio="0.7",crumbs=[("TAP Express","/"),("TAPIA","/tapia/")])
 
@@ -184,5 +183,35 @@ def city_links(uf): return ''.join(f'<a class="tile" href="/cidades/{c["slug"]}/
 hero=f'<p class="kicker">Cidades atendidas</p><h1>{len(cities)} localidades <span>na rede TAP.</span></h1><p class="sub">Encontre sua cidade e veja qual unidade atende, em que dias e como pedir a cotação. Prefere o mapa? <a href="/#unidades" style="color:var(--green)">Abra o mapa interativo</a>.</p>'
 body=''.join(f'<section class="section-pad"><div class="wrap"><h2>{nm}</h2><div class="grid-4" style="margin-top:18px">{city_links(uf)}</div></div></section>' for uf,nm in (("SP","São Paulo"),("PR","Paraná"),("MS","Mato Grosso do Sul")))
 write('cidades',BASE+'/cidades/',"Cidades atendidas pela TAP Express em SP, PR e MS",f"Lista das {len(cities)} localidades atendidas pela TAP Express, com a unidade responsável e os dias de atendimento de cada cidade.",hero,body,[{"@context":"https://schema.org","@type":"CollectionPage","name":"Cidades atendidas","url":BASE+"/cidades/"},bc(("TAP Express",BASE+"/"),("Cidades",BASE+"/cidades/"))],prio="0.9",crumbs=[("TAP Express","/"),("Cidades","/cidades/")])
+
+# ---------------- CARREIRAS ----------------
+faq_c=[("Preciso de experiência para ser motorista na TAP?","Para caminhão baú e carreta pedimos CNH C, D ou E e experiência com carga. Para utilitários, CNH B e boa vontade de aprender: a unidade treina na rota."),("Como funciona a seleção?","Sua candidatura entra no painel da equipe de gente da TAP. Se o perfil combina com uma vaga, ligamos ou chamamos no WhatsApp para uma conversa na unidade mais próxima."),("Posso me candidatar sem vaga aberta?","Sim. Escolha \"Banco de talentos\" no formulário. Quando abrir uma vaga na sua região, a equipe entra em contato."),("As rotas são regionais?","Sim. A rede cobre o oeste paulista, o norte do Paraná e o Mato Grosso do Sul, com rotas diárias entre as unidades e as cidades atendidas.")]
+hero='<p class="kicker">Carreiras · Trabalhe conosco</p><h1>Quem move a TAP <span>é gente da região.</span></h1><p class="sub">Motoristas, equipes de pátio, atendimento e comercial: são as pessoas das nossas 20 unidades que fazem a urgência virar entrega no prazo. Veja as vagas abertas ou deixe seu currículo no banco de talentos.</p>'
+body=f'''<section class="section-pad"><div class="wrap two-col"><div class="prose">
+<h2>Valorização de quem está na estrada</h2>
+<p>Motorista na TAP não é só quem dirige. É quem representa a empresa na porta do cliente, conhece cada cidade da rota e cuida da carga como se fosse sua. Por isso a operação é pensada para quem dirige:</p>
+<ul><li><strong>Rotas regionais e fixas.</strong> A rede cobre SP, PR e MS com rotas diárias entre unidades vizinhas. Você conhece o caminho, os clientes e volta para a sua base.</li><li><strong>Frota cuidada e rastreada.</strong> Caminhões revisados e monitorados via satélite, com apoio da central 24 horas em qualquer ponto da rota.</li><li><strong>Voz na operação.</strong> Quem está na estrada ajuda a desenhar a rota. Sugestão de motorista vira melhoria de processo.</li><li><strong>Crescimento por dentro.</strong> Ajudantes que viram motoristas, motoristas que viram líderes de pátio e de unidade. A preferência é sempre de quem já está na casa.</li></ul>
+<h2>Cultura TAP</h2>
+<p>Desde 2001 a TAP cresce com um jeito simples: cumprir o combinado, tratar bem quem está do outro lado do balcão e resolver o problema sem empurrar para o próximo. Nossos valores são <strong>inovação</strong>, <strong>rapidez com segurança</strong>, <strong>capital humano</strong> e <strong>responsabilidade social</strong>. Na prática isso quer dizer equipe pequena por unidade, chefia que conhece cada pessoa pelo nome e decisão rápida.</p>
+<h2>Benefícios</h2>
+<p>Os benefícios variam por vaga e por unidade e aparecem descritos em cada anúncio abaixo. Em todas as contratações CLT você encontra registro em carteira, salário em dia e os benefícios legais. As vagas de motorista informam também o modelo de remuneração e a rota.</p>
+<h2>Perguntas frequentes</h2>{faq_html(faq_c)}
+</div><figure class="side-photo"><img src="/assets/pessoas/motorista.jpg" alt="Motorista da TAP Express ao lado do caminhão no pátio da unidade" /><figcaption>Motorista da TAP no pátio da unidade</figcaption></figure></div></section>
+<section class="section-pad" data-theme="light"><div class="wrap"><p class="kicker">Vagas abertas</p><h2>Oportunidades <span>agora.</span></h2><p class="sub">As vagas abaixo são publicadas pela equipe da TAP e atualizadas em tempo real.</p><div class="grid-3" id="vagasList" style="margin-top:24px"><div class="tile"><h3>Carregando vagas…</h3></div></div></div></section>
+<section class="section-pad" id="candidatura"><div class="wrap two-col"><div class="prose"><p class="kicker">Candidatura</p><h2>Envie seu currículo</h2><p>Leva dois minutos. Se preferir, mande o currículo em PDF ou Word.</p>
+<form id="candForm" class="qf" style="margin-top:18px" enctype="multipart/form-data" novalidate>
+<div class="hp"><label>Website</label><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
+<div class="full"><label>Vaga</label><select name="vaga_id" id="cVaga"><option value="">Banco de talentos (sem vaga específica)</option></select></div>
+<div><label>Nome completo</label><input name="nome" required autocomplete="name" /></div><div><label>WhatsApp / telefone</label><input name="telefone" type="tel" required placeholder="(18) 99999-9999" /></div>
+<div><label>E-mail</label><input name="email" type="email" autocomplete="email" /></div><div><label>Cidade onde mora</label><input name="cidade" required placeholder="Ex.: Presidente Prudente" /></div>
+<div><label>Categoria da CNH</label><select name="cnh"><option value="">Não tenho / não se aplica</option><option>B</option><option>C</option><option>D</option><option>E</option></select></div><div><label>Experiência na área</label><select name="experiencia"><option>Sem experiência</option><option>Até 1 ano</option><option>1 a 3 anos</option><option>3 a 5 anos</option><option>Mais de 5 anos</option></select></div>
+<div class="full"><label>Currículo (PDF ou Word, até 5 MB)</label><input name="cv" type="file" accept=".pdf,.doc,.docx" /></div>
+<div class="full"><label>Conte um pouco sobre você</label><textarea name="mensagem" rows="3" placeholder="Rotas que já fez, tipo de veículo, disponibilidade, o que procura."></textarea></div>
+<div class="full" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn btn-solid" type="submit">Enviar candidatura</button><span id="candMsg" style="color:#ff9b8d;font-size:13px"></span></div>
+</form>
+<div id="candDone" hidden class="tile" style="margin-top:18px"><h3>Candidatura recebida. Obrigado!</h3><p>A equipe da TAP analisa o perfil e entra em contato pelo WhatsApp ou e-mail informado. Boa sorte!</p></div>
+</div><figure class="side-photo"><img src="/assets/pessoas/equipe.jpg" alt="Equipe da TAP Express em frente à frota no pátio da unidade" /><figcaption>Equipe da TAP no pátio</figcaption></figure></div></section>'''
+write('carreiras',BASE+'/carreiras/',"Trabalhe conosco | Vagas para motoristas e equipe | TAP Express","Vagas abertas na TAP Express para motoristas, operação, atendimento e comercial em SP, PR e MS. Rotas regionais, frota rastreada e crescimento por dentro. Envie seu currículo.",hero,body,[{"@context":"https://schema.org","@type":"WebPage","name":"Carreiras TAP Express","url":BASE+"/carreiras/","about":ORG},bc(("TAP Express",BASE+"/"),("Carreiras",BASE+"/carreiras/")),faq_ld(faq_c)],prio="0.8",freq="weekly",crumbs=[("TAP Express","/"),("Carreiras","/carreiras/")],og_image=BASE+"/assets/pessoas/equipe.jpg",extra_js=f'<script src="/carreiras.js?v={V}"></script>')
+
 json.dump(PAGES,open('data/pages.json','w',encoding='utf-8'),ensure_ascii=False)
 print(f"páginas geradas: {len(PAGES)}")

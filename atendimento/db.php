@@ -43,6 +43,24 @@ function tap_db(): PDO {
         nome TEXT NOT NULL, email TEXT UNIQUE NOT NULL, senha_hash TEXT NOT NULL, criado_em TEXT NOT NULL
     )');
     $pdo->exec('CREATE TABLE IF NOT EXISTS rate (ip TEXT, ts INTEGER)');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS vagas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titulo TEXT NOT NULL, area TEXT, tipo TEXT, unidade TEXT, cidade TEXT, uf TEXT,
+        descricao TEXT, requisitos TEXT, beneficios TEXT, ativa INTEGER NOT NULL DEFAULT 1,
+        criado_em TEXT NOT NULL, atualizado_em TEXT NOT NULL
+    )');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS candidaturas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        vaga_id INTEGER REFERENCES vagas(id) ON DELETE SET NULL,
+        status TEXT NOT NULL DEFAULT "novo",
+        nome TEXT NOT NULL, email TEXT, telefone TEXT, cidade TEXT, cnh TEXT, experiencia TEXT, mensagem TEXT,
+        cv_arquivo TEXT, cv_nome TEXT, ip TEXT, criado_em TEXT NOT NULL, atualizado_em TEXT NOT NULL
+    )');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS candidatura_notas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        candidatura_id INTEGER NOT NULL REFERENCES candidaturas(id) ON DELETE CASCADE,
+        criado_em TEXT NOT NULL, autor TEXT, texto TEXT NOT NULL
+    )');
     return $pdo;
 }
 
@@ -59,3 +77,7 @@ function tap_protocolo(PDO $pdo): string {
 }
 
 const TAP_STATUS = ['novo' => 'Novo', 'atendimento' => 'Em atendimento', 'cotado' => 'Cotado', 'fechado' => 'Fechado', 'perdido' => 'Perdido'];
+const TAP_CAND_STATUS = ['novo' => 'Novos', 'triagem' => 'Triagem', 'entrevista' => 'Entrevista', 'aprovado' => 'Aprovados', 'reprovado' => 'Reprovados'];
+const TAP_AREAS = ['Motorista', 'Operação e armazém', 'Atendimento e administrativo', 'Comercial', 'Tecnologia'];
+const TAP_TIPOS = ['CLT', 'PJ', 'Agregado', 'Estágio', 'Temporário'];
+function tap_cv_dir(): string { $d = tap_data_dir() . '/cv'; if (!is_dir($d)) @mkdir($d, 0750, true); return $d; }
