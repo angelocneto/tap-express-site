@@ -32,16 +32,49 @@
   if (window.TAP_REDE) window.TAP_REDE.units.forEach(u => { places.push({ n: u.n, uf: u.uf, via: u.n }); u.cities.forEach(c => { if (norm(c.n) !== norm(u.n)) places.push({ n: c.n, uf: u.uf, via: u.n }); }); });
   sheet.querySelectorAll(".ac").forEach(box => {
     const input = box.querySelector("input"), list = box.querySelector(".ac-list"), hint = box.querySelector(".hint");
-    input.addEventListener("input", () => {
-      const q = norm(input.value); hint.textContent = "";
-      if (q.length < 2) { list.classList.remove("is-open"); return; }
-      const m = places.filter(p => norm(p.n).includes(q)).slice(0, 6);
-      list.innerHTML = m.map(p => `<button type="button" data-n="${p.n}" data-via="${p.via}">${p.n} <small>${p.uf}</small></button>`).join("");
-      list.classList.toggle("is-open", m.length > 0);
-      list.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { input.value = b.dataset.n; list.classList.remove("is-open"); hint.textContent = "✓ Cidade atendida pela rede TAP" + (b.dataset.via !== b.dataset.n ? " · via " + b.dataset.via : ""); }));
+    let items = [], idx = -1;
+    function choose(p) { input.value = p.n; list.classList.remove("is-open"); input.classList.add("ok"); hint.textContent = "✓ Cidade atendida pela rede TAP" + (p.via !== p.n ? " · via " + p.via : "") + " · " + p.uf; }
+    function render() {
+      const q = norm(input.value.trim()); hint.textContent = ""; input.classList.remove("ok"); idx = -1;
+      if (q.length < 1) { list.classList.remove("is-open"); items = []; return; }
+      items = places.filter(p => norm(p.n).includes(q)).sort((a, b) => norm(a.n).indexOf(q) - norm(b.n).indexOf(q) || a.n.localeCompare(b.n)).slice(0, 6);
+      if (!items.length) { list.innerHTML = ""; list.classList.remove("is-open"); hint.textContent = "Não achamos essa cidade na rede, mas pode continuar: nossa equipe verifica a rota."; return; }
+      list.innerHTML = items.map((p, i) => `<button type="button" data-i="${i}">${p.n} <small>${p.uf}${p.via !== p.n ? " · via " + p.via : ""}</small></button>`).join("");
+      list.classList.add("is-open");
+      list.querySelectorAll("button").forEach(b => b.addEventListener("mousedown", (e) => { e.preventDefault(); choose(items[+b.dataset.i]); }));
+      if (items.length === 1 && norm(items[0].n) === q) choose(items[0]);
+    }
+    input.addEventListener("input", render);
+    input.addEventListener("focus", () => { if (input.value && !input.classList.contains("ok")) render(); });
+    input.addEventListener("keydown", (e) => {
+      if (!list.classList.contains("is-open")) return;
+      const btns = list.querySelectorAll("button");
+      if (e.key === "ArrowDown") { idx = Math.min(idx + 1, btns.length - 1); e.preventDefault(); }
+      else if (e.key === "ArrowUp") { idx = Math.max(idx - 1, 0); e.preventDefault(); }
+      else if (e.key === "Enter" || e.key === "Tab") { if (items.length) { e.preventDefault(); choose(items[idx >= 0 ? idx : 0]); if (e.key === "Tab") { const next = input.closest(".qf").querySelectorAll("input")[1]; if (next && next !== input) next.focus(); } } return; }
+      else if (e.key === "Escape") { list.classList.remove("is-open"); return; }
+      btns.forEach((b, i) => b.classList.toggle("is-active", i === idx));
     });
     input.addEventListener("blur", () => setTimeout(() => list.classList.remove("is-open"), 150));
   });
+
+  /* ---- máscara de telefone (aceita colar com +55) ---- */
+  const tel = form.elements["telefone"];
+  function fmtTel(v) {
+    let d = v.replace(/\D/g, "");
+    if (d.startsWith("55") && d.length > 11) d = d.slice(2);
+    if (d.startsWith("0") && d.length > 11) d = d.slice(1);
+    d = d.slice(0, 11);
+    if (d.length <= 2) return d.length ? "(" + d : "";
+    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+  }
+  if (tel) {
+    tel.addEventListener("input", () => { tel.value = fmtTel(tel.value); });
+    tel.addEventListener("paste", (e) => { e.preventDefault(); tel.value = fmtTel((e.clipboardData || window.clipboardData).getData("text")); });
+    tel.addEventListener("blur", () => { const d = tel.value.replace(/\D/g, ""); tel.style.borderColor = d.length && d.length < 10 ? "#ff6b5a" : ""; });
+  }
 
   /* ---- steps ---- */
   function show(i) {
@@ -57,6 +90,8 @@
     s.querySelectorAll("[required]").forEach(f => { const bad = f.type === "radio" ? !s.querySelector(`[name="${f.name}"]:checked`) : !f.value.trim(); f.style.borderColor = bad ? "#ff6b5a" : ""; if (bad) ok = false; });
     const email = s.querySelector('input[type="email"]');
     if (email && email.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) { email.style.borderColor = "#ff6b5a"; ok = false; }
+    const t = s.querySelector('input[name="telefone"]');
+    if (t && t.value && t.value.replace(/\D/g, "").length < 10) { t.style.borderColor = "#ff6b5a"; ok = false; }
     if (!ok) errEl.textContent = "Preencha os campos destacados.";
     return ok;
   }
@@ -90,6 +125,6 @@
     }
   });
   form.addEventListener("submit", (e) => { e.preventDefault(); btnNext.click(); });
-  form.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") { e.preventDefault(); btnNext.click(); } });
+  form.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName !== "TEXTAREA" && !e.target.closest(".ac")?.querySelector(".ac-list.is-open")) { e.preventDefault(); btnNext.click(); } });
   show(0);
 })();
