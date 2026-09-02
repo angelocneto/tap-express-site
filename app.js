@@ -1,3 +1,13 @@
+/* TAP Express — anos de estrada calculados a partir da fundação (2001) */
+(function () {
+  const FOUNDED = 2001, now = new Date().getFullYear(), years = now - FOUNDED;
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".years-since").forEach(el => el.textContent = years);
+    document.querySelectorAll(".year-now").forEach(el => el.textContent = now);
+    document.querySelectorAll("[data-count-from]").forEach(el => el.dataset.count = now - parseInt(el.dataset.countFrom, 10));
+  });
+})();
+
 /* TAP Express — scroll engine (canvas frame scrub + Lenis + reveals) */
 function initScrub(cfg) {
   const section = document.querySelector(cfg.section);
