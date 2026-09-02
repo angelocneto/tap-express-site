@@ -12,12 +12,15 @@
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="map.css" />
+  <link rel="stylesheet" href="cotacao.css" />
+  <link rel="stylesheet" href="theme.css" />
 </head>
-<body>
+<body data-theme="dark">
+  <div class="aurora"></div>
 
   <!-- ===== NAV ===== -->
   <header class="nav" id="nav">
-    <a class="nav-logo" href="#top" aria-label="TAP Express"><img src="assets/logo_branca.png" alt="TAP Express" /></a>
+    <a class="nav-logo" href="#top" aria-label="TAP Express"><img class="light" src="assets/logo_branca.png" alt="TAP Express" /><img class="dark" src="assets/logo_verde.png" alt="TAP Express" /></a>
     <nav class="nav-links">
       <a href="#servicos">Serviços</a>
       <a href="#frota">Frota</a>
@@ -27,7 +30,7 @@
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastrear</a>
-      <a class="btn btn-solid" href="tel:+551839187777">Cotação</a>
+      <a class="btn btn-solid" href="#cotacao" data-open-quote="nav">Cotação</a>
     </div>
     <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
   </header>
@@ -41,7 +44,7 @@
   </div>
 
   <!-- ===== HERO (scroll-scrubbed) ===== -->
-  <section class="cinematic" id="hero">
+  <section class="cinematic" id="hero" data-theme="dark">
     <div class="sticky">
       <canvas></canvas>
       <div class="vignette"></div>
@@ -64,7 +67,7 @@
   </section>
 
   <!-- ===== STATS ===== -->
-  <section class="stats" id="top">
+  <section class="stats" data-theme="light" id="top">
     <div class="wrap stats-grid">
       <div class="stat reveal"><div class="stat-num" data-count-from="2001" data-count="25" data-suffix="+">0</div><div class="stat-label">anos de estrada</div></div>
       <div class="stat reveal"><div class="stat-num" data-count="92">0</div><div class="stat-label">cidades atendidas</div></div>
@@ -75,7 +78,7 @@
   </section>
 
   <!-- ===== SOBRE ===== -->
-  <section class="about" id="sobre">
+  <section class="about" data-theme="light" id="sobre">
     <div class="wrap about-grid">
       <div class="reveal">
         <p class="kicker">Quem somos</p>
@@ -95,7 +98,7 @@
   </section>
 
   <!-- ===== SERVIÇOS ===== -->
-  <section class="services" id="servicos">
+  <section class="services" data-theme="dark" id="servicos">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="kicker">Serviços</p>
@@ -137,7 +140,7 @@
   </section>
 
   <!-- ===== FROTA (scroll-scrubbed, real yard) ===== -->
-  <section class="cinematic frota" id="frota">
+  <section class="cinematic frota" id="frota" data-theme="dark">
     <div class="sticky">
       <canvas></canvas>
       <div class="vignette"></div>
@@ -155,7 +158,7 @@
     </div>
   </section>
 
-  <section class="gallery">
+  <section class="gallery" data-theme="light">
     <div class="wrap">
       <div class="gallery-grid">
         <figure class="reveal"><img src="assets/frota_01.jpg" alt="Caminhão baú TAP Express no pátio" loading="lazy" /></figure>
@@ -169,7 +172,7 @@
   </section>
 
   <!-- ===== TAP.IA ===== -->
-  <section class="tapia" id="tapia">
+  <section class="tapia" data-theme="dark" id="tapia">
     <div class="wrap tapia-grid">
       <div class="tapia-video reveal">
         <video id="tapiaVideo" playsinline preload="metadata" poster="assets/tapia-poster.jpg">
@@ -189,7 +192,7 @@
           <li>Atendimento 24 horas, todos os dias</li>
         </ul>
         <div class="btn-row">
-          <a class="btn btn-solid" href="tel:+551839187777">Falar com a TAP</a>
+          <a class="btn btn-solid" href="#cotacao" data-open-quote="tapia">Pedir cotação à Tap.IA</a>
           <a class="btn btn-ghost" href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastrear encomenda</a>
         </div>
       </div>
@@ -197,7 +200,7 @@
   </section>
 
   <!-- ===== UNIDADES ===== -->
-  <section class="units" id="unidades">
+  <section class="units" data-theme="light" id="unidades">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="kicker">Onde estamos</p>
@@ -284,7 +287,7 @@
   </section>
 
   <!-- ===== CTA ===== -->
-  <section class="cta" id="contato">
+  <section class="cta" data-theme="dark" id="contato">
     <div class="wrap cta-grid">
       <div class="reveal">
         <p class="kicker">Rastreamento</p>
@@ -301,7 +304,7 @@
         <p>Atendimento 24 horas · SAC</p>
         <p>Rod. SP 270 Raposo Tavares, km 556<br/>Regente Feijó · Presidente Prudente, SP</p>
         <div class="btn-row">
-          <a class="btn btn-solid" href="tel:+551839187777">Solicitar cotação</a>
+          <a class="btn btn-solid" href="#cotacao" data-open-quote="contato">Solicitar cotação</a>
           <a class="btn btn-ghost" href="https://www.google.com/maps/place/22%C2%B009'12.5%22S+51%C2%B023'28.2%22W/@-22.1534593,-51.393727,17z" target="_blank" rel="noopener">Como chegar</a>
         </div>
       </div>
@@ -325,7 +328,7 @@
       <div>
         <h5>Cliente</h5>
         <a href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">Rastreamento</a>
-        <a href="tel:+551839187777">Cotação</a>
+        <a href="#cotacao" data-open-quote="rodape">Cotação online</a>
         <a href="tel:+551839187777">SAC 24h</a>
       </div>
       <div>
@@ -340,6 +343,79 @@
     </div>
   </footer>
 
+
+  <!-- ===== Tap.IA no canto + cotação ===== -->
+  <div class="tapia-fab" id="tapiaFab">
+    <div class="tapia-bubble" id="tapiaBubble"><span class="x" aria-label="Fechar">×</span><b>Oi, eu sou a Tap.IA!</b><br/>Quer uma cotação rápida? Me conta de onde para onde vai a sua encomenda.</div>
+    <div class="tapia-avatar" role="button" aria-label="Abrir cotação com a Tap.IA">
+      <video id="tapiaWave" src="assets/tapia-wave.mp4" poster="assets/tapia-poster.jpg" muted loop playsinline autoplay></video>
+      <span class="tag">TAP.IA</span>
+    </div>
+  </div>
+  <div class="quote-backdrop" id="quoteBackdrop"></div>
+  <aside class="quote-sheet" id="quoteSheet" aria-label="Solicitar cotação">
+    <div class="quote-head">
+      <div class="av"><video src="assets/tapia-wave.mp4" poster="assets/tapia-poster.jpg" muted loop playsinline autoplay></video></div>
+      <div><h3>Cotação com a Tap.IA</h3><p>3 passos rápidos. Nossa equipe responde em horário comercial.</p></div>
+      <button class="close" aria-label="Fechar">×</button>
+    </div>
+    <div class="quote-progress"><i></i></div>
+    <form id="quoteForm" novalidate>
+      <input type="hidden" id="qPagina" name="pagina" value="" />
+      <div class="hp"><label>Website</label><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
+      <div class="quote-steps">
+        <section class="quote-step is-on">
+          <h4>De onde <em>para onde?</em></h4>
+          <p>Digite a cidade e veja na hora se ela está na rede TAP.</p>
+          <div class="qf">
+            <div class="ac"><label>Cidade de origem</label><input name="origem" placeholder="Ex.: Presidente Prudente" required autocomplete="off" /><div class="ac-list"></div><div class="hint"></div></div>
+            <div class="ac"><label>Cidade de destino</label><input name="destino" placeholder="Ex.: Londrina" required autocomplete="off" /><div class="ac-list"></div><div class="hint"></div></div>
+          </div>
+        </section>
+        <section class="quote-step">
+          <h4>O que vai <em>viajar?</em></h4>
+          <p>Quanto mais detalhes, mais precisa a cotação.</p>
+          <div class="qf">
+            <div class="types">
+              <label><input type="radio" name="tipo" value="Encomenda expressa" required checked /><span>Encomenda<small>caixas e pacotes</small></span></label>
+              <label><input type="radio" name="tipo" value="Malote / documentos" /><span>Malote<small>documentos</small></span></label>
+              <label><input type="radio" name="tipo" value="Carga fracionada" /><span>Carga<small>paletes e fracionado</small></span></label>
+            </div>
+            <div><label>Volumes</label><input name="volumes" type="number" min="1" step="1" placeholder="1" /></div>
+            <div><label>Peso total (kg)</label><input name="peso" type="number" min="0" step="0.1" placeholder="Ex.: 12,5" /></div>
+            <div><label>Dimensões (opcional)</label><input name="dimensoes" placeholder="Ex.: 40 × 30 × 20 cm" /></div>
+            <div><label>Valor da mercadoria (R$)</label><input name="valor" type="number" min="0" step="0.01" placeholder="Para o seguro incluso" /></div>
+          </div>
+        </section>
+        <section class="quote-step">
+          <h4>Para quem <em>enviamos a cotação?</em></h4>
+          <p>Retornamos por WhatsApp ou e-mail.</p>
+          <div id="qSummary" class="quote-summary"></div>
+          <div class="qf">
+            <div><label>Seu nome</label><input name="nome" required placeholder="Nome completo" autocomplete="name" /></div>
+            <div><label>Empresa (opcional)</label><input name="empresa" placeholder="Razão social ou fantasia" autocomplete="organization" /></div>
+            <div><label>WhatsApp / telefone</label><input name="telefone" type="tel" required placeholder="(18) 99999-9999" autocomplete="tel" /></div>
+            <div><label>E-mail</label><input name="email" type="email" placeholder="voce@empresa.com.br" autocomplete="email" /></div>
+            <div class="full"><label>Observações</label><textarea name="observacoes" rows="2" placeholder="Prazo desejado, coleta, horário, fragilidade…"></textarea></div>
+          </div>
+        </section>
+      </div>
+      <div class="quote-foot">
+        <button type="button" class="btn btn-ghost" id="qPrev">← Voltar</button>
+        <span class="err" id="qErr"></span>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-solid" id="qNext">Continuar →</button>
+      </div>
+    </form>
+    <div class="quote-done" id="quoteDone" hidden>
+      <p class="kicker">Cotação registrada</p>
+      <h4 style="font-family:var(--display);font-size:1.5rem;font-weight:800">Obrigada, <span id="qDoneName"></span>! 👋</h4>
+      <div class="proto" id="qProto">TAP-0000-00000</div>
+      <p>Guarde este protocolo. Nossa equipe de atendimento já recebeu o pedido e retorna em horário comercial pelo WhatsApp ou e-mail informado.</p>
+      <p style="margin-top:14px">Urgente? <a href="tel:+551839187777" style="color:#9df0a8">(18) 3918-7777</a></p>
+    </div>
+  </aside>
+
   <script src="https://unpkg.com/lenis@1.3.21/dist/lenis.min.js"></script>
   <script>
     window.SCRUB_SECTIONS = [
@@ -352,5 +428,6 @@
   <script src="data/rede.js"></script>
   <script src="data/estados.js"></script>
   <script src="map.js"></script>
+  <script src="cotacao.js"></script>
 </body>
 </html>

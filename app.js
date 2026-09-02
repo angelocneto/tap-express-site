@@ -152,3 +152,21 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open("https://ssw.inf.br/2/rastreamento", "_blank", "noopener");
   });
 });
+
+/* ===== Tema claro/escuro por seção + progresso de scroll para os gradientes ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body, sections = [...document.querySelectorAll("section[data-theme], footer")];
+  function pickTheme() {
+    const mid = window.innerHeight * 0.35; let best = null, bestD = Infinity;
+    for (const s of sections) { const r = s.getBoundingClientRect(); if (r.top <= mid && r.bottom >= mid) { best = s; break; } const d = Math.min(Math.abs(r.top - mid), Math.abs(r.bottom - mid)); if (d < bestD) { bestD = d; best = s; } }
+    const t = best ? (best.dataset.theme || "dark") : "dark";
+    if (body.dataset.theme !== t) body.dataset.theme = t;
+  }
+  function onScroll() {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    body.style.setProperty("--sp", (window.scrollY / max).toFixed(4));
+    pickTheme();
+  }
+  if (window.__lenis) window.__lenis.on("scroll", onScroll); else window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+});
