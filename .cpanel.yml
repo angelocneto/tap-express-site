@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home1/angel772/tap.amodesenvolvimento.com.br/
+    - /bin/cp -R index.html styles.css app.js .htaccess assets frames $DEPLOYPATH
