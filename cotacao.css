@@ -118,3 +118,10 @@ body.quote-open .tapia-chat { display: none; }
 .tapia-avatar .tag img { height: 14px; width: auto; display: block; }
 @media (max-width: 720px) { .tapia-avatar .tag img { height: 11px; } }
 .tc-head img.tc-logo { width: auto; height: 20px; border-radius: 0; border: 0; object-fit: contain; }
+@media (max-width: 720px) {
+  .tapia-avatar { width: 140px; height: 178px; }
+  .tapia-avatar::before { width: 140px; height: 66px; }
+  .tapia-avatar .tag img { height: 13px; }
+  .tapia-bubble { max-width: 176px; }
+  .tapia-fab { gap: 8px; }
+}
