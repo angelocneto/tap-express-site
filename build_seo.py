@@ -63,6 +63,9 @@ for u in units:
 
 # ---------- sitemap / robots / llms.txt ----------
 urls=[(BASE+'/','1.0','weekly')]+[(f"{BASE}/unidades/{u['slug']}/",'0.8','monthly') for u in units]
+import os
+if os.path.exists('data/pages.json'):
+    for u_,p_,f_,t_ in json.load(open('data/pages.json',encoding='utf-8')): urls.append((u_,p_,f_))
 open('sitemap.xml','w',encoding='utf-8').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{l}</loc><lastmod>{today}</lastmod><changefreq>{f}</changefreq><priority>{p}</priority></url>\n' for l,p,f in urls)+'</urlset>\n')
 open('robots.txt','w').write(f"User-agent: *\nAllow: /\nDisallow: /atendimento/\nDisallow: /api/\n\n# Crawlers de IA: liberados (GEO)\nUser-agent: GPTBot\nAllow: /\nUser-agent: OAI-SearchBot\nAllow: /\nUser-agent: ChatGPT-User\nAllow: /\nUser-agent: ClaudeBot\nAllow: /\nUser-agent: anthropic-ai\nAllow: /\nUser-agent: PerplexityBot\nAllow: /\nUser-agent: Google-Extended\nAllow: /\nUser-agent: Applebot-Extended\nAllow: /\nUser-agent: Bytespider\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
 llms=f"""# TAP Express
@@ -89,6 +92,8 @@ llms=f"""# TAP Express
 """ + "".join(f"- [{u['n']} · {u['uf']}]({BASE}/unidades/{u['slug']}/): {u['addr']} · {u['phone']} · atende " + (", ".join(c['n']+(f" ({dias(c['d'])})" if c.get('d') else '') for c in u['cities']) or "consulte a central") + "\n" for u in units) + f"""
 ## Páginas
 - [Início]({BASE}/)
+- [Sobre]({BASE}/sobre/) · [Serviços]({BASE}/servicos/) · [Rastreamento]({BASE}/rastreamento/) · [Cotação]({BASE}/cotacao/) · [TAPIA]({BASE}/tapia/) · [Contato]({BASE}/contato/)
+- [Unidades]({BASE}/unidades/) · [Cidades atendidas]({BASE}/cidades/) (uma página por cidade: {BASE}/cidades/<cidade>/)
 - [Mapa da rede]({BASE}/#unidades)
 - [Sitemap]({BASE}/sitemap.xml)
 """

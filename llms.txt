@@ -42,5 +42,7 @@
 
 ## Páginas
 - [Início](https://tap.amodesenvolvimento.com.br/)
+- [Sobre](https://tap.amodesenvolvimento.com.br/sobre/) · [Serviços](https://tap.amodesenvolvimento.com.br/servicos/) · [Rastreamento](https://tap.amodesenvolvimento.com.br/rastreamento/) · [Cotação](https://tap.amodesenvolvimento.com.br/cotacao/) · [TAPIA](https://tap.amodesenvolvimento.com.br/tapia/) · [Contato](https://tap.amodesenvolvimento.com.br/contato/)
+- [Unidades](https://tap.amodesenvolvimento.com.br/unidades/) · [Cidades atendidas](https://tap.amodesenvolvimento.com.br/cidades/) (uma página por cidade: https://tap.amodesenvolvimento.com.br/cidades/<cidade>/)
 - [Mapa da rede](https://tap.amodesenvolvimento.com.br/#unidades)
 - [Sitemap](https://tap.amodesenvolvimento.com.br/sitemap.xml)
