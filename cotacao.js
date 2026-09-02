@@ -15,10 +15,10 @@
   if (avatarVideo) {
     // Chrome/Firefox/Edge: WebM VP9 com alpha. Safari/iOS: WebP animado com alpha (HEVC alpha não é confiável no iOS).
     const ua = navigator.userAgent, isSafari = (/safari/i.test(ua) && !/chrome|chromium|crios|android|edg|fxios/i.test(ua)) || /iphone|ipad|ipod/i.test(ua);
-    const usePng = () => { avatarVideo.pause(); avatarVideo.hidden = true; if (!avatarVideo.parentElement.querySelector("img.wave")) { const img = new Image(); img.className = "wave"; img.src = "/assets/tapia-wave.webp"; img.alt = "TAPIA"; img.onerror = () => { img.src = "/assets/tapia-wave-poster.png"; }; avatarVideo.parentElement.insertBefore(img, avatarVideo); } };
+    const usePng = () => { avatarVideo.pause(); avatarVideo.hidden = true; if (!avatarVideo.parentElement.querySelector("img.wave")) { const img = new Image(); img.className = "wave"; img.src = "/assets/tapia-wave-2.webp"; img.alt = "TAPIA"; img.onerror = () => { img.src = "/assets/tapia-wave-2-poster.png"; }; avatarVideo.parentElement.insertBefore(img, avatarVideo); } };
     if (isSafari) { usePng(); }
     else {
-      const src = document.createElement("source"); src.src = "/assets/tapia-wave.webm"; src.type = "video/webm"; avatarVideo.appendChild(src);
+      const src = document.createElement("source"); src.src = "/assets/tapia-wave-2.webm"; src.type = "video/webm"; avatarVideo.appendChild(src);
       avatarVideo.muted = true; avatarVideo.loop = true;
       avatarVideo.addEventListener("error", usePng, { once: true });
       avatarVideo.addEventListener("loadeddata", () => {

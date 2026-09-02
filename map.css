@@ -55,7 +55,7 @@
 .map-actions .primary.is-on { background: #ff6b5a; border-color: #ff6b5a; }
 
 /* Markers */
-.mk { position: relative; width: 18px; height: 18px; cursor: pointer; }
+.mk { position: absolute; top: 0; left: 0; width: 18px; height: 18px; cursor: pointer; will-change: transform; }
 .mk::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(57,181,74,0.25), 0 0 18px rgba(57,181,74,0.8); transition: transform .25s; }
 .mk::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(57,181,74,0.7); animation: ring 2.4s ease-out infinite; }
 .mk:hover::before, .mk.is-active::before { transform: scale(1.35); background: #9df0a8; }
