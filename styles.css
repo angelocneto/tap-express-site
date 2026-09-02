@@ -54,7 +54,7 @@ a { color: inherit; text-decoration: none; }
   linear-gradient(180deg, rgba(4,14,10,0.55) 0%, transparent 28%, transparent 62%, rgba(4,14,10,0.85) 100%); }
 
 .overlay { position: absolute; inset: 0; z-index: 10; display: grid; place-items: center; text-align: center; padding: 0 24px; }
-.overlay .eyebrow { position: absolute; left: 50%; top: calc(50% - clamp(70px, 9vw, 120px)); transform: translateX(-50%); font-family: var(--display); font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase; color: #9df0a8; opacity: 0; white-space: nowrap; }
+.overlay .eyebrow { position: absolute; left: 50%; top: 150px; transform: translateX(-50%); font-family: var(--display); font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase; color: #9df0a8; opacity: 0; white-space: nowrap; }
 .line { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(92vw, 1100px); font-family: var(--display); font-weight: 800; font-size: clamp(2.3rem, 7vw, 6.2rem); line-height: 1.02; letter-spacing: -0.03em; opacity: 0; text-shadow: 0 10px 60px rgba(0,0,0,0.6); will-change: opacity, transform; }
 .line em { font-style: normal; color: var(--green); }
 
@@ -183,7 +183,7 @@ h2 span { color: var(--green); }
   .telemetry { font-size: 9px; letter-spacing: .18em; }
   .tl, .tr { top: 70px; } .tl, .bl { left: 18px; } .tr, .br { right: 18px; }
   .progress { left: 18px; right: 18px; }
-  .overlay .eyebrow { font-size: 10px; letter-spacing: .22em; white-space: normal; width: 90vw; }
+  .overlay .eyebrow { font-size: 10px; letter-spacing: .22em; white-space: normal; width: 90vw; top: 112px; }
   .cards, .gallery-grid, .unit-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); padding: 40px 0; }
   .about, .services, .tapia, .units, .cta { padding: 80px 0; }
