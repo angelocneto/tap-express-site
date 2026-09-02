@@ -125,3 +125,8 @@ body.quote-open .tapia-chat { display: none; }
   .tapia-bubble { max-width: 176px; }
   .tapia-fab { gap: 8px; }
 }
+
+.tc-actions button span { background: rgba(201,167,91,0.10); border: 1px solid rgba(201,167,91,0.35); width: 32px; height: 32px; border-radius: 10px; }
+.tc-actions button span svg { width: 17px; height: 17px; fill: none; stroke: #e9d39a; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.tc-input button { font-size: 0; background: linear-gradient(135deg, #f3d98d, #c9a75b); position: relative; }
+.tc-input button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; border-top: 2px solid #1a1405; border-right: 2px solid #1a1405; transform: translate(-60%, -50%) rotate(45deg); }
