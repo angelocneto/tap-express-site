@@ -23,10 +23,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=202609021814" />
-  <link rel="stylesheet" href="map.css?v=202609021814" />
-  <link rel="stylesheet" href="cotacao.css?v=202609021814" />
-  <link rel="stylesheet" href="theme.css?v=202609021814" />
+  <link rel="stylesheet" href="styles.css?v=202609021817" />
+  <link rel="stylesheet" href="map.css?v=202609021817" />
+  <link rel="stylesheet" href="cotacao.css?v=202609021817" />
+  <link rel="stylesheet" href="theme.css?v=202609021817" />
 </head>
 <body data-theme="dark">
   <div class="aurora"></div>
@@ -213,9 +213,9 @@
         </button>
       </div>
       <div class="tapia-copy reveal">
-        <p class="kicker gold">TAPIA · Inteligência que move.</p>
-        <h2>Conheça a <span class="gold-text">TAPIA.</span></h2>
-        <p class="lead" style="font-style:normal">A inteligência que acompanha cada movimento. A TAPIA junta inteligência artificial com os <span class="years-since">25</span> anos de estrada da TAP Express e orienta cada conversa, do primeiro contato até a entrega.</p>
+        <img class="tapia-logo" src="assets/tapia-logo.png" alt="TAP.IA. Inteligência que move." />
+        <h2>A inteligência que acompanha <span class="gold-text">cada movimento.</span></h2>
+        <p class="lead" style="font-style:normal">A TAPIA junta inteligência artificial com os <span class="years-since">25</span> anos de estrada da TAP Express e orienta cada conversa, do primeiro contato até a entrega.</p>
         <ul class="pillars">
           <li><b>Onipresente</b><span>Presente em todos os canais, do primeiro contato à entrega.</span></li>
           <li><b>Onisciente</b><span>Conhece a operação, as rotas, os prazos e as soluções.</span></li>
@@ -383,7 +383,7 @@
   <div class="tapia-fab" id="tapiaFab">
     <div class="tapia-bubble" id="tapiaBubble"><span class="x" aria-label="Fechar">×</span><b>Olá! Eu sou a TAPIA.</b><br/>Como posso ajudar você hoje?</div>
     <div class="tapia-chat" id="tapiaChat" aria-label="TAPIA">
-      <div class="tc-head"><img src="assets/tapia-poster.jpg" alt="" /><div><b>TAPIA</b><span><i></i>Online · Inteligência que move.</span></div><button class="tc-close" id="tapiaChatClose" aria-label="Fechar">×</button></div>
+      <div class="tc-head"><img src="assets/tapia-poster.jpg" alt="" /><div><img class="tc-logo" src="assets/tapia-logo-mark.png" alt="TAP.IA" /><span><i></i>Online · Inteligência que move.</span></div><button class="tc-close" id="tapiaChatClose" aria-label="Fechar">×</button></div>
       <div class="tc-body" id="tapiaChatBody">
         <div class="tc-msg">Olá! Eu sou a <b>TAPIA</b>, a inteligência da TAP Express. Como posso ajudar você hoje?</div>
         <div class="tc-actions">
@@ -397,7 +397,7 @@
     </div>
     <div class="tapia-avatar" role="button" aria-label="Falar com a TAPIA">
       <video id="tapiaWave" poster="assets/tapia-wave-poster.png" muted loop playsinline autoplay></video>
-      <span class="tag">TAPIA</span>
+      <span class="tag"><img src="assets/tapia-logo-mark.png" alt="TAP.IA" /></span>
     </div>
   </div>
   <div class="quote-backdrop" id="quoteBackdrop"></div>
@@ -471,11 +471,11 @@
       { section: "#frota", frameCount: 180, bg: "#07140e", framePath: (i) => `frames/frota/frame_${String(i).padStart(4, "0")}.jpg` }
     ];
   </script>
-  <script src="app.js?v=202609021814"></script>
+  <script src="app.js?v=202609021817"></script>
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="data/rede.js?v=202609021814"></script>
-  <script src="data/estados.js?v=202609021814"></script>
-  <script src="map.js?v=202609021814"></script>
-  <script src="cotacao.js?v=202609021814"></script>
+  <script src="data/rede.js?v=202609021817"></script>
+  <script src="data/estados.js?v=202609021817"></script>
+  <script src="map.js?v=202609021817"></script>
+  <script src="cotacao.js?v=202609021817"></script>
 </body>
 </html>
