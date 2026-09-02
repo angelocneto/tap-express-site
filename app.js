@@ -14,6 +14,7 @@ function initScrub(cfg) {
   const canvas  = section.querySelector("canvas");
   const ctx     = canvas.getContext("2d", { alpha: false });
   const lines   = [...section.querySelectorAll(".reveal-line")];
+  const scenes  = [...section.querySelectorAll(".fx-scene")];
   const fill    = section.querySelector(".progress-fill");
   const readout = section.querySelector(".frame-readout");
   const bgFill  = cfg.bg || "#07140e";
@@ -63,6 +64,17 @@ function initScrub(cfg) {
       el.style.opacity = o.toFixed(3);
       const base = el.classList.contains("line") ? "translate(-50%, -50%)" : "translateX(-50%)";
       el.style.transform = `${base} translateY(${(1 - o) * 26}px)`;
+    }
+    for (const el of scenes) {
+      const a = parseFloat(el.dataset.in), b = parseFloat(el.dataset.out);
+      const mid = (a + b) / 2, half = (b - a) / 2;
+      let o = 1 - Math.abs(p - mid) / half;
+      o = Math.max(0, Math.min(1, o * 1.6)) * 0.85;
+      el.style.opacity = o.toFixed(3);
+      const ka = parseFloat(el.dataset.kin ?? a), kb = parseFloat(el.dataset.kout ?? b);
+      const k = Math.max(0, Math.min(1, (p - ka) / (kb - ka)));
+      el.style.setProperty("--k", k.toFixed(4));
+      el.style.transform = `scale(${(0.92 + 0.08 * o).toFixed(3)})`;
     }
   }
   window.addEventListener("resize", resize);

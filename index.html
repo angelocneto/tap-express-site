@@ -23,10 +23,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
-  <link rel="stylesheet" href="styles.css?v=202609021910" />
-  <link rel="stylesheet" href="map.css?v=202609021910" />
-  <link rel="stylesheet" href="cotacao.css?v=202609021910" />
-  <link rel="stylesheet" href="theme.css?v=202609021910" />
+  <link rel="stylesheet" href="styles.css?v=202609021919" />
+  <link rel="stylesheet" href="map.css?v=202609021919" />
+  <link rel="stylesheet" href="cotacao.css?v=202609021919" />
+  <link rel="stylesheet" href="theme.css?v=202609021919" />
 </head>
 <body data-theme="dark">
   <div class="aurora"></div>
@@ -65,11 +65,50 @@
       <canvas></canvas>
       <div class="vignette"></div>
 
+      <div class="fx" aria-hidden="true">
+        <svg class="fx-scene fx-radar" data-in="-0.30" data-out="0.30" data-kin="0" data-kout="0.24" viewBox="0 0 600 600">
+          <defs>
+            <linearGradient id="fxSweep" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#39b54a" stop-opacity="0"/><stop offset="1" stop-color="#9df0a8" stop-opacity=".55"/></linearGradient>
+          </defs>
+          <g class="fx-rings">
+            <circle cx="300" cy="300" r="90"/><circle cx="300" cy="300" r="170"/><circle cx="300" cy="300" r="250"/>
+            <line x1="300" y1="40" x2="300" y2="560"/><line x1="40" y1="300" x2="560" y2="300"/>
+          </g>
+          <path class="fx-sweep" d="M300 300 L300 44 A256 256 0 0 1 452 92 Z" fill="url(#fxSweep)"/>
+          <g class="fx-routes">
+            <line x1="300" y1="300" x2="130" y2="330"/><line x1="300" y1="300" x2="200" y2="450"/><line x1="300" y1="300" x2="430" y2="180"/><line x1="300" y1="300" x2="470" y2="330"/>
+          </g>
+          <g class="fx-blips">
+            <circle cx="300" cy="300" r="9" class="hub"/>
+            <circle cx="130" cy="330" r="7"/><circle cx="200" cy="450" r="7"/><circle cx="430" cy="180" r="7"/><circle cx="470" cy="330" r="7"/>
+            <circle cx="130" cy="330" r="5" class="ping"/><circle cx="200" cy="450" r="5" class="ping"/><circle cx="430" cy="180" r="5" class="ping"/><circle cx="470" cy="330" r="5" class="ping"/>
+          </g>
+        </svg>
+        <svg class="fx-scene fx-speed" data-in="0.34" data-out="0.64" data-kin="0.36" data-kout="0.58" viewBox="0 0 1200 600">
+          <g class="fx-lines">
+            <line x1="0" y1="150" x2="260" y2="150"/><line x1="0" y1="215" x2="180" y2="215"/><line x1="0" y1="300" x2="320" y2="300"/><line x1="0" y1="372" x2="200" y2="372"/><line x1="0" y1="450" x2="280" y2="450"/><line x1="0" y1="500" x2="150" y2="500"/>
+          </g>
+          <g class="fx-chev">
+            <polyline points="470,120 650,300 470,480" pathLength="100"/>
+            <polyline points="600,120 780,300 600,480" pathLength="100"/>
+          </g>
+        </svg>
+        <svg class="fx-scene fx-clock" data-in="0.68" data-out="1.30" data-kin="0.72" data-kout="0.97" viewBox="0 0 600 600">
+          <circle class="fx-ring-bg" cx="300" cy="300" r="256"/>
+          <circle class="fx-ticks" cx="300" cy="300" r="232" pathLength="2400"/>
+          <circle class="fx-ring-glow" cx="300" cy="300" r="256" pathLength="100"/>
+          <circle class="fx-ring" cx="300" cy="300" r="256" pathLength="100"/>
+          <line class="fx-sec" x1="300" y1="300" x2="300" y2="84"/>
+          <line class="fx-hand" x1="300" y1="300" x2="300" y2="120"/>
+          <circle class="fx-pin" cx="300" cy="300" r="9"/>
+        </svg>
+      </div>
+
       <div class="overlay">
         <p class="eyebrow reveal-line" data-in="-0.30" data-out="0.30">Precisão regional. Velocidade que move negócios.</p>
         <h1 class="line reveal-line" data-in="-0.30" data-out="0.30">Onde a urgência encontra <em>domínio regional.</em></h1>
         <h1 class="line reveal-line" data-in="0.34" data-out="0.64">Pensou encomendas expressas? <em>Pensou em TAP Express.</em></h1>
-        <h1 class="line reveal-line" data-in="0.68" data-out="1.30">Entrega em até <em>18 horas.</em></h1>
+        <h1 class="line reveal-line" data-in="0.68" data-out="1.30">Entrega em até<br><em>18 horas.</em></h1>
       </div>
 
       <div class="telemetry tl">PRESIDENTE PRUDENTE · SP</div>
@@ -473,11 +512,11 @@
       { section: "#frota", frameCount: 180, bg: "#07140e", framePath: (i) => `frames/frota/frame_${String(i).padStart(4, "0")}.jpg` }
     ];
   </script>
-  <script src="app.js?v=202609021910"></script>
+  <script src="app.js?v=202609021919"></script>
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-  <script src="data/rede.js?v=202609021910"></script>
-  <script src="data/estados.js?v=202609021910"></script>
-  <script src="map.js?v=202609021910"></script>
-  <script src="cotacao.js?v=202609021910"></script>
+  <script src="data/rede.js?v=202609021919"></script>
+  <script src="data/estados.js?v=202609021919"></script>
+  <script src="map.js?v=202609021919"></script>
+  <script src="cotacao.js?v=202609021919"></script>
 </body>
 </html>

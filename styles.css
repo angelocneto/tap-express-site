@@ -240,3 +240,41 @@ h2 span { color: var(--green); }
 .play-btn { inset: auto 18px 18px auto; margin: 0; width: 64px; height: 64px; box-shadow: 0 0 0 8px rgba(57,181,74,0.18), 0 10px 30px rgba(0,0,0,0.4); }
 .play-btn svg { width: 26px; height: 26px; }
 @media (max-width: 720px) { .play-btn { width: 54px; height: 54px; inset: auto 12px 12px auto; } }
+
+/* ===== Hero FX: cenas vetoriais entre o fundo e as frases ===== */
+.fx { position: absolute; inset: 0; z-index: 6; pointer-events: none; display: grid; place-items: center; overflow: hidden; }
+.fx-scene { position: absolute; width: min(78vh, 640px); height: min(78vh, 640px); opacity: 0; will-change: opacity, transform; overflow: visible; --k: 0; }
+.fx-speed { width: min(150vw, 1300px); height: min(78vh, 640px); }
+.fx-scene * { transform-box: view-box; }
+/* radar */
+.fx-rings circle, .fx-rings line { fill: none; stroke: rgba(157,240,168,0.5); stroke-width: 1.8; }
+.fx-rings { transform-origin: 300px 300px; transform: scale(calc(0.55 + 0.45 * var(--k))); }
+.fx-sweep { transform-origin: 300px 300px; animation: fxSweep 3.6s linear infinite; }
+.fx-routes line { stroke: #9df0a8; stroke-width: 2; stroke-dasharray: 6 8; opacity: .8; animation: fxDash 1.2s linear infinite; }
+.fx-blips circle { fill: #9df0a8; filter: drop-shadow(0 0 10px rgba(57,181,74,1)); }
+.fx-blips .hub { fill: #fff; }
+.fx-blips .ping { fill: none; stroke: #39b54a; stroke-width: 2; transform-origin: center; transform-box: fill-box; animation: fxPing 2.4s ease-out infinite; }
+.fx-blips .ping:nth-of-type(6) { animation-delay: .5s; } .fx-blips .ping:nth-of-type(7) { animation-delay: 1s; } .fx-blips .ping:nth-of-type(8) { animation-delay: 1.5s; }
+/* speed */
+.fx-lines line { stroke: #9df0a8; stroke-width: 3; stroke-linecap: round; opacity: 0; animation: fxStreak 1.5s linear infinite; }
+.fx-lines line:nth-child(2) { animation-delay: .25s; } .fx-lines line:nth-child(3) { animation-delay: .5s; } .fx-lines line:nth-child(4) { animation-delay: .8s; } .fx-lines line:nth-child(5) { animation-delay: 1.05s; } .fx-lines line:nth-child(6) { animation-delay: 1.3s; }
+.fx-chev polyline { fill: none; stroke: #39b54a; stroke-width: 34; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: calc(100 - 100 * var(--k)); filter: drop-shadow(0 0 18px rgba(57,181,74,0.6)); opacity: .75; }
+.fx-chev polyline:nth-child(2) { stroke: #9df0a8; opacity: .55; }
+/* clock */
+.fx-ring-bg { fill: none; stroke: rgba(157,240,168,0.22); stroke-width: 2; }
+.fx-ticks { fill: none; stroke: rgba(157,240,168,0.6); stroke-width: 14; stroke-dasharray: 4 96; }
+.fx-ring, .fx-ring-glow { fill: none; stroke: #39b54a; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: calc(100 - 75 * var(--k)); transform-origin: 300px 300px; transform: rotate(-90deg); }
+.fx-ring-glow { stroke-width: 22; opacity: .45; filter: blur(8px); }
+.fx-hand { stroke: #9df0a8; stroke-width: 6; stroke-linecap: round; transform-origin: 300px 300px; transform: rotate(calc(var(--k) * 540deg)); filter: drop-shadow(0 0 10px rgba(57,181,74,0.9)); }
+.fx-sec { stroke: rgba(157,240,168,0.55); stroke-width: 2; stroke-linecap: round; transform-origin: 300px 300px; animation: fxSweep 6s linear infinite; }
+.fx-pin { fill: #fff; }
+@keyframes fxSweep { to { transform: rotate(360deg); } }
+@keyframes fxDash { to { stroke-dashoffset: -14; } }
+@keyframes fxPing { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(4.5); opacity: 0; } }
+@keyframes fxStreak { 0% { transform: translateX(-320px); opacity: 0; } 15% { opacity: .9; } 85% { opacity: .9; } 100% { transform: translateX(1300px); opacity: 0; } }
+@media (max-width: 720px) {
+  .fx-scene { width: min(80vw, 360px); height: min(80vw, 360px); }
+  .fx-speed { width: 170vw; }
+  .fx-chev polyline { stroke-width: 26; }
+}
+@media (prefers-reduced-motion: reduce) { .fx-sweep, .fx-routes line, .fx-blips .ping, .fx-lines line, .fx-sec { animation: none; } }
