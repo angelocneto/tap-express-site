@@ -117,3 +117,4 @@ body.quote-open .tapia-chat { display: none; }
 .tapia-avatar .tag { background: rgba(6,20,16,0.92); border: 1px solid rgba(201,167,91,0.6); padding: 5px 12px; }
 .tapia-avatar .tag img { height: 14px; width: auto; display: block; }
 @media (max-width: 720px) { .tapia-avatar .tag img { height: 11px; } }
+.tc-head img.tc-logo { width: auto; height: 20px; border-radius: 0; border: 0; object-fit: contain; }
