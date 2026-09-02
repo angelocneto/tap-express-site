@@ -11,7 +11,7 @@ $h = fn($v) => htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
 $csrf = $_SESSION['csrf'] ??= bin2hex(random_bytes(16));
 $hasUsers = (int)$pdo->query('SELECT COUNT(*) FROM usuarios')->fetchColumn() > 0;
 $user = $_SESSION['user'] ?? null;
-$msg = ''; $err = '';
+$msg = ($_GET['msg'] ?? '') === 'excluida' ? 'Cotação excluída.' : ''; $err = '';
 $action = $_POST['action'] ?? $_GET['a'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !hash_equals($csrf, $_POST['csrf'] ?? '')) { $err = 'Sessão expirada. Tente novamente.'; $action = ''; }
@@ -48,6 +48,12 @@ if ($user) {
         $nome = trim($_POST['nome'] ?? ''); $email = strtolower(trim($_POST['email'] ?? '')); $senha = $_POST['senha'] ?? '';
         if ($nome === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($senha) < 8) $err = 'Dados do novo usuário inválidos (senha mínima de 8 caracteres).';
         else { try { $pdo->prepare('INSERT INTO usuarios (nome, email, senha_hash, criado_em) VALUES (?, ?, ?, ?)')->execute([$nome, $email, password_hash($senha, PASSWORD_DEFAULT), tap_now()]); $msg = 'Usuário criado.'; } catch (Throwable $e) { $err = 'E-mail já cadastrado.'; } }
+    }
+    if ($action === 'excluir') {
+        $id = (int)($_POST['id'] ?? 0);
+        $pdo->prepare('DELETE FROM notas WHERE cotacao_id = ?')->execute([$id]);
+        $pdo->prepare('DELETE FROM cotacoes WHERE id = ?')->execute([$id]);
+        header('Location: index.php?msg=excluida'); exit;
     }
     if ($action === 'csv') {
         header('Content-Type: text/csv; charset=utf-8'); header('Content-Disposition: attachment; filename="cotacoes-' . date('Y-m-d') . '.csv"');
@@ -141,6 +147,7 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
         <h3>Notas internas</h3>
         <form method="post"><input type="hidden" name="action" value="nota"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/><input type="hidden" name="id" value="<?= $id ?>"/>
           <textarea name="texto" rows="3" placeholder="Ex.: Cotado R$ 148,00, prazo 18h. Cliente vai confirmar amanhã."></textarea><div style="margin-top:8px"><button class="btn" type="submit">Adicionar nota</button></div></form>
+        <details><summary>Excluir esta cotação</summary><form method="post" onsubmit="return confirm('Excluir definitivamente a cotação <?= $h($c['protocolo']) ?>?')" style="margin-top:8px"><input type="hidden" name="action" value="excluir"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/><input type="hidden" name="id" value="<?= $id ?>"/><button class="btn" type="submit" style="border-color:#ff6b5a;color:#ff9b8d">Excluir definitivamente</button></form></details>
         <div style="margin-top:12px"><?php foreach ($notas as $nt) echo "<div class='nota'><small>{$fmtData($nt['criado_em'])} · {$h($nt['autor'])}</small>" . nl2br($h($nt['texto'])) . "</div>"; if (!$notas) echo "<p style='color:var(--muted);font-size:13px'>Nenhuma nota ainda.</p>"; ?></div></div></div></div>
   <?php } elseif ($view === 'usuarios'): ?>
     <div class="grid2"><div class="card"><h2>Usuários com acesso</h2><table><tr><th>Nome</th><th>E-mail</th><th>Desde</th></tr><?php foreach ($pdo->query('SELECT * FROM usuarios ORDER BY id') as $u) echo "<tr><td>{$h($u['nome'])}</td><td>{$h($u['email'])}</td><td>{$fmtData($u['criado_em'])}</td></tr>"; ?></table></div>

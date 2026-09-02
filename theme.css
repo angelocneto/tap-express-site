@@ -47,8 +47,8 @@ section[data-theme="light"] .map-stats div { background: rgba(255,255,255,0.04);
 section[data-theme="light"] .units-list-head { color: var(--muted); }
 
 /* ---- seções escuras com gradiente reativo ---- */
-section[data-theme="dark"] { background: linear-gradient(calc(200deg - var(--sp) * 40deg), #061410 0%, #0a1f17 55%, #061410 100%); }
-section[data-theme="dark"]::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+section[data-theme="dark"]:not(.cinematic) { background: linear-gradient(calc(200deg - var(--sp) * 40deg), #061410 0%, #0a1f17 55%, #061410 100%); }
+section[data-theme="dark"]:not(.cinematic)::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
   background: radial-gradient(40% 50% at calc(85% - var(--sp) * 60%) 20%, rgba(57,181,74,0.16), transparent 70%); }
-section[data-theme="dark"] > * { position: relative; z-index: 1; }
+section[data-theme="dark"]:not(.cinematic) > * { position: relative; z-index: 1; }
 .stats { border-bottom: 0; }

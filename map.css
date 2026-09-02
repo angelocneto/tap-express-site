@@ -1,6 +1,6 @@
 /* ===== Mapa interativo da rede TAP ===== */
 .mapwrap { position: relative; width: min(1400px, calc(100% - 32px)); margin: 0 auto; border-radius: 28px; overflow: hidden; border: 1px solid rgba(57,181,74,0.35); box-shadow: 0 40px 120px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03) inset; background: #07140e; }
-#map { width: 100%; height: min(78vh, 760px); min-height: 520px; background: #07140e; }
+#map { width: 100%; height: min(66vh, 640px); min-height: 480px; background: #07140e; }
 .maplibregl-ctrl-attrib { background: rgba(6,20,16,0.7) !important; color: rgba(242,247,243,0.5) !important; font-size: 10px !important; }
 .maplibregl-ctrl-attrib a { color: rgba(157,240,168,0.7) !important; }
 .maplibregl-ctrl-group { background: rgba(6,20,16,0.85) !important; border: 1px solid rgba(57,181,74,0.35) !important; box-shadow: none !important; }
