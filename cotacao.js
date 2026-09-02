@@ -13,25 +13,19 @@
   setTimeout(() => { if (!sessionStorage.getItem("tapiaBubbleClosed")) bubble.classList.add("is-on"); }, 2800);
   bubble.querySelector(".x").addEventListener("click", (e) => { e.stopPropagation(); bubble.classList.remove("is-on"); sessionStorage.setItem("tapiaBubbleClosed", "1"); });
   if (avatarVideo) {
-    // Safari toca HEVC com alpha (.mov); os demais, WebM VP9 com alpha
-    const ua = navigator.userAgent, isSafari = /safari/i.test(ua) && !/chrome|chromium|crios|android|edg/i.test(ua);
-    const src = document.createElement("source");
-    src.src = isSafari ? "assets/tapia-wave.mov" : "assets/tapia-wave.webm";
-    src.type = isSafari ? 'video/mp4; codecs="hvc1"' : "video/webm";
-    avatarVideo.appendChild(src);
-    avatarVideo.muted = true; avatarVideo.loop = true;
-    avatarVideo.addEventListener("error", () => { avatarVideo.hidden = true; const img = new Image(); img.src = "assets/tapia-wave-poster.png"; img.alt = "Tap.IA"; avatarVideo.parentElement.insertBefore(img, avatarVideo); }, { once: true });
-    // se o navegador tocar sem transparência (canto opaco), troca pela imagem recortada
-    avatarVideo.addEventListener("loadeddata", () => {
-      try {
-        const c = document.createElement("canvas"); c.width = 8; c.height = 8;
-        const ctx = c.getContext("2d", { willReadFrequently: true });
-        ctx.drawImage(avatarVideo, 0, 0, 40, 40, 0, 0, 8, 8);
-        const a = ctx.getImageData(0, 0, 1, 1).data[3];
-        if (a > 200) { avatarVideo.pause(); avatarVideo.hidden = true; const img = new Image(); img.src = "assets/tapia-wave-poster.png"; img.alt = "Tap.IA"; avatarVideo.parentElement.insertBefore(img, avatarVideo); }
-      } catch (e) {}
-    }, { once: true });
-    avatarVideo.play().catch(() => {});
+    // Chrome/Firefox/Edge: WebM VP9 com alpha. Safari/iOS: WebP animado com alpha (HEVC alpha não é confiável no iOS).
+    const ua = navigator.userAgent, isSafari = (/safari/i.test(ua) && !/chrome|chromium|crios|android|edg|fxios/i.test(ua)) || /iphone|ipad|ipod/i.test(ua);
+    const usePng = () => { avatarVideo.pause(); avatarVideo.hidden = true; if (!avatarVideo.parentElement.querySelector("img.wave")) { const img = new Image(); img.className = "wave"; img.src = "/assets/tapia-wave.webp"; img.alt = "TAPIA"; img.onerror = () => { img.src = "/assets/tapia-wave-poster.png"; }; avatarVideo.parentElement.insertBefore(img, avatarVideo); } };
+    if (isSafari) { usePng(); }
+    else {
+      const src = document.createElement("source"); src.src = "/assets/tapia-wave.webm"; src.type = "video/webm"; avatarVideo.appendChild(src);
+      avatarVideo.muted = true; avatarVideo.loop = true;
+      avatarVideo.addEventListener("error", usePng, { once: true });
+      avatarVideo.addEventListener("loadeddata", () => {
+        try { const c = document.createElement("canvas"); c.width = 8; c.height = 8; const ctx = c.getContext("2d", { willReadFrequently: true }); ctx.drawImage(avatarVideo, 0, 0, 40, 40, 0, 0, 8, 8); if (ctx.getImageData(0, 0, 1, 1).data[3] > 200) usePng(); } catch (e) {}
+      }, { once: true });
+      avatarVideo.play().catch(usePng);
+    }
   }
 
   /* ---- open / close ---- */
@@ -66,7 +60,7 @@
     const n = t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     if (/cota|preco|preço|valor|frete|envio|enviar|mandar/.test(n)) { say("Posso preparar a cotação agora mesmo. Abrindo os 3 passos…"); setTimeout(() => { toggleChat(false); open("tapia-chat"); }, 800); return; }
     if (/rastre|onde esta|cadê|cade|encomenda|nota/.test(n)) { say("Para rastrear, use o portal oficial da TAP. Abrindo em nova aba…"); setTimeout(() => window.open("https://ssw.inf.br/2/rastreamento", "_blank", "noopener"), 800); return; }
-    if (/unidade|cidade|atende|cobertura|regiao|região/.test(n)) { say("Nossa rede tem 20 unidades e 104 localidades. Vou te mostrar no mapa: digite a cidade na busca para ver quem atende."); setTimeout(() => { toggleChat(false); if (window.__lenis) window.__lenis.scrollTo(document.querySelector(".mapwrap"), { offset: -90 }); const s = document.getElementById("citySearch"); if (s) { s.value = ""; setTimeout(() => s.focus(), 1200); } }, 800); return; }
+    if (/unidade|cidade|atende|cobertura|regiao|região/.test(n)) { say("Nossa rede tem 20 unidades e 104 localidades. Vou te mostrar no mapa: digite a cidade na busca para ver quem atende."); setTimeout(() => { toggleChat(false); const mw = document.querySelector(".mapwrap"); if (!mw) { location.href = "/#unidades"; return; } if (window.__lenis) window.__lenis.scrollTo(mw, { offset: -90 }); else mw.scrollIntoView({ behavior: "smooth" }); const s = document.getElementById("citySearch"); if (s) { s.value = ""; setTimeout(() => s.focus(), 1200); } }, 800); return; }
     say("Anotei. Para não te deixar sem resposta, vou encaminhar sua mensagem ao atendimento humano no WhatsApp com todo o contexto.");
     setTimeout(() => window.open(`https://wa.me/${WA}?text=${encodeURIComponent("Olá! Vim pelo site da TAP Express (TAPIA). Minha mensagem: " + t)}`, "_blank", "noopener"), 1200);
   });
@@ -158,7 +152,7 @@
     const data = {}; ["origem", "destino", "tipo", "volumes", "peso", "dimensoes", "valor", "nome", "empresa", "email", "telefone", "observacoes", "website"].forEach(k => data[k] = val(k));
     data.pagina = document.getElementById("qPagina").value;
     try {
-      const r = await fetch("api/cotacao.php", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      const r = await fetch("/api/cotacao.php", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       const j = await r.json();
       if (!r.ok || !j.ok) throw new Error(j.erro || "Falha ao enviar");
       sent = true;

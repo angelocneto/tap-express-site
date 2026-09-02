@@ -19,4 +19,5 @@
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
 </IfModule>
 AddType video/webm .webm
+AddType image/webp .webp
 AddType video/quicktime .mov
