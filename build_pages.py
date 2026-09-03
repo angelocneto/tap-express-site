@@ -37,11 +37,11 @@ def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero
 <body data-theme="{theme}">
   <header class="nav is-solid" id="nav">
     <a class="nav-logo" href="/" aria-label="TAP Express"><img class="light" src="/assets/logo_branca.png" alt="TAP Express" /><img class="dark" src="/assets/logo_cor.png" alt="TAP Express" /></a>
-    <nav class="nav-links"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></nav>
+    <nav class="nav-links"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Rede TAP</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></nav>
     <div class="nav-cta"><a class="btn btn-ghost" href="/rastreamento/">Rastrear</a><a class="btn btn-solid" href="/cotacao/" data-open-quote="nav">Cotação</a></div>
     <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
   </header>
-  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Unidades</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a></div>
+  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Rede TAP</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a></div>
   <main>
     <section class="page-hero"><div class="wrap"><div class="crumbs">{crumb_html}</div>{body[0]}</div></section>
     {body[1]}
@@ -49,7 +49,7 @@ def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero
   </main>
   <footer class="footer"><div class="wrap footer-grid">
     <div><img class="footer-logo" src="/assets/logo_branca.png" alt="TAP Express" /><p>Transporte rodoviário de cargas e encomendas desde 2001, a partir de Presidente Prudente, SP.</p></div>
-    <div><h5>Navegação</h5><a href="/sobre/">Sobre a empresa</a><a href="/servicos/">Serviços</a><a href="/unidades/">Unidades</a><a href="/cidades/">Cidades atendidas</a><a href="/tapia/">TAPIA</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></div>
+    <div><h5>Navegação</h5><a href="/sobre/">Sobre a empresa</a><a href="/servicos/">Serviços</a><a href="/unidades/">Rede TAP</a><a href="/cidades/">Cidades atendidas</a><a href="/tapia/">TAPIA</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></div>
     <div><h5>Cliente</h5><a href="/rastreamento/">Rastreamento</a><a href="/cotacao/">Cotação online</a><a href="tel:+551839187777">SAC (18) 3918-7777</a><a href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
     <div><h5>Redes</h5><a href="https://www.instagram.com/tap.transportes/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/taptransportes/" target="_blank" rel="noopener">Facebook</a></div>
   </div><div class="wrap footer-bottom"><span>© {YEAR} TAP Express · Transportes</span><span>Precisão regional. Velocidade que move negócios.</span></div></footer>
