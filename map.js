@@ -143,6 +143,7 @@
       <p class="kicker">${city ? "Cidade atendida" : (u.hub ? "Hub de distribuição" : "Unidade " + u.uf)}</p>
       <h4>${city ? city + " <small style='color:var(--green);font-size:12px'>· via " + u.n + "</small>" : u.n}</h4>
       <p>${u.addr}</p>
+      ${u.addr && !/confirma/.test(u.addr) ? `<span class="go-links"><a href="https://www.google.com/maps/search/?api=1&query=${u.c[1]},${u.c[0]}" target="_blank" rel="noopener">Google Maps</a><a href="https://waze.com/ul?ll=${u.c[1]},${u.c[0]}&navigate=yes" target="_blank" rel="noopener">Waze</a></span>` : ""}
       <div class="map-contacts"><a class="phone" href="tel:${u.tel}">${u.phone}</a>${wa ? `<a class="wa" href="${wa}" target="_blank" rel="noopener">WhatsApp</a>` : ""}${u.email ? `<a class="mail" href="mailto:${u.email}">${u.email}</a>` : ""}</div>
       ${cityChips(u)}
       <div class="dist">${d}</div>`;

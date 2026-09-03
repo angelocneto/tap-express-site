@@ -311,3 +311,13 @@ h2 span { color: var(--green); }
 .unit-more { display: inline-block; margin-top: 14px; font-family: var(--display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--green) !important; border-bottom: 0 !important; align-self: flex-start; margin-top: auto; padding-top: 14px; }
 .map-hud-link { pointer-events: auto !important; cursor: pointer; text-decoration: none; transition: color .2s; }
 .map-hud-link:hover { color: #fff; }
+
+/* ===== Discreet navigation links (Google Maps / Waze) ===== */
+.unit-links { margin-top: auto; padding-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+.unit-links .unit-more { margin-top: 0; padding-top: 0; }
+.go-links { display: inline-flex; gap: 12px; margin-left: auto; }
+.go-links a { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; letter-spacing: .04em; color: rgba(242,247,243,0.5) !important; border-bottom: 0 !important; margin-top: 0 !important; transition: color .2s; }
+.go-links a:hover { color: var(--green) !important; }
+.go-links svg { opacity: .8; }
+section[data-theme="light"] .go-links a { color: rgba(8,21,15,0.5) !important; }
+section[data-theme="light"] .go-links a:hover { color: #1f8f36 !important; }

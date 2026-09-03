@@ -53,3 +53,11 @@ section[data-theme="light"] .vaga { color: var(--ink); }
 .tile-photo figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
 .tile-photo:hover figure img { transform: scale(1.05); }
 .tile-photo .tile-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.tile-link { display: block; color: inherit; text-decoration: none; }
+.tile-foot { padding: 0 20px 16px; display: flex; }
+.tile-foot .go-links { margin-left: 0; }
+.tile-foot .go-links a { color: rgba(242,247,243,0.5); font-size: 11px; display: inline-flex; align-items: center; gap: 4px; }
+.tile-foot .go-links a:hover { color: var(--green); }
+dd .go-links { display: flex; gap: 12px; margin-top: 6px; }
+dd .go-links a { font-size: 11px; color: rgba(242,247,243,0.55); display: inline-flex; align-items: center; gap: 4px; }
+dd .go-links a:hover { color: var(--green); }

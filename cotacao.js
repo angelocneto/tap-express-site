@@ -140,7 +140,7 @@
   const val = (n) => { const f = form.elements[n]; if (!f) return ""; return f.type === "radio" || (f.length && f[0] && f[0].type === "radio") ? (form.querySelector(`[name="${n}"]:checked`)?.value || "") : f.value; };
   function summary() {
     const box = document.getElementById("qSummary");
-    const rows = [["Origem", val("origem")], ["Destino", val("destino")], ["Tipo", val("tipo")], ["Volumes", val("volumes")], ["Peso", val("peso") ? val("peso") + " kg" : ""], ["Valor", val("valor") ? "R$ " + val("valor") : ""]];
+    const rows = [["Origem", val("origem")], ["Destino", val("destino")], ["Tipo", val("tipo")], ["Volumes", val("volumes")], ["Peso", val("peso") ? val("peso") + " kg" : ""], ["Dimensões", val("dimensoes")], ["Valor da NF", val("valor") ? "R$ " + val("valor") : ""], ["Frete pago por", val("pagador")], ["Coleta", val("coleta_data") ? val("coleta_data").split("-").reverse().join("/") : ""]];
     box.innerHTML = rows.filter(r => r[1]).map(r => `<div><span>${r[0]}</span>${r[1]}</div>`).join("");
   }
   btnPrev.addEventListener("click", () => show(step - 1));

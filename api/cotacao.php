@@ -18,6 +18,9 @@ $f = fn($k) => isset($d[$k]) && $d[$k] !== '' ? (float)str_replace(',', '.', (st
 
 $nome = $s('nome', 120); $email = $s('email', 160); $tel = $s('telefone', 40); $origem = $s('origem', 120); $destino = $s('destino', 120);
 if ($nome === '' || $tel === '' || $origem === '' || $destino === '') out(422, ['ok' => false, 'erro' => 'Preencha nome, telefone, origem e destino.']);
+$volumes = isset($d['volumes']) && $d['volumes'] !== '' ? (int)$d['volumes'] : null; $peso = $f('peso'); $valor = $f('valor'); $dimensoes = $s('dimensoes', 120);
+if ($volumes === null || $volumes < 1 || $peso === null || $peso <= 0 || $dimensoes === '' || $valor === null || $valor <= 0) out(422, ['ok' => false, 'erro' => 'Informe volumes, peso, dimensões e o valor da nota fiscal.']);
+$cnpj = preg_replace('/\D+/', '', $s('cnpj', 30)); $pagador = in_array($s('pagador', 20), ['Remetente', 'Destinatário'], true) ? $s('pagador', 20) : 'Remetente'; $coleta = preg_match('/^\d{4}-\d{2}-\d{2}$/', $s('coleta_data', 10)) ? $s('coleta_data', 10) : '';
 if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) out(422, ['ok' => false, 'erro' => 'E-mail inválido.']);
 
 try {
@@ -29,15 +32,15 @@ try {
     $pdo->prepare('INSERT INTO rate (ip, ts) VALUES (?, ?)')->execute([$ip, time()]);
 
     $protocolo = tap_protocolo($pdo); $now = tap_now();
-    $st = $pdo->prepare('INSERT INTO cotacoes (protocolo, criado_em, atualizado_em, status, origem, destino, tipo, volumes, peso, dimensoes, valor_mercadoria, nome, empresa, email, telefone, observacoes, origem_pagina, ip, user_agent)
-        VALUES (?, ?, ?, "novo", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-    $st->execute([$protocolo, $now, $now, $origem, $destino, $s('tipo', 40), isset($d['volumes']) ? (int)$d['volumes'] : null, $f('peso'), $s('dimensoes', 120), $f('valor'),
-        $nome, $s('empresa', 120), $email, $tel, $s('observacoes', 2000), $s('pagina', 200), $ip, mb_substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 250)]);
+    $st = $pdo->prepare('INSERT INTO cotacoes (protocolo, criado_em, atualizado_em, status, origem, destino, tipo, volumes, peso, dimensoes, valor_mercadoria, nome, empresa, email, telefone, observacoes, origem_pagina, ip, user_agent, cnpj, pagador, coleta_data)
+        VALUES (?, ?, ?, "novo", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $st->execute([$protocolo, $now, $now, $origem, $destino, $s('tipo', 40), $volumes, $peso, $dimensoes, $valor,
+        $nome, $s('empresa', 120), $email, $tel, $s('observacoes', 2000), $s('pagina', 200), $ip, mb_substr((string)($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 250), $cnpj, $pagador, $coleta]);
 
     $cfg = __DIR__ . '/config.php'; $notify = '';
     if (file_exists($cfg)) { $c = include $cfg; $notify = is_array($c) ? ($c['notificar_email'] ?? '') : ''; }
     if ($notify) {
-        $body = "Nova cotação $protocolo\n\nNome: $nome\nEmpresa: {$s('empresa')}\nTelefone: $tel\nE-mail: $email\nOrigem: $origem\nDestino: $destino\nTipo: {$s('tipo')}\nVolumes: " . ($d['volumes'] ?? '') . "\nPeso: " . ($d['peso'] ?? '') . " kg\nValor: " . ($d['valor'] ?? '') . "\n\nObs: {$s('observacoes', 2000)}\n\nAcesse a área de atendimento para responder.";
+        $body = "Nova cotação $protocolo\n\nNome: $nome\nEmpresa: {$s('empresa')}\nTelefone: $tel\nE-mail: $email\nOrigem: $origem\nDestino: $destino\nCNPJ: $cnpj\nPaga o frete: $pagador\nColeta desejada: $coleta\nTipo: {$s('tipo')}\nVolumes: " . ($d['volumes'] ?? '') . "\nPeso: " . ($d['peso'] ?? '') . " kg\nValor: " . ($d['valor'] ?? '') . "\n\nObs: {$s('observacoes', 2000)}\n\nAcesse a área de atendimento para responder.";
         @mail($notify, "[TAP Express] Nova cotação $protocolo — $nome", $body, "From: site@" . ($_SERVER['HTTP_HOST'] ?? 'tapexpress.com.br') . "\r\nContent-Type: text/plain; charset=utf-8");
     }
     out(200, ['ok' => true, 'protocolo' => $protocolo]);

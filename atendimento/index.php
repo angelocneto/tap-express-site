@@ -58,7 +58,7 @@ if ($user) {
     if ($action === 'csv') {
         header('Content-Type: text/csv; charset=utf-8'); header('Content-Disposition: attachment; filename="cotacoes-' . date('Y-m-d') . '.csv"');
         $o = fopen('php://output', 'w'); fwrite($o, "\xEF\xBB\xBF");
-        $cols = ['protocolo','criado_em','status','nome','empresa','telefone','email','origem','destino','tipo','volumes','peso','dimensoes','valor_mercadoria','observacoes'];
+        $cols = ['protocolo','criado_em','status','nome','empresa','telefone','email','origem','destino','tipo','volumes','peso','dimensoes','valor_mercadoria','cnpj','pagador','coleta_data','observacoes'];
         fputcsv($o, $cols, ';');
         foreach ($pdo->query('SELECT * FROM cotacoes ORDER BY id DESC') as $r) fputcsv($o, array_map(fn($c) => $r[$c], $cols), ';');
         exit;
@@ -137,8 +137,9 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
         <div class="kv">
           <div>Recebida</div><div><?= $fmtData($c['criado_em']) ?></div><div>Origem</div><div><?= $h($c['origem']) ?></div><div>Destino</div><div><?= $h($c['destino']) ?></div>
           <div>Tipo</div><div><?= $h($c['tipo']) ?></div><div>Volumes</div><div><?= $h($c['volumes']) ?></div><div>Peso</div><div><?= $c['peso'] !== null ? $h($c['peso']) . ' kg' : '' ?></div>
-          <div>Dimensões</div><div><?= $h($c['dimensoes']) ?></div><div>Valor mercadoria</div><div><?= $c['valor_mercadoria'] !== null ? 'R$ ' . number_format((float)$c['valor_mercadoria'], 2, ',', '.') : '' ?></div>
-          <div>Empresa</div><div><?= $h($c['empresa']) ?></div><div>Telefone</div><div><a href="tel:+<?= $tel ?>"><?= $h($c['telefone']) ?></a></div><div>E-mail</div><div><?= $h($c['email']) ?></div>
+          <div>Dimensões</div><div><?= $h($c['dimensoes']) ?></div><div>Valor da NF</div><div><?= $c['valor_mercadoria'] !== null ? 'R$ ' . number_format((float)$c['valor_mercadoria'], 2, ',', '.') : '' ?></div>
+          <div>Paga o frete</div><div><?= $h($c['pagador'] ?? '') ?></div><div>Coleta desejada</div><div><?= !empty($c['coleta_data']) ? $h(implode('/', array_reverse(explode('-', $c['coleta_data'])))) : '' ?></div>
+          <div>Empresa</div><div><?= $h($c['empresa']) ?></div><div>CNPJ</div><div><?= $h($c['cnpj'] ?? '') ?></div><div>Telefone</div><div><a href="tel:+<?= $tel ?>"><?= $h($c['telefone']) ?></a></div><div>E-mail</div><div><?= $h($c['email']) ?></div>
           <div>Observações</div><div><?= nl2br($h($c['observacoes'])) ?></div><div>Página</div><div><?= $h($c['origem_pagina']) ?></div></div></div>
       <div><div class="card"><h3 style="margin-top:0">Status</h3>
         <form method="post"><input type="hidden" name="action" value="status"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/><input type="hidden" name="id" value="<?= $id ?>"/>

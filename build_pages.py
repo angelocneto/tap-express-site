@@ -146,7 +146,12 @@ body=f'<section><div class="wrap two-col"><div class="prose"><div class="facts">
 write('contato',BASE+'/contato/',"Contato | TAP Express","Telefone (18) 3918-7777, WhatsApp (18) 99109-6441 e e-mail recepcao@taptransportes.com.br. Matriz na Rod. SP 270, km 556, Regente Feijó, Presidente Prudente.",hero,body,[{"@context":"https://schema.org","@type":"ContactPage","name":"Contato TAP Express","url":BASE+"/contato/","about":ORG},bc(("TAP Express",BASE+"/"),("Contato",BASE+"/contato/"))],prio="0.8",crumbs=[("TAP Express","/"),("Contato","/contato/")])
 
 # ---------------- UNIDADES (índice) ----------------
-def unit_tiles(uf): return ''.join(f'<a class="tile tile-photo" href="/unidades/{u["slug"]}/"><figure><img src="/{u.get("foto") or "assets/frota_06-v2.jpg"}" alt="{esc("Unidade TAP Express em "+u["n"])}" loading="lazy" /></figure><div class="tile-body"><h3>{esc(u["n"])}</h3><p>{esc(u["addr"])}<br/>{esc(u["phone"])}</p><small>{1+len(u["cities"])} localidades →</small></div></a>' for u in units if u['uf']==uf)
+PIN='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>'
+def go_links(u):
+    if not u.get('addr') or 'confirmação' in u['addr']: return ''
+    lng,lat=u['c']
+    return f'<span class="go-links"><a href="https://www.google.com/maps/search/?api=1&query={lat},{lng}" target="_blank" rel="noopener" title="Abrir no Google Maps">{PIN}Google Maps</a><a href="https://waze.com/ul?ll={lat},{lng}&navigate=yes" target="_blank" rel="noopener" title="Abrir no Waze">{PIN}Waze</a></span>'
+def unit_tiles(uf): return ''.join(f'<div class="tile tile-photo"><a class="tile-link" href="/unidades/{u["slug"]}/"><figure><img src="/{u.get("foto") or "assets/frota_06-v2.jpg"}" alt="{esc("Unidade TAP Express em "+u["n"])}" loading="lazy" /></figure><div class="tile-body"><h3>{esc(u["n"])}</h3><p>{esc(u["addr"])}<br/>{esc(u["phone"])}</p><small>{1+len(u["cities"])} localidades →</small></div></a><div class="tile-foot">{go_links(u)}</div></div>' for u in units if u['uf']==uf)
 hero=f'<p class="kicker">Rede TAP</p><h1>{N_UNITS} unidades e bases <span>em três estados.</span></h1><p class="sub">Distribuição a partir de Regente Feijó (Presidente Prudente) para o oeste paulista, o norte do Paraná e o Mato Grosso do Sul. Toque em uma unidade para ver endereço, telefone, foto e cidades atendidas.</p>'
 _idx=open('index.html',encoding='utf-8').read()
 _a=_idx.index('<div class="mapwrap reveal">'); _b=_idx.index('</aside>',_a); _b=_idx.index('</div>',_b)+len('</div>')

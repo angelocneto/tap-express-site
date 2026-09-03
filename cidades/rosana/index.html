@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/assets/favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=202609031616" /><link rel="stylesheet" href="/theme.css?v=202609031616" /><link rel="stylesheet" href="/cotacao.css?v=202609031616" /><link rel="stylesheet" href="/pages.css?v=202609031616" />
+  <link rel="stylesheet" href="/styles.css?v=202609031643" /><link rel="stylesheet" href="/theme.css?v=202609031643" /><link rel="stylesheet" href="/cotacao.css?v=202609031643" /><link rel="stylesheet" href="/pages.css?v=202609031643" />
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "Transporte de encomendas em Rosana", "description": "Rosana é atendida pela unidade TAP Express de Regente Feijó (Rod. SP 270 Raposo Tavares, km 556, telefone (18) 3918-7777), a 185 km, com atendimento em todos os dias úteis.", "url": "https://tap.amodesenvolvimento.com.br/cidades/rosana/", "provider": {"@type": "Organization", "name": "TAP Express", "@id": "https://tap.amodesenvolvimento.com.br/#organization"}, "areaServed": [{"@type": "State", "name": "São Paulo"}, {"@type": "State", "name": "Paraná"}, {"@type": "State", "name": "Mato Grosso do Sul"}], "serviceType": "Transporte de encomendas em Rosana"}, {"@context": "https://schema.org", "@type": "LocalBusiness", "@id": "https://tap.amodesenvolvimento.com.br/unidades/regente-feijo/#local", "name": "TAP Express · Regente Feijó", "url": "https://tap.amodesenvolvimento.com.br/unidades/regente-feijo/", "telephone": "+551839187777", "address": {"@type": "PostalAddress", "streetAddress": "Rod. SP 270 Raposo Tavares, km 556", "addressLocality": "Regente Feijó", "addressRegion": "SP", "addressCountry": "BR"}, "areaServed": {"@type": "City", "name": "Rosana"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TAP Express", "item": "https://tap.amodesenvolvimento.com.br/"}, {"@type": "ListItem", "position": 2, "name": "Cidades", "item": "https://tap.amodesenvolvimento.com.br/cidades/"}, {"@type": "ListItem", "position": 3, "name": "Rosana", "item": "https://tap.amodesenvolvimento.com.br/cidades/rosana/"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qual unidade da TAP Express atende Rosana?", "acceptedAnswer": {"@type": "Answer", "text": "A unidade de Regente Feijó, SP: Rod. SP 270 Raposo Tavares, km 556, telefone (18) 3918-7777. Fica a cerca de 185 km."}}, {"@type": "Question", "name": "Em que dias a TAP passa em Rosana?", "acceptedAnswer": {"@type": "Answer", "text": "Todos os dias úteis, em rota diária."}}, {"@type": "Question", "name": "Qual o prazo de entrega para Rosana?", "acceptedAnswer": {"@type": "Answer", "text": "Até 18 horas a partir da coleta entre as cidades da rede, respeitando os dias de atendimento da cidade."}}, {"@type": "Question", "name": "Como peço uma cotação?", "acceptedAnswer": {"@type": "Answer", "text": "Pelo formulário em 3 passos no site, pela TAPIA ou pelo WhatsApp (18) 99109-6441. Você recebe um protocolo e a equipe responde em horário comercial."}}]}]</script>
 </head>
 <body data-theme="dark">
@@ -81,17 +81,19 @@
         </section>
         <section class="quote-step">
           <h4>O que vai <em>viajar?</em></h4>
-          <p>Quanto mais detalhes, mais precisa a cotação.</p>
+          <p>Peso, medidas e valor da nota entram no cálculo do frete.</p>
           <div class="qf">
             <div class="types">
               <label><input type="radio" name="tipo" value="Encomenda expressa" required checked /><span>Encomenda<small>caixas e pacotes</small></span></label>
               <label><input type="radio" name="tipo" value="Malote / documentos" /><span>Malote<small>documentos</small></span></label>
               <label><input type="radio" name="tipo" value="Carga fracionada" /><span>Carga<small>paletes e fracionado</small></span></label>
             </div>
-            <div><label>Volumes</label><input name="volumes" type="number" min="1" step="1" placeholder="1" /></div>
-            <div><label>Peso total (kg)</label><input name="peso" type="number" min="0" step="0.1" placeholder="Ex.: 12,5" /></div>
-            <div><label>Dimensões (opcional)</label><input name="dimensoes" placeholder="Ex.: 40 × 30 × 20 cm" /></div>
-            <div><label>Valor da mercadoria (R$)</label><input name="valor" type="number" min="0" step="0.01" placeholder="Para o seguro incluso" /></div>
+            <div><label>Volumes</label><input name="volumes" type="number" min="1" step="1" required placeholder="1" /></div>
+            <div><label>Peso total (kg)</label><input name="peso" type="number" min="0" step="0.1" required placeholder="Ex.: 12,5" /></div>
+            <div><label>Dimensões (C × L × A)</label><input name="dimensoes" required placeholder="Ex.: 40 × 30 × 20 cm" /></div>
+            <div><label>Valor da nota fiscal (R$)</label><input name="valor" type="number" min="0" step="0.01" required placeholder="Compõe o frete e o seguro" /></div>
+            <div><label>Quem paga o frete</label><select name="pagador"><option value="Remetente">Remetente (quem envia)</option><option value="Destinatário">Destinatário (quem recebe)</option></select></div>
+            <div><label>Data desejada da coleta</label><input name="coleta_data" type="date" /></div>
           </div>
         </section>
         <section class="quote-step">
@@ -101,6 +103,7 @@
           <div class="qf">
             <div><label>Seu nome</label><input name="nome" required placeholder="Nome completo" autocomplete="name" /></div>
             <div><label>Empresa (opcional)</label><input name="empresa" placeholder="Razão social ou fantasia" autocomplete="organization" /></div>
+            <div><label>CNPJ (se já é cliente)</label><input name="cnpj" inputmode="numeric" placeholder="00.000.000/0000-00" /></div>
             <div><label>WhatsApp / telefone</label><input name="telefone" type="tel" required placeholder="(18) 99999-9999" autocomplete="tel" /></div>
             <div><label>E-mail</label><input name="email" type="email" placeholder="voce@empresa.com.br" autocomplete="email" /></div>
             <div class="full"><label>Observações</label><textarea name="observacoes" rows="2" placeholder="Prazo desejado, coleta, horário, fragilidade…"></textarea></div>
@@ -124,8 +127,8 @@
   </aside>
 
 
-  <script src="/data/rede.js?v=202609031616"></script>
-  <script src="/cotacao.js?v=202609031616"></script>
+  <script src="/data/rede.js?v=202609031643"></script>
+  <script src="/cotacao.js?v=202609031643"></script>
   <script>document.getElementById("burger").addEventListener("click",()=>{document.getElementById("burger").classList.toggle("is-open");document.getElementById("mobileMenu").classList.toggle("is-open")});document.querySelectorAll('[data-open-quote]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));document.querySelectorAll('.years-since').forEach(e=>e.textContent=25);</script>
 </body>
 </html>

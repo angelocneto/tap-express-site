@@ -4,6 +4,12 @@ import json, re, os, html, datetime
 BASE="https://tap.amodesenvolvimento.com.br"  # troque para https://www.tapexpress.com.br na virada do domínio
 rede=json.loads(re.search(r'window\.TAP_REDE = (\{.*\});', open('data/rede.js',encoding='utf-8').read(), re.S).group(1))
 units=rede['units']; wa=rede['wa']; today=datetime.date.today().isoformat()
+PIN='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>'
+def go_links(u):
+    if not u.get('addr') or 'confirmação' in u['addr']: return ''
+    lng,lat=u['c']
+    return f'<span class="go-links"><a href="https://www.google.com/maps/search/?api=1&query={lat},{lng}" target="_blank" rel="noopener" title="Abrir no Google Maps">{PIN}Google Maps</a><a href="https://waze.com/ul?ll={lat},{lng}&navigate=yes" target="_blank" rel="noopener" title="Abrir no Waze">{PIN}Waze</a></span>'
+
 def esc(s): return html.escape(str(s), quote=True)
 DIAS={"seg":"segunda","ter":"terça","qua":"quarta","qui":"quinta","sex":"sexta"}
 def dias(d): return ", ".join(DIAS[x] for x in d.split(",")) if d else "todos os dias úteis"
@@ -55,7 +61,7 @@ for u in units:
     desc=f"Unidade TAP Express em {u['n']} ({u['uf']}): {u['addr']}. Atende {n_c} localidades: {', '.join(c['n'] for c in u['cities'][:8])}{'…' if len(u['cities'])>8 else ''}. Encomendas expressas, malotes e cargas fracionadas com entrega em até 18 horas."
     ld=[{"@context":"https://schema.org",**unit_ld(u)},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TAP Express","item":BASE+"/"},{"@type":"ListItem","position":2,"name":"Unidades","item":BASE+"/#unidades"},{"@type":"ListItem","position":3,"name":u['n'],"item":f"{BASE}/unidades/{u['slug']}/"}]}]
     page=(tpl.replace('{{TITLE}}',esc(title)).replace('{{DESC}}',esc(desc)).replace('{{URL}}',f"{BASE}/unidades/{u['slug']}/").replace('{{NAME}}',esc(u['n'])).replace('{{UF}}',u['uf'])
-        .replace('{{ADDR}}',esc(u['addr'])).replace('{{PHONE}}',esc(u['phone'])).replace('{{TEL}}',u['tel']).replace('{{EMAIL}}',u['email']).replace('{{WA}}',wa)
+        .replace('{{ADDR}}',esc(u['addr'])).replace('{{NAV}}',go_links(u)).replace('{{PHONE}}',esc(u['phone'])).replace('{{TEL}}',u['tel']).replace('{{EMAIL}}',u['email']).replace('{{WA}}',wa)
         .replace('{{FOTO}}',('/'+u['foto']) if u.get('foto') else '/assets/frota.jpg').replace('{{FOTOCAP}}','Vista territorial da região' if u.get('fotoTipo')=='aerea' else f"Unidade TAP Express em {esc(u['n'])}")
         .replace('{{CITIES}}',cities_html).replace('{{NC}}',str(n_c)).replace('{{KIND}}','Hub de distribuição · matriz' if u.get('hub') else ('Base de atendimento' if u['slug']=='ourinhos' else f"Unidade TAP Express · {u['uf']}"))
         .replace('{{LD}}',json.dumps(ld,ensure_ascii=False)).replace('{{LINKS}}',links).replace('{{LAT}}',str(u['c'][1])).replace('{{LNG}}',str(u['c'][0])).replace('{{YEAR}}',str(datetime.date.today().year)))

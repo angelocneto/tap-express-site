@@ -33,6 +33,11 @@ function tap_db(): PDO {
         nome TEXT, empresa TEXT, email TEXT, telefone TEXT, observacoes TEXT,
         origem_pagina TEXT, ip TEXT, user_agent TEXT
     )');
+    // colunas adicionadas depois (SSW: CNPJ, pagador do frete, data de coleta)
+    $have = array_column($pdo->query('PRAGMA table_info(cotacoes)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    foreach (['cnpj' => 'TEXT', 'pagador' => 'TEXT', 'coleta_data' => 'TEXT'] as $col => $type) {
+        if (!in_array($col, $have, true)) $pdo->exec("ALTER TABLE cotacoes ADD COLUMN $col $type");
+    }
     $pdo->exec('CREATE TABLE IF NOT EXISTS notas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         cotacao_id INTEGER NOT NULL REFERENCES cotacoes(id) ON DELETE CASCADE,
