@@ -46,3 +46,10 @@ body[data-theme="light"] .nav-logo img.dark { display: none; } body[data-theme="
 section[data-theme="light"] .vaga { color: var(--ink); }
 #candForm select { width: 100%; padding: 13px 15px; border-radius: 14px; border: 1px solid rgba(242,247,243,0.18); background: rgba(255,255,255,0.05); color: #f2f7f3; font-family: var(--body); font-size: 15px; }
 #candForm input[type="file"] { padding: 10px; }
+
+/* Rede TAP tiles with photo */
+.tile.tile-photo { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.tile-photo figure { margin: 0; aspect-ratio: 16 / 9; overflow: hidden; }
+.tile-photo figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
+.tile-photo:hover figure img { transform: scale(1.05); }
+.tile-photo .tile-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 6px; flex: 1; }

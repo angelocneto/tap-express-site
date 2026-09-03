@@ -301,3 +301,13 @@ h2 span { color: var(--green); }
 .fx-go .bar { fill: #39b54a; transform-origin: 200px 543px; transform: scaleX(var(--k)); filter: drop-shadow(0 0 10px rgba(57,181,74,0.9)); }
 @keyframes fxPingTarget { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(5); opacity: 0; } }
 @media (max-width: 720px) { .fx-fleet, .fx-go { width: 175vw; } .fx-gochev polyline { stroke-width: 16; } }
+
+/* ===== Unit cards with photo ===== */
+.unit.has-photo { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.unit-photo { margin: 0; aspect-ratio: 16 / 9; overflow: hidden; background: rgba(57,181,74,0.08); }
+.unit-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
+.unit.has-photo:hover .unit-photo img { transform: scale(1.05); }
+.unit-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.unit-more { display: inline-block; margin-top: 14px; font-family: var(--display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--green) !important; border-bottom: 0 !important; align-self: flex-start; margin-top: auto; padding-top: 14px; }
+.map-hud-link { pointer-events: auto !important; cursor: pointer; text-decoration: none; transition: color .2s; }
+.map-hud-link:hover { color: #fff; }

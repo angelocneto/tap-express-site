@@ -5,6 +5,7 @@
   if (!el || !REDE || typeof maplibregl === "undefined") return;
 
   const HUB = REDE.hub, UNITS = REDE.units;
+  UNITS.forEach(u => { if (u.foto && u.foto[0] !== "/" && !/^https?:/.test(u.foto)) u.foto = "/" + u.foto; }); // caminhos absolutos: o mapa também roda em /unidades/
   const GREEN = "#39b54a", LIME = "#9df0a8";
   const $ = (s) => document.querySelector(s);
   const detail = $("#mapDetail"), suggest = $("#citySuggest"), search = $("#citySearch");
