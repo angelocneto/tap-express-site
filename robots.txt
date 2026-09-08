@@ -23,4 +23,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://tap.amodesenvolvimento.com.br/sitemap.xml
+Sitemap: https://www.tapexpress.com.br/sitemap.xml
