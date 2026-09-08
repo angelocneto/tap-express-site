@@ -108,7 +108,7 @@ if ($modo === 'kanban') {
   <?php $soma = array_sum(array_map(fn($c) => (float)($c['valor_frete'] ?? 0), $col)); ?>
   <div class="col" data-status="<?= $k ?>"><h4><?= $label ?> <span><?= count($col) ?></span></h4><div class="col-sum" data-sum><?= $soma > 0 ? $h($brl($soma)) : '&nbsp;' ?></div>
   <?php foreach ($col as $c): [$tel, $walink] = $wa($c); ?>
-    <div class="kcard" draggable="<?= $edit ? 'true' : 'false' ?>" data-id="<?= $c['id'] ?>">
+    <div class="kcard" draggable="<?= $edit ? 'true' : 'false' ?>" data-id="<?= $c['id'] ?>" data-href="cotacoes.php?v=ver&id=<?= $c['id'] ?>" role="link" tabindex="0" title="Abrir a cotação">
       <span class="proto"><?= $h($c['protocolo']) ?></span><b><?= $h($c['nome']) ?></b>
       <small><?= $h($c['empresa'] ?: $c['telefone']) ?></small>
       <small><?= $h($c['origem']) ?> → <?= $h($c['destino']) ?></small>
@@ -121,6 +121,16 @@ if ($modo === 'kanban') {
   <?php endforeach; ?></div>
 <?php endforeach; ?>
 </div>
+<script>
+// clique em qualquer parte do card abre a cotação (links, campo de valor e arrastar continuam funcionando)
+(function(){ let dragging = false;
+  document.querySelectorAll('.kcard[data-href]').forEach(c => {
+    c.addEventListener('dragstart', () => { dragging = true; }); c.addEventListener('dragend', () => { setTimeout(() => { dragging = false; }, 50); });
+    c.addEventListener('click', e => { if (dragging || e.target.closest('a, input, button, form, select, textarea')) return; if (e.metaKey || e.ctrlKey) window.open(c.dataset.href, '_blank'); else location.href = c.dataset.href; });
+    c.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target === c) { e.preventDefault(); location.href = c.dataset.href; } });
+  });
+})();
+</script>
 <?php if ($edit): ?>
 <script>
 (function(){

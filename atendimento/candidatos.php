@@ -36,7 +36,7 @@ if ($msg) echo "<div class='msg ok'>{$h($msg)}</div>"; if ($err) echo "<div clas
 <?php foreach (TAP_CAND_STATUS as $k => $label): $col = array_values(array_filter($cands, fn($c) => $c['status'] === $k)); ?>
   <div class="col" data-status="<?= $k ?>"><h4><?= $label ?> <span><?= count($col) ?></span></h4>
   <?php foreach ($col as $c): $tel = $digits($c['telefone']); if (strlen($tel) <= 11) $tel = '55' . $tel; ?>
-    <div class="kcard" draggable="true" data-id="<?= $c['id'] ?>">
+    <div class="kcard" draggable="true" data-id="<?= $c['id'] ?>" data-card-open="<?= $c['id'] ?>" role="button" tabindex="0" title="Abrir o candidato">
       <b><?= $h($c['nome']) ?></b><small><?= $h($c['cidade']) ?><?= $c['cnh'] ? ' · CNH ' . $h($c['cnh']) : '' ?><?= $c['experiencia'] ? ' · ' . $h($c['experiencia']) : '' ?></small><small><?= $fmtData($c['criado_em']) ?></small>
       <span class="vaga"><?= $h($c['vaga_id'] && isset($vmap[$c['vaga_id']]) ? $vmap[$c['vaga_id']] : 'Banco de talentos') ?></span>
       <div class="acts"><a href="#" data-open="<?= $c['id'] ?>">Detalhes</a><a href="https://wa.me/<?= $tel ?>" target="_blank" rel="noopener">WhatsApp</a><?php if ($c['cv_arquivo']): ?><a href="?cv=<?= $c['id'] ?>">Currículo</a><?php endif; ?></div>
@@ -72,6 +72,12 @@ if ($msg) echo "<div class='msg ok'>{$h($msg)}</div>"; if ($err) echo "<div clas
   });
   function recount(){ document.querySelectorAll('.col').forEach(c => c.querySelector('h4 span').textContent = c.querySelectorAll('.kcard').length); }
   document.querySelectorAll('[data-open]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); document.getElementById('m' + a.dataset.open).classList.add('on'); }));
+  let dragging = false;
+  document.querySelectorAll('.kcard[data-card-open]').forEach(k => {
+    k.addEventListener('dragstart', () => { dragging = true; }); k.addEventListener('dragend', () => { setTimeout(() => { dragging = false; }, 50); });
+    k.addEventListener('click', e => { if (dragging || e.target.closest('a, input, button, form, select, textarea')) return; document.getElementById('m' + k.dataset.cardOpen).classList.add('on'); });
+    k.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target === k) { e.preventDefault(); document.getElementById('m' + k.dataset.cardOpen).classList.add('on'); } });
+  });
   document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => b.closest('.modal').classList.remove('on')));
   document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('on'); }));
 })();
