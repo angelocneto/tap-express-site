@@ -35,7 +35,7 @@ function tap_db(): PDO {
     )');
     // colunas adicionadas depois (SSW: CNPJ, pagador do frete, data de coleta)
     $have = array_column($pdo->query('PRAGMA table_info(cotacoes)')->fetchAll(PDO::FETCH_ASSOC), 'name');
-    foreach (['cnpj' => 'TEXT', 'pagador' => 'TEXT', 'coleta_data' => 'TEXT'] as $col => $type) {
+    foreach (['cnpj' => 'TEXT', 'pagador' => 'TEXT', 'coleta_data' => 'TEXT', 'valor_frete' => 'REAL', 'rastreio' => 'TEXT', 'fechado_em' => 'TEXT'] as $col => $type) {
         if (!in_array($col, $have, true)) $pdo->exec("ALTER TABLE cotacoes ADD COLUMN $col $type");
     }
     $pdo->exec('CREATE TABLE IF NOT EXISTS notas (
