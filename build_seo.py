@@ -23,10 +23,13 @@ def unit_ld(u):
     return d
 faq={"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
  {"@type":"Question","name":"Quais cidades a TAP Express atende?","acceptedAnswer":{"@type":"Answer","text":f"A TAP Express atende {sum(1+len(u['cities']) for u in units)} localidades em São Paulo, Paraná e Mato Grosso do Sul a partir de {len(units)} unidades e bases, com distribuição centralizada em Presidente Prudente (Regente Feijó). Unidades: "+", ".join(u['n'] for u in units)+"."}},
- {"@type":"Question","name":"Qual o prazo de entrega da TAP Express?","acceptedAnswer":{"@type":"Answer","text":"Entrega em até 18 horas entre as cidades atendidas pela rede, com rotas diárias e centro de distribuição operando 24 horas."}},
+ {"@type":"Question","name":"Qual o prazo de entrega da TAP Express?","acceptedAnswer":{"@type":"Answer","text":"Entrega em até 18 horas entre as cidades atendidas pela rede. Algumas cidades menores têm dia fixo de entrega, informado na lista de cidades atendidas. Rotas diárias e centro de distribuição operando 24 horas."}},
  {"@type":"Question","name":"Como rastrear uma encomenda da TAP Express?","acceptedAnswer":{"@type":"Answer","text":"O rastreamento é feito no portal oficial https://ssw.inf.br/2/rastreamento com o código da encomenda ou nota fiscal. Todos os veículos têm rastreamento via satélite."}},
  {"@type":"Question","name":"Como pedir uma cotação de frete?","acceptedAnswer":{"@type":"Answer","text":f"Pelo formulário de cotação em 3 passos no site (com a assistente TAPIA), pelo WhatsApp central +{wa} ou pelo telefone (18) 3918-7777. A cotação gera um protocolo e a equipe comercial responde em horário comercial."}},
  {"@type":"Question","name":"A carga é segurada?","acceptedAnswer":{"@type":"Answer","text":"Sim. O seguro de carga está incluso em todos os envios, sem custo adicional."}},
+ {"@type":"Question","name":"Preciso trocar quem paga o frete. É possível?","acceptedAnswer":{"@type":"Answer","text":"Só enquanto o frete ainda não foi pago. O tomador atual precisa registrar a manifestação de desacordo dentro do prazo permitido pela SEFAZ. Depois do pagamento a troca não é possível."}},
+ {"@type":"Question","name":"Como faço para trabalhar na TAP Express?","acceptedAnswer":{"@type":"Answer","text":f"As vagas abertas ficam em {BASE}/carreiras/, onde o currículo vai direto para a central de candidatos da TAP. Também é possível enviar para rh@taptransportes.com.br."}},
+ {"@type":"Question","name":"A TAP Express faz mudanças?","acceptedAnswer":{"@type":"Answer","text":"Não. A TAP trabalha com encomendas, malotes e cargas fracionadas entre as cidades da rede. Não faz mudanças residenciais nem comerciais."}},
 ]}
 ld_home=[org,website,faq,{"@context":"https://schema.org","@type":"ItemList","name":"Unidades TAP Express","itemListElement":[{"@type":"ListItem","position":i+1,"item":unit_ld(u)} for i,u in enumerate(units)]}]
 
