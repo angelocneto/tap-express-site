@@ -32,6 +32,43 @@ if ($action === 'login') {
     if ($u && password_verify($senha, $u['senha_hash'])) { session_regenerate_id(true); $_SESSION['user'] = ['nome' => $u['nome'], 'email' => $u['email']]; header('Location: index.php'); exit; }
     $err = 'E-mail ou senha incorretos.'; usleep(400000);
 }
+if ($action === 'esqueci') {
+    // sempre responde a mesma coisa (não revela se o e-mail existe); limite por IP via tabela rate
+    $email = strtolower(trim($_POST['email'] ?? '')); $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+    $pdo->prepare('DELETE FROM rate WHERE ts < ?')->execute([time() - 900]);
+    $q = $pdo->prepare('SELECT COUNT(*) FROM rate WHERE ip = ?'); $q->execute([$ip]);
+    if ((int)$q->fetchColumn() < 5) {
+        $pdo->prepare('INSERT INTO rate (ip, ts) VALUES (?, ?)')->execute([$ip, time()]);
+        $q = $pdo->prepare('SELECT * FROM usuarios WHERE email = ?'); $q->execute([$email]); $u = $q->fetch();
+        if ($u) {
+            $token = bin2hex(random_bytes(24));
+            $pdo->prepare('UPDATE senha_reset SET usado = 1 WHERE email = ? AND usado = 0')->execute([$email]);
+            $pdo->prepare('INSERT INTO senha_reset (email, token_hash, expira_em, usado, criado_em) VALUES (?, ?, ?, 0, ?)')
+                ->execute([$email, hash('sha256', $token), date('Y-m-d H:i:s', time() + 3600), tap_now()]);
+            $host = $_SERVER['HTTP_HOST'] ?? 'www.tapexpress.com.br';
+            $link = 'https://' . $host . '/atendimento/index.php?v=redefinir&t=' . $token;
+            $corpo = "Olá, {$u['nome']}.\n\nRecebemos um pedido para redefinir a senha da área de atendimento da TAP Express.\n\nAbra o link abaixo em até 1 hora para criar uma nova senha:\n$link\n\nSe você não pediu isso, ignore este e-mail. Sua senha continua a mesma.\n\nTAP Express · Atendimento";
+            $cfg = dirname(__DIR__) . '/api/config.php'; $from = '';
+            if (file_exists($cfg)) { $c = include $cfg; $from = is_array($c) ? ($c['remetente'] ?? '') : ''; }
+            if ($from === '') $from = 'no-reply@' . preg_replace('/^www\./', '', $host);
+            @mail($email, 'TAP Express · Redefinir senha da área de atendimento', $corpo, "From: TAP Express <$from>\r\nReply-To: recepcao@taptransportes.com.br\r\nContent-Type: text/plain; charset=utf-8");
+        }
+    }
+    header('Location: index.php?v=esqueci&ok=1'); exit;
+}
+if ($action === 'redefinir') {
+    $token = $_POST['t'] ?? ''; $senha = $_POST['senha'] ?? ''; $senha2 = $_POST['senha2'] ?? '';
+    $q = $pdo->prepare('SELECT * FROM senha_reset WHERE token_hash = ? AND usado = 0 AND expira_em > ?'); $q->execute([hash('sha256', $token), date('Y-m-d H:i:s')]); $r = $q->fetch();
+    if (!$r) { header('Location: index.php?v=esqueci&expirado=1'); exit; }
+    if (strlen($senha) < 8) $err = 'A senha precisa ter pelo menos 8 caracteres.';
+    elseif ($senha !== $senha2) $err = 'As duas senhas não conferem.';
+    else {
+        $pdo->prepare('UPDATE usuarios SET senha_hash = ? WHERE email = ?')->execute([password_hash($senha, PASSWORD_DEFAULT), $r['email']]);
+        $pdo->prepare('UPDATE senha_reset SET usado = 1 WHERE id = ?')->execute([$r['id']]);
+        header('Location: index.php?redefinida=1'); exit;
+    }
+    $_GET['v'] = 'redefinir'; $_GET['t'] = $token;
+}
 if ($action === 'logout') { session_destroy(); header('Location: index.php'); exit; }
 
 // ---------- ações autenticadas ----------
@@ -65,7 +102,8 @@ if ($user) {
     }
 }
 
-$view = $user ? ($_GET['v'] ?? 'lista') : ($hasUsers ? 'login' : 'setup');
+$view = $user ? ($_GET['v'] ?? 'lista') : ($hasUsers ? (in_array($_GET['v'] ?? '', ['esqueci', 'redefinir'], true) ? $_GET['v'] : 'login') : 'setup');
+if (($_GET['redefinida'] ?? '') === '1') $msg = 'Senha redefinida. Entre com a nova senha.';
 $filtro = $_GET['s'] ?? 'abertas'; $busca = trim($_GET['q'] ?? '');
 $statusBadge = fn($s) => '<span class="badge b-' . $h($s) . '">' . $h(TAP_STATUS[$s] ?? $s) . '</span>';
 $digits = fn($t) => preg_replace('/\D+/', '', (string)$t);
@@ -105,6 +143,7 @@ td .p{font-family:var(--d);font-weight:700;color:#9df0a8}td small{display:block;
 .quick{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.empty{padding:40px;text-align:center;color:var(--muted)}
 details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.kv{grid-template-columns:1fr}table{display:block;overflow-x:auto}}
+.pw{position:relative}.pw input{padding-right:44px;width:100%}.pw .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--muted);cursor:pointer;padding:6px;border-radius:8px}.pw .eye:hover{color:#9df0a8}.link{color:#9df0a8;font-size:13px;text-decoration:none}.link:hover{text-decoration:underline}
 </style>
 </head>
 <body><div class="wrap">
@@ -113,15 +152,32 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
     <h1>Primeiro acesso</h1><p>Crie o usuário administrador da área de atendimento. Só é possível uma vez.</p>
     <?php if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
     <form method="post"><input type="hidden" name="action" value="setup"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/>
-      <label>Nome</label><input name="nome" required/><label>E-mail</label><input type="email" name="email" required/><label>Senha (mín. 8 caracteres)</label><input type="password" name="senha" minlength="8" required/>
+      <label>Nome</label><input name="nome" required/><label>E-mail</label><input type="email" name="email" required/><label>Senha (mín. 8 caracteres)</label><div class="pw"><input type="password" name="senha" minlength="8" required/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
       <div style="margin-top:18px"><button class="btn p" type="submit">Criar acesso</button></div></form></div>
 <?php elseif ($view === 'login'): ?>
   <div class="auth card"><img src="../assets/logo_branca.png" alt="TAP Express" style="height:40px;margin-bottom:18px"/>
     <h1>Área de atendimento</h1><p>Entre para ver e responder as cotações do site.</p>
-    <?php if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
+    <?php if ($msg) echo "<div class='msg ok'>$h($msg)</div>"; if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
     <form method="post"><input type="hidden" name="action" value="login"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/>
-      <label>E-mail</label><input type="email" name="email" required autofocus/><label>Senha</label><input type="password" name="senha" required/>
-      <div style="margin-top:18px"><button class="btn p" type="submit">Entrar</button></div></form></div>
+      <label>E-mail</label><input type="email" name="email" required autofocus/><label>Senha</label><div class="pw"><input type="password" name="senha" required/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
+      <div style="margin-top:18px;display:flex;align-items:center;gap:16px"><button class="btn p" type="submit">Entrar</button><a class="link" href="index.php?v=esqueci">Esqueci minha senha</a></div></form></div>
+<?php elseif ($view === 'esqueci'): ?>
+  <div class="auth card"><img src="../assets/logo_branca.png" alt="TAP Express" style="height:40px;margin-bottom:18px"/>
+    <h1>Esqueci minha senha</h1>
+    <?php if (($_GET['ok'] ?? '') === '1'): ?><div class="msg ok">Se este e-mail tiver acesso, enviamos um link para criar uma nova senha. Vale por 1 hora. Confira também a caixa de spam.</div><?php endif; ?>
+    <?php if (($_GET['expirado'] ?? '') === '1'): ?><div class="msg err">Esse link expirou ou já foi usado. Peça um novo.</div><?php endif; ?>
+    <p>Informe o e-mail do seu acesso. Enviamos um link para você definir uma nova senha.</p>
+    <form method="post"><input type="hidden" name="action" value="esqueci"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/>
+      <label>E-mail</label><input type="email" name="email" required autofocus/>
+      <div style="margin-top:18px;display:flex;align-items:center;gap:16px"><button class="btn p" type="submit">Enviar link</button><a class="link" href="index.php">Voltar</a></div></form></div>
+<?php elseif ($view === 'redefinir'): ?>
+  <div class="auth card"><img src="../assets/logo_branca.png" alt="TAP Express" style="height:40px;margin-bottom:18px"/>
+    <h1>Nova senha</h1><p>Escolha uma senha com pelo menos 8 caracteres.</p>
+    <?php if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
+    <form method="post"><input type="hidden" name="action" value="redefinir"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/><input type="hidden" name="t" value="<?= $h($_GET['t'] ?? '') ?>"/>
+      <label>Nova senha</label><div class="pw"><input type="password" name="senha" minlength="8" required autofocus/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
+      <label>Repita a nova senha</label><div class="pw"><input type="password" name="senha2" minlength="8" required/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
+      <div style="margin-top:18px"><button class="btn p" type="submit">Salvar nova senha</button></div></form></div>
 <?php else: ?>
   <div class="top"><a href="index.php"><img src="../assets/logo_branca.png" alt="TAP Express"/></a>
     <div class="who">Atendimento · <b><?= $h($user['nome']) ?></b></div>
@@ -167,4 +223,5 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
       <?php foreach ($rows as $r): ?><tr><td><a class="p" href="?v=ver&id=<?= $r['id'] ?>"><?= $h($r['protocolo']) ?></a></td><td><a href="?v=ver&id=<?= $r['id'] ?>"><?= $h($r['nome']) ?></a><small><?= $h($r['empresa'] ?: $r['telefone']) ?></small></td><td><?= $h($r['origem']) ?> → <?= $h($r['destino']) ?></td><td><?= $h($r['tipo']) ?><small><?= $r['volumes'] ? $h($r['volumes']) . ' vol · ' : '' ?><?= $r['peso'] !== null ? $h($r['peso']) . ' kg' : '' ?></small></td><td><?= $statusBadge($r['status']) ?></td><td><?= $fmtData($r['criado_em']) ?></td></tr><?php endforeach; if (!$rows) echo '<tr><td colspan="6" class="empty">Nenhuma cotação neste filtro.</td></tr>'; ?></table></div>
   <?php endif; ?>
 <?php endif; ?>
-</div></body></html>
+</div><script>document.addEventListener("click",function(e){const b=e.target.closest("[data-eye]");if(!b)return;const i=b.parentElement.querySelector("input");const show=i.type==="password";i.type=show?"text":"password";b.querySelector(".e-shut").style.display=show?"":"none";b.setAttribute("aria-pressed",show?"true":"false");i.focus();});</script>
+</body></html>

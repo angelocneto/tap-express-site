@@ -48,6 +48,7 @@ function tap_db(): PDO {
         nome TEXT NOT NULL, email TEXT UNIQUE NOT NULL, senha_hash TEXT NOT NULL, criado_em TEXT NOT NULL
     )');
     $pdo->exec('CREATE TABLE IF NOT EXISTS rate (ip TEXT, ts INTEGER)');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS senha_reset (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, token_hash TEXT NOT NULL, expira_em TEXT NOT NULL, usado INTEGER NOT NULL DEFAULT 0, criado_em TEXT NOT NULL)');
     $pdo->exec('CREATE TABLE IF NOT EXISTS vagas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         titulo TEXT NOT NULL, area TEXT, tipo TEXT, unidade TEXT, cidade TEXT, uf TEXT,
