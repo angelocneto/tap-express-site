@@ -1,0 +1,310 @@
+K|seg|Mon
+K|ter|Tue
+K|qua|Wed
+K|qui|Thu
+K|sex|Fri
+K|Encomenda expressa|Express parcel
+K|Malote / documentos|Pouch / documents
+K|Carga fracionada|LTL freight
+K|Remetente|Shipper
+K|Destinatário|Consignee
+000| TAP Express | Regional precision. Speed that moves business.
+001| Services
+002| How it works
+003| Fleet
+005| TAP Network
+006| Careers
+007| Contact
+008| Track
+009| Get a quote
+014| Track a parcel
+015| Regional precision. Speed that moves business.
+016| Where urgency meets <0>regional mastery.</0>
+017| Thinking express parcels? <0>Think TAP Express.</0>
+018| Delivery within<0/><1>18 hours.</1>
+019| PRESIDENTE PRUDENTE · SP
+020| 104 LOCATIONS · 20 BRANCHES
+021| SP · PR · MS
+022| SCROLL TO EXPLORE ▾
+023| years on the road
+024| locations served
+025| branches and bases
+026| delivery time
+027| distribution center
+028| Who we are
+029| Regional logistics with clarity, coordination and <0>proximity.</0>
+030| Intelligent route planner at headquarters
+031| TAP Transportes started in 2001 in Presidente Prudente, founded by Paulo Barreto to provide fast, well-executed road transport for people and businesses across the region.
+032| Today distribution runs from Presidente Prudente and 20 branches and bases in western São Paulo state, northern Paraná and Mato Grosso do Sul, serving 104 locations with daily routes and fixed service days in smaller towns.
+033| <0>Innovation</0>: intelligent route planner and TAPIA in daily operations
+034| <0>Speed</0> with safety in every delivery
+035| <0>Human capital</0> and social responsibility
+036| <0>Sustainability</0> and respect for the environment
+037| What we do for <0>your shipment.</0>
+038| Express parcels
+039| Small and medium parcels, with same-day pickup and delivery within 18 hours between network cities.
+040| Pouches and documents
+041| Corporate pouches and documents between headquarters, branches and clients, with a record of who sent and who received.
+042| LTL freight
+043| Own fleet and certified partners for pallets and less-than-truckload freight, on daily routes.
+044| Smart route tracking
+045| Every vehicle is satellite-tracked and the shipper follows the parcel's route, not just the truck's position.
+046| Cargo insurance included
+047| Goods are insured from pickup to delivery, at no extra cost.
+048| Customer area
+049| Shipment tracking, duplicate invoices and 24-hour customer service.
+050| From request to delivery, <0>step by step.</0>
+051| Real people at every point along the way. That is how urgency becomes on-time delivery.
+052| Request
+053| You request a quote on the website, through TAPIA or on WhatsApp. Your local branch receives the request with full context.
+054| Smart planning
+055| TAP's route planner, together with TAPIA, fits the pickup into the best route of the day and confirms time and price with you before anything moves.
+056| In motion
+057| Pickup, transfer at the distribution center and delivery within 18 hours. The shipper follows the route with smart tracking, not just the vehicle.
+058| Digital completion
+059| Checked at delivery with a signature on the tablet. The proof of delivery goes to the portal instantly and the branch is ready for your next shipment.
+060| Our fleet · Presidente Prudente
+061| Own fleet and <0>certified partners.</0>
+062| Satellite tracking <0>on every vehicle.</0>
+063| Ready to roll. <0>Right now.</0>
+064| TAP FLEET
+065| DAILY ROUTES
+066| Own fleet · satellite-tracked
+067| The intelligence behind <0>every move.</0>
+068| TAPIA combines artificial intelligence with TAP Express's <0>25</0> years on the road and guides every conversation, from first contact to delivery.
+069| Quote in 3 steps
+070| Origin, destination and cargo. You get a reference number and the team replies during business hours.
+071| Do we serve your city?
+072| Type the name and instantly see the responsible branch and service days.
+073| Tracking without a phone call
+074| TAPIA takes you to the tracking portal with the parcel code or the invoice number.
+075| Real people when you need them
+076| One tap and the conversation continues on the team's WhatsApp, with your context already there. No need to repeat everything.
+077| Quote a shipment with TAPIA
+078| TAP on WhatsApp
+079| Where we are
+080| TAP is always <0>close by.</0>
+081| Distribution runs from Presidente Prudente to branches in western São Paulo state, northern Paraná and Mato Grosso do Sul. Search your city, filter by state or take the branch tour.
+082| TAP Network · <0>SP · PR · MS</0> ↗
+084| Hub <0>Presidente Prudente</0> · routes in real time
+085| Base map unavailable right now · showing the TAP network only
+086| All
+090| branches
+091| cities
+092| km of routes
+093| ▶ Branch tour
+094| Recenter
+095| Full list of branches
+096| São Paulo <0>15</0>
+097| Paraná <0>4</0>
+098| Mato Grosso do Sul <0>1</0>
+099| Regente Feijó <0>Headquarters · Presidente Prudente</0>
+101| Presidente Prudente, Álvares Machado, Pirapozinho, Martinópolis, Rancharia, Presidente Venceslau, Presidente Epitácio, Teodoro Sampaio, Rosana, Mirante do Paranapanema and surroundings
+103| View branch →
+108| Birigui, Coroados, Guararapes
+111| Agudos, Pederneiras, Piratininga, Macatuba, Lençóis Paulista
+114| Garça, Oriente, Pompéia, Vera Cruz
+117| Cravinhos (Tue/Thu), Sertãozinho (Mon/Wed/Fri), Jardinópolis (Tue/Thu)
+120| Bady Bassit, Catanduva, Cedral, Mirassol
+123| Américo Brasiliense, Matão
+126| Cândido Mota, Paraguaçu Paulista, Palmital, Tarumã, Maracaí (Tue/Thu)
+129| Bariri, Barra Bonita, Igaraçu do Tietê, Itapuí (Mon/Wed/Fri) · Dois Córregos, Mineiros do Tietê (Tue/Thu)
+132| Castilho, Guaraçaí, Mirandópolis, Murutinga do Sul
+135| Junqueirópolis, Tupi Paulista · Irapuru (Mon/Wed) · Ouro Verde (Tue/Thu)
+138| Adamantina, Lucélia, Parapuã, Rinópolis, Bastos and surroundings
+143| Lins, Promissão (Mon/Wed/Fri)
+144| Ourinhos <0>Service base</0>
+145| Served by the central office
+146| Canitar, Chavantes, Ibirarema, Ipaussu, Salto Grande, Santa Cruz do Rio Pardo
+149| Cambé, Ibiporã, Rolândia
+152| Marialva, Paiçandu, Sarandi
+157| Astorga, Sabáudia (Tue/Thu)
+160| Frequently asked questions
+161| Quick answers <0>from the TAP team.</0>
+162| Which cities does TAP serve?
+163| 104 locations across São Paulo, Paraná and Mato Grosso do Sul. The full list, with the responsible branch and route days, is under <0>cities served</0>. You can also type your city into the <1>network map</1> search.
+164| What is the delivery time?
+165| Up to 18 hours for the cities we serve. Some smaller towns have fixed delivery days, for example Tuesday and Thursday. Those days are shown next to each city under <0>cities served</0>.
+166| How do I track my parcel?
+167| Right here on the website, under <0>Tracking</0>: enter the electronic invoice key (DANFE) or the CNPJ together with the tracking key. TAPIA, in the corner of the screen, can also take you there.
+168| I need to change who pays the freight. Is that possible?
+169| Only while the freight has not yet been paid. In that case the current payer must file a disagreement statement within the period allowed by SEFAZ. After payment the change is no longer possible. Contact the branch that issued the CT-e for guidance.
+170| How do I get a job at TAP?
+171| Open positions are listed under <0>Work with us</0>, where you send your CV straight to our candidate center. If you prefer, send it to <1>rh@taptransportes.com.br</1>.
+172| Does TAP do house moves?
+173| No. We handle parcels, pouches and LTL freight between network cities. We do not do residential or commercial moves.
+174| Tracking
+175| Where is my <0>parcel?</0>
+176| Enter the parcel code or the invoice number and see which stage the delivery is at.
+177| Talk to TAP
+178| 24-hour service · Customer care · <0>WhatsApp +55 18 99109-6441</0> · <1>recepcao@taptransportes.com.br</1>
+180| Request a quote
+181| Directions
+182| Road transport of freight and parcels since 2001, from Presidente Prudente, SP, Brazil.
+183| Navigation
+184| About the company
+185| Work with us
+186| Privacy
+187| Staff area
+188| Customers
+189| Online quote
+190| 24h customer care
+192| Social
+195| © <0>2026</0> TAP Express · Transportes
+196| Thinking express parcels? Think TAP Express.
+197| <0>×</0><1>Hi! I'm TAPIA.</1><2/>How can I help you today?
+198| <0></0>Online · Intelligence that moves
+200| Hi! I'm <0>TAPIA</0>, the intelligence behind TAP Express. How can I help you today?
+201| <0><1/></0>Quote a shipment
+202| <0><1/></0>Track a parcel
+203| <0><1/></0>Talk to a specialist
+204| <0><1/></0>Scheduled pickups
+205| Quote with TAPIA
+206| 3 quick steps. Our team replies during business hours.
+208| From where <0>to where?</0>
+209| Type the city and instantly see whether it is in the TAP network.
+210| Origin city
+211| Destination city
+212| What is <0>travelling?</0>
+213| Weight, dimensions and invoice value go into the freight calculation.
+214| Parcel<0>boxes and packages</0>
+215| Pouch<0>documents</0>
+216| Freight<0>pallets and LTL</0>
+217| Pieces
+218| Total weight (kg)
+219| Package dimensions (cm)
+220| Length
+221| Width
+222| Height
+223| Fill in the three dimensions of the largest package.
+224| Invoice value (R$)
+225| Who pays the freight
+226| Shipper (sender)
+227| Consignee (receiver)
+228| Preferred pickup date
+229| Who should <0>receive the quote?</0>
+230| We reply by WhatsApp or e-mail.
+231| Your name
+232| Company (optional)
+233| CNPJ (if you are already a customer)
+234| WhatsApp / phone
+235| E-mail
+236| Notes
+237| ← Back
+238| Continue →
+239| Quote registered
+240| Thank you, <0></0>! 👋
+242| Keep this reference number. Our service team has already received the request and will reply during business hours via the WhatsApp or e-mail you provided.
+243| Urgent? <0>WhatsApp +55 18 99109-6441</0> · <1>+55 18 3918-7777</1>
+244| Where urgency meets regional mastery. Since 2001 TAP Express has carried freight and parcels to 94 locations in São Paulo, Paraná and Mato Grosso do Sul, with 19 branches, satellite tracking, cargo insurance and delivery within 18 hours.
+245| carrier Presidente Prudente, express parcel shipping Brazil, freight western São Paulo, carrier Londrina Maringá, LTL freight SP PR MS, TAP Express, TAP Transportes
+246| TAP Express: where urgency meets regional mastery
+247| Regional precision. Speed that moves business. 20 branches, 104 locations in SP, PR and MS, delivery within 18 hours.
+248| TAP Express: Regional precision. Speed that moves business.
+249| TAP Express serves 104 locations in São Paulo, Paraná and Mato Grosso do Sul from 20 branches and bases, with centralized distribution in Presidente Prudente (Regente Feijó). Branches: Regente Feijó, Araçatuba, Bauru, Marília, Ribeirão Preto, São José do Rio Preto, Araraquara, Assis, Jaú, Andradina, Dracena, Osvaldo Cruz, Tupã, Londrina, Maringá, Apucarana, Arapongas, Três Lagoas, Penápolis, Ourinhos.
+250| Does TAP Express do house moves?
+251| Is the cargo insured?
+252| Open positions are listed at https://www.tapexpress.com.br/carreiras/, where the CV goes straight to TAP's candidate center. You can also send it to rh@taptransportes.com.br.
+253| Service base · address to be confirmed
+255| How do I get a job at TAP Express?
+256| How do I request a freight quote?
+257| How do I track a TAP Express parcel?
+259| Delivery within 18 hours between the cities served by the network. Some smaller towns have fixed delivery days, shown in the list of cities served. Daily routes and a distribution center operating 24 hours.
+260| No. TAP handles parcels, pouches and LTL freight between network cities. It does not do residential or commercial moves.
+261| Tracking is done on the website itself, at https://www.tapexpress.com.br/rastreamento/, with the NF-e key or the CNPJ and tracking key. Data comes from the SSW portal, using the parcel code or invoice number. Every vehicle is satellite-tracked.
+264| Through the 3-step quote form on the website (with the TAPIA assistant), on the central WhatsApp +5518991096441 or by phone at +55 18 3918-7777. The quote generates a reference number and the sales team replies during business hours.
+266| Which cities does TAP Express serve?
+267| What is TAP Express's delivery time?
+269| Yes. Cargo insurance is included in every shipment, at no extra cost.
+271| Only while the freight has not yet been paid. The current payer must file a disagreement statement within the period allowed by SEFAZ. After payment the change is not possible.
+295| Freight and express parcel carrier with 20 branches and 104 locations served in western São Paulo state, northern Paraná and Mato Grosso do Sul. Delivery within 18 hours, satellite tracking and cargo insurance included.
+296| TAP Express branches
+299| Language
+301| TAPIA and an operator in front of the intelligent route planner, with the fleet seen through the window
+302| TAP Express agent registering a request with the TAP.IA panel on screen
+303| TAPIA and an operator in front of TAP's intelligent route planner
+304| TAP Express driver delivering a box at a shop door
+305| Customer signing for receipt on the TAP Express driver's tablet
+306| TAP Express box truck in the yard
+307| TAP Express fleet lined up at the distribution center
+308| TAP Express trailers at the docks
+309| TAP Express trucks ready for the route
+311| TAP Express delivery vehicles
+312| Play the TAPIA presentation
+313| TAP.IA, intelligence that moves
+314| Open the TAP Network page
+315| Do we serve your city? Type the name
+316| TAP Express branch in Regente Feijó
+317| Open in Google Maps
+318| Open in Waze
+319| TAP Express branch in Araçatuba
+320| TAP Express branch in Bauru
+321| TAP Express branch in Marília
+322| TAP Express branch in Ribeirão Preto
+323| TAP Express branch in São José do Rio Preto
+324| TAP Express branch in Araraquara
+325| TAP Express branch in Assis
+326| TAP Express branch in Jaú
+327| TAP Express branch in Andradina
+328| TAP Express branch in Dracena
+329| TAP Express branch in Osvaldo Cruz
+330| TAP Express branch in Tupã
+331| TAP Express branch in Penápolis
+332| TAP Express branch in Ourinhos
+333| TAP Express branch in Londrina
+334| TAP Express branch in Maringá
+335| TAP Express branch in Apucarana
+336| TAP Express branch in Arapongas
+337| TAP Express branch in Três Lagoas
+338| NF-e key (44 digits)
+339| Tracking code
+340| Close
+342| Type your message…
+343| Send
+344| Talk to TAPIA
+345| E.g. Presidente Prudente
+346| E.g. Londrina
+348| Used for freight and insurance
+349| Full name
+350| Legal or trade name
+352| Desired deadline, pickup, time window, fragility…
+353| About TAP Express | Carrier since 2001 in Presidente Prudente, Brazil
+354| Request a quote
+355| About
+356| About TAP Express
+357| 25 years connecting inland cities <0>in the shortest possible time.</0>
+358| TAP started in 2001 in Presidente Prudente and today delivers to 104 locations from 20 branches and bases. Own fleet, certified partners and people who know every road in the region.
+359| How it all began
+360| Paulo Barreto founded TAP Transportes in 2001 in Presidente Prudente with a simple idea: fast, reliable road transport for people and businesses in western São Paulo state. The first trucks bridged the region and the rest of the state.
+361| Operations grew into northern Paraná and Mato Grosso do Sul. Today distribution leaves headquarters in Regente Feijó, on the Raposo Tavares highway, and reaches the network's 20 branches and bases, each responsible for a group of cities in its region.
+362| locations
+363| Mission, vision and values
+364| <0>Mission:</0> improve processes and technology every year and deliver what was agreed with the customer.
+365| <0>Vision:</0> grow sustainably, connecting the longest distances in the shortest possible time while respecting the environment.
+366| <0>Innovation</0>: intelligent route planner, smart route tracking for shippers and the <1>TAPIA</1> assistant.
+367| <0>Speed</0> with safety: delivery within 18 hours between network cities.
+368| <0>Human capital:</0> local teams who know customers by name.
+369| <0>Social and environmental responsibility</0> in operations and in the choice of partners.
+370| How the network works
+371| Each branch serves neighbouring cities on fixed routes. Smaller towns have set service days (for example Tuesday and Thursday), which keeps delivery times predictable and costs low. See the full list under <0>cities served</0> or explore the <1>network map</1>.
+372| Frequently asked questions
+373| How long has TAP Express been around?
+374| TAP Transportes was founded in 2001 in Presidente Prudente by Paulo Barreto. That is 25 years on the road.
+375| Where is the headquarters?
+376| On highway SP 270 Raposo Tavares, km 556, in Regente Feijó, in the Presidente Prudente region. Distribution to the whole network starts there.
+377| How many branches does TAP have?
+378| 20 branches and bases in São Paulo, Paraná and Mato Grosso do Sul, serving 104 locations.
+379| Does TAP ship outside these regions?
+380| The network covers western São Paulo state, northern Paraná and Mato Grosso do Sul. For other destinations, call the central office at +55 18 3918-7777 and the team will assess case by case.
+381| Route planning in the headquarters yard
+382| Box trucks, vans and trailers <0>with satellite tracking.</0>
+383| Need to ship today?
+384| Request a quote in 3 steps <0>with TAPIA.</0>
+386| Cities served
+387| Customer care +55 18 3918-7777
+388| © 2026 TAP Express · Transportes
+389| History, mission and values of TAP Express: founded in 2001 by Paulo Barreto, with 20 branches and 104 locations served in SP, PR and MS.
+390| Transport services | Parcels, pouches and LTL freight | TAP Express
+391| Parcel, pouch and freight transport <0>with delivery within 18 hours.</0>
+392| Three services, one network: 20 branches in SP, PR and MS, a satellite-tracked own fleet and insurance included in every shipment.
+393| Small and medium boxes and packages with same-day pickup and delivery within 18 hours between network cities.

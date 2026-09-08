@@ -17,12 +17,13 @@ V=re.search(r'\?v=(\d+)',index_html); V=V.group(1) if V else str(YEAR)
 PAGES=[]  # (url, priority, changefreq, title)
 
 def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/og-home.jpg", crumbs=None, extra_js=""):
-    ldj=json.dumps(ld,ensure_ascii=False)
+    ldj=json.dumps(ld,ensure_ascii=False); path=url[len(BASE):] or "/"
     crumb_html=''.join(f'<a href="{c[1]}">{esc(c[0])}</a><span>›</span>' for c in (crumbs or [("TAP Express","/")]))
     page=f'''<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>window.t=function(s){{var d=window.TAP_T;return (d&&d[s])||s}};document.addEventListener("click",function(e){{var c=e.target.closest(".lang-cur"),l=document.querySelector(".nav .lang.is-open");if(l&&(!c||c.parentNode!==l))l.classList.remove("is-open");if(c)c.parentNode.classList.toggle("is-open")}});document.addEventListener("DOMContentLoaded",function(){{try{{if(window.TAP_LANG||localStorage.getItem("tapLangTip"))return;var l=(navigator.language||"").toLowerCase().slice(0,2),m={{en:["Prefer English?","View this site in English"],es:["¿Prefiere español?","Ver el sitio en español"],zh:["需要中文？","查看中文版网站"]}}[l];if(!m)return;var p=location.pathname,d=document.createElement("div");d.className="lang-tip";d.innerHTML="<span>"+m[0]+"</span> <a href=\"/"+l+p+"\">"+m[1]+" →</a><button aria-label=\"×\">×</button>";d.querySelector("button").onclick=function(){{d.remove();localStorage.setItem("tapLangTip","1")}};d.querySelector("a").onclick=function(){{localStorage.setItem("tapLangTip","1")}};document.body.appendChild(d)}}catch(e){{}}}});</script>
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(desc)}" />
   <link rel="canonical" href="{url}" /><meta name="robots" content="index, follow, max-image-preview:large" />
@@ -39,9 +40,10 @@ def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/og-h
     <a class="nav-logo" href="/" aria-label="TAP Express"><img class="light" src="/assets/logo_branca.png" alt="TAP Express" /><img class="dark" src="/assets/logo_cor.png" alt="TAP Express" /></a>
     <nav class="nav-links"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Rede TAP</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></nav>
     <div class="nav-cta"><a class="btn btn-ghost" href="/rastreamento/">Rastrear</a><a class="btn btn-solid" href="/cotacao/" data-open-quote="nav">Cotação</a></div>
+    <div class="lang" aria-label="Idioma"><span class="lang-cur" tabindex="0">PT</span><a class="lang-item is-on" href="{path}" hreflang="pt-BR" lang="pt-BR">PT</a><a class="lang-item" href="/en{path}" hreflang="en" lang="en">EN</a><a class="lang-item" href="/es{path}" hreflang="es" lang="es">ES</a><a class="lang-item" href="/zh{path}" hreflang="zh-Hans" lang="zh-Hans">中文</a></div>
     <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span></button>
   </header>
-  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Rede TAP</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a></div>
+  <div class="mobile-menu" id="mobileMenu"><a href="/servicos/">Serviços</a><a href="/#jornada">Como funciona</a><a href="/#frota">Frota</a><a href="/tapia/">TAPIA</a><a href="/unidades/">Rede TAP</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a><a class="btn btn-solid" href="/cotacao/">Pedir cotação</a><div class="lang lang-mobile" aria-label="Idioma"><span class="lang-cur" tabindex="0">PT</span><a class="lang-item is-on" href="{path}" hreflang="pt-BR" lang="pt-BR">PT</a><a class="lang-item" href="/en{path}" hreflang="en" lang="en">EN</a><a class="lang-item" href="/es{path}" hreflang="es" lang="es">ES</a><a class="lang-item" href="/zh{path}" hreflang="zh-Hans" lang="zh-Hans">中文</a></div></div>
   <main>
     <section class="page-hero"><div class="wrap"><div class="crumbs">{crumb_html}</div>{body[0]}</div></section>
     {body[1]}

@@ -56,7 +56,7 @@
   const map = new maplibregl.Map({
     container: el, style: "https://tiles.openfreemap.org/styles/dark", ...HOME,
     cooperativeGestures: true, attributionControl: { compact: true }, maxZoom: 13, minZoom: 4.5,
-    locale: { "CooperativeGesturesHandler.WindowsHelpText": "Use Ctrl + rolagem para dar zoom no mapa", "CooperativeGesturesHandler.MacHelpText": "Use ⌘ + rolagem para dar zoom no mapa", "CooperativeGesturesHandler.MobileHelpText": "Use dois dedos para mover o mapa" }
+    locale: { "CooperativeGesturesHandler.WindowsHelpText": t("Use Ctrl + rolagem para dar zoom no mapa"), "CooperativeGesturesHandler.MacHelpText": t("Use ⌘ + rolagem para dar zoom no mapa"), "CooperativeGesturesHandler.MobileHelpText": t("Use dois dedos para mover o mapa") }
   });
   map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "bottom-right");
   let usingFallback = false;
@@ -97,7 +97,7 @@
     d.className = "mk" + (u.hub ? " hub" : "");
     d.innerHTML = `<span class="lbl">${u.hub ? "HUB · " : ""}${u.n}</span>`;
     d.addEventListener("click", (ev) => { ev.stopPropagation(); stopTour(); focusUnit(u, true); if (window.innerWidth <= 900) detail.scrollIntoView({ behavior: "smooth", block: "center" }); });
-    d.addEventListener("mouseenter", () => { if (u.foto) showPopup(u.c, `<div class="pp"><img src="${u.foto}" alt="${u.n}" /><b>${u.n}</b><br/>${u.hub ? "Hub de distribuição" : "Unidade " + u.uf} · clique para ver</div>`, false); });
+    d.addEventListener("mouseenter", () => { if (u.foto) showPopup(u.c, `<div class="pp"><img src="${u.foto}" alt="${u.n}" /><b>${u.n}</b><br/>${u.hub ? t("Hub de distribuição") : t("Unidade") + " " + u.uf} · ${t("clique para ver")}</div>`, false); });
     d.addEventListener("mouseleave", () => { if (popup && popup._hover) popup.remove(); });
     markers[u.id] = new maplibregl.Marker({ element: d, anchor: "center" }).setLngLat(u.c).addTo(map);
   });
@@ -124,7 +124,7 @@
   }
 
   /* ---------- lightbox ---------- */
-  const lb = document.createElement("div"); lb.className = "map-lightbox"; lb.innerHTML = `<button class="lb-close" aria-label="Fechar">×</button><figure><img alt="" /><figcaption></figcaption></figure>`; document.body.appendChild(lb);
+  const lb = document.createElement("div"); lb.className = "map-lightbox"; lb.innerHTML = `<button class="lb-close" aria-label="${t("Fechar")}">×</button><figure><img alt="" /><figcaption></figcaption></figure>`; document.body.appendChild(lb);
   function openLightbox(src, cap) { lb.querySelector("img").src = src; lb.querySelector("figcaption").textContent = cap; lb.classList.add("is-on"); if (window.__lenis) window.__lenis.stop(); }
   function closeLightbox() { lb.classList.remove("is-on"); if (window.__lenis) window.__lenis.start(); }
   lb.addEventListener("click", (e) => { if (e.target === lb || e.target.classList.contains("lb-close")) closeLightbox(); });
@@ -132,15 +132,15 @@
 
   /* ---------- interaction ---------- */
   let activeUnit = null, popup = null;
-  const diasTxt = (d) => d ? d.split(",").map(x => ({ seg: "seg", ter: "ter", qua: "qua", qui: "qui", sex: "sex" }[x] || x)).join(" · ") : "";
-  function cityChips(u) { return u.cities.length ? `<div class="cities">${u.cities.map(c => `<span data-lng="${c.c[0]}" data-lat="${c.c[1]}" data-d="${c.d || ""}" title="${c.d ? "Atendimento: " + diasTxt(c.d) : "Atendimento diário"}">${c.n}${c.d ? `<i>${diasTxt(c.d)}</i>` : ""}</span>`).join("")}</div>` : ""; }
+  const diasTxt = (d) => d ? d.split(",").map(x => t(x)).join(" · ") : "";
+  function cityChips(u) { return u.cities.length ? `<div class="cities">${u.cities.map(c => `<span data-lng="${c.c[0]}" data-lat="${c.c[1]}" data-d="${c.d || ""}" title="${c.d ? t("Atendimento:") + " " + diasTxt(c.d) : t("Atendimento diário")}">${c.n}${c.d ? `<i>${diasTxt(c.d)}</i>` : ""}</span>`).join("")}</div>` : ""; }
   function renderDetail(u, city) {
     const d = u.hub ? "Centro de distribuição · matriz" : `${Math.round(km(HUB, u.c))} km do hub · Presidente Prudente`;
-    const legenda = u.fotoTipo === "aerea" ? "Vista territorial da região" : "Unidade TAP Express · " + u.n;
+    const legenda = u.fotoTipo === "aerea" ? t("Vista territorial da região") : t("Unidade TAP Express") + " · " + u.n;
     const waNum = u.wa || REDE.wa; const wa = waNum ? `https://wa.me/${waNum}?text=${encodeURIComponent("Olá! Estou no site da TAP Express e quero atendimento sobre a unidade de " + u.n + ".")}` : "";
     detail.innerHTML = `
       ${u.foto ? `<figure class="map-photo" data-src="${u.foto}" data-cap="${legenda}"><img src="${u.foto}" alt="${legenda}" loading="lazy" /><figcaption>${legenda} <span>ampliar ⤢</span></figcaption></figure>` : ""}
-      <p class="kicker">${city ? "Cidade atendida" : (u.hub ? "Hub de distribuição" : "Unidade " + u.uf)}</p>
+      <p class="kicker">${city ? t("Cidade atendida") : (u.hub ? t("Hub de distribuição") : t("Unidade") + " " + u.uf)}</p>
       <h4>${city ? city + " <small style='color:var(--green);font-size:12px'>· via " + u.n + "</small>" : u.n}</h4>
       <p>${u.addr}</p>
       ${u.addr && !/confirma/.test(u.addr) ? `<span class="go-links"><a href="https://www.google.com/maps/search/?api=1&query=${u.c[1]},${u.c[0]}" target="_blank" rel="noopener">Google Maps</a><a href="https://waze.com/ul?ll=${u.c[1]},${u.c[0]}&navigate=yes" target="_blank" rel="noopener">Waze</a></span>` : ""}
@@ -151,7 +151,7 @@
     if (fig) fig.addEventListener("click", () => openLightbox(fig.dataset.src, fig.dataset.cap));
     detail.querySelectorAll(".cities span").forEach(s => s.addEventListener("click", () => {
       const c = [parseFloat(s.dataset.lng), parseFloat(s.dataset.lat)];
-      flyTo(c, 9.2); showPopup(c, `<b>${s.firstChild.textContent}</b><br/>Atendida pela unidade ${u.n}${s.dataset.d ? "<br/>Atendimento: " + diasTxt(s.dataset.d) : ""}`);
+      flyTo(c, 9.2); showPopup(c, `<b>${s.firstChild.textContent}</b><br/>${t("Atendida pela unidade")} ${u.n}${s.dataset.d ? "<br/>" + t("Atendimento:") + " " + diasTxt(s.dataset.d) : ""}`);
     }));
   }
   function showPopup(c, html, closeButton = true) {
@@ -187,7 +187,7 @@
   map.on("click", "cities-dot", (e) => {
     const p = e.features[0].properties, u = UNITS.find(x => x.id === p.unit);
     stopTour(); focusUnit(u, false); renderDetail(u, p.n);
-    showPopup(e.features[0].geometry.coordinates, `<b>${p.n}</b><br/>Atendida pela unidade ${p.unitName}${p.d ? "<br/>Atendimento: " + diasTxt(p.d) : ""}`);
+    showPopup(e.features[0].geometry.coordinates, `<b>${p.n}</b><br/>${t("Atendida pela unidade")} ${p.unitName}${p.d ? "<br/>" + t("Atendimento:") + " " + diasTxt(p.d) : ""}`);
   });
   map.on("mouseenter", "cities-dot", () => map.getCanvas().style.cursor = "pointer");
   map.on("mouseleave", "cities-dot", () => map.getCanvas().style.cursor = "");
@@ -218,7 +218,7 @@
     const nq = norm(q);
     sugItems = nq.length < 2 ? [] : places.filter(p => norm(p.n).includes(nq)).sort((a, b) => norm(a.n).indexOf(nq) - norm(b.n).indexOf(nq) || a.n.localeCompare(b.n)).slice(0, 7);
     if (nq.length < 2) { suggest.classList.remove("is-open"); return; }
-    suggest.innerHTML = sugItems.length ? sugItems.map((p, i) => `<button data-i="${i}">${p.n} <small>${p.isUnit ? "Unidade · " + p.uf : "via " + p.unit.n + " · " + p.uf}</small></button>`).join("") : `<div class="empty">Ainda não atendemos “${q}”. Fale com a TAP: (18) 3918-7777</div>`;
+    suggest.innerHTML = sugItems.length ? sugItems.map((p, i) => `<button data-i="${i}">${p.n} <small>${p.isUnit ? t("Unidade") + " · " + p.uf : "via " + p.unit.n + " · " + p.uf}</small></button>`).join("") : `<div class="empty">${t("Ainda não atendemos “{q}”. Fale com a TAP: (18) 3918-7777").replace("{q}", q)}</div>`;
     suggest.classList.add("is-open"); sugIdx = -1;
     suggest.querySelectorAll("button").forEach(b => b.addEventListener("click", () => pick(sugItems[+b.dataset.i])));
   }
@@ -227,7 +227,7 @@
     stopTour(); search.value = p.n; suggest.classList.remove("is-open");
     if (p.isUnit) { focusUnit(p.unit, true); return; }
     focusUnit(p.unit, false); renderDetail(p.unit, p.n);
-    flyTo(p.c, 9.4); showPopup(p.c, `<b>${p.n}</b><br/>Atendida pela unidade ${p.unit.n}${p.d ? "<br/>Atendimento: " + diasTxt(p.d) : ""}`);
+    flyTo(p.c, 9.4); showPopup(p.c, `<b>${p.n}</b><br/>${t("Atendida pela unidade")} ${p.unit.n}${p.d ? "<br/>" + t("Atendimento:") + " " + diasTxt(p.d) : ""}`);
   }
   search.addEventListener("input", () => renderSuggest(search.value));
   search.addEventListener("keydown", (e) => {
@@ -242,7 +242,7 @@
 
   /* ---------- tour ---------- */
   let tourTimer = null, tourI = 0;
-  function stopTour() { if (tourTimer) { clearTimeout(tourTimer); tourTimer = null; tourBtn.textContent = "▶ Tour pelas unidades"; tourBtn.classList.remove("is-on"); } }
+  function stopTour() { if (tourTimer) { clearTimeout(tourTimer); tourTimer = null; tourBtn.textContent = t("▶ Tour pelas unidades"); tourBtn.classList.remove("is-on"); } }
   function tourStep() {
     const u = UNITS[tourI % UNITS.length]; tourI++;
     focusUnit(u, true);
@@ -250,7 +250,7 @@
   }
   tourBtn.addEventListener("click", () => {
     if (tourTimer) { stopTour(); return; }
-    tourBtn.textContent = "■ Parar tour"; tourBtn.classList.add("is-on"); tourI = 0; tourStep();
+    tourBtn.textContent = t("■ Parar tour"); tourBtn.classList.add("is-on"); tourI = 0; tourStep();
   });
   resetBtn.addEventListener("click", () => { stopTour(); if (popup) popup.remove(); clearFocus(); search.value = ""; map.flyTo({ ...HOME, essential: true }); });
   ["dragstart", "wheel"].forEach(ev => map.on(ev, stopTour));

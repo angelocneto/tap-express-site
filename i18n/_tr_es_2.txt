@@ -1,0 +1,331 @@
+394| Saber más →
+395| Valijas corporativas, contratos y documentos entre casa matriz, sucursales y clientes, con control de quién envió y quién recibió.
+396| Pallets, bultos mayores y cargas de varios clientes en el mismo vehículo, con flota propia y socios homologados en rutas diarias.
+397| Lo que vale para todos los servicios
+398| <0>Entrega en hasta 18 horas</0> entre las ciudades de la red, con rutas diarias.
+399| <0>Seguro de carga incluido</0>, sin costo extra.
+400| <0>Rastreo satelital</0> en todos los vehículos y portal de rastreo para el cliente.
+401| <0>Atención local</0> en la sucursal de su ciudad y SAC 24 horas.
+402| <0>Cotización con protocolo</0> por el sitio, con TAPIA o por WhatsApp.
+403| Entrega en el mostrador del cliente
+404| Encomiendas expresas, valijas y documentos, carga fraccionada. Entrega en hasta 18 horas en 104 localidades de SP, PR y MS, seguro incluido y rastreo satelital.
+405| Servicios TAP Express
+406| Encomiendas expresas | TAP Express
+407| Servicio
+408| Encomiendas expresas <0>con TAP Express.</0>
+409| Para quién es
+410| Tiendas, e-commerce regionales, industrias con repuestos, clínicas y oficinas que necesitan que algo llegue mañana temprano a otra ciudad del interior. La encomienda expresa es el servicio más usado de TAP.
+411| Usted pide la cotización por el sitio, con <0>TAPIA</0> o por WhatsApp e informa origen, destino, bultos y peso.
+412| La sucursal de su ciudad programa la recogida o usted entrega en el mostrador.
+413| La encomienda sigue en la ruta del día hasta el centro de distribución en Regente Feijó y de allí a la sucursal de destino.
+414| Entrega en hasta 18 horas en las ciudades de la red, con comprobante y rastreo por el portal.
+415| Qué está incluido
+416| Seguro de carga sin costo adicional.
+417| Rastreo satelital del vehículo.
+418| Atención por la sucursal local y por el SAC 24 horas.
+419| ¿Cuál es el peso máximo de una encomienda expresa?
+420| No hay límite fijo: paquetes de hasta 30 kg viajan como encomienda; por encima de eso el equipo cotiza como carga fraccionada, en el mismo pedido.
+421| ¿Puedo enviar a una ciudad que no está en la lista?
+422| La red cubre 104 localidades en SP, PR y MS. Para otros destinos, la central evalúa socios de conexión. Pregunte en la cotización.
+423| ¿Cómo sé que llegó?
+424| Por el portal de rastreo, con el código de la encomienda o la factura, y por el comprobante de entrega firmado.
+425| Otros servicios
+426| Registro de una encomienda en la recepción de la sucursal
+427| Carga fraccionada | TAP Express
+428| Carga fraccionada <0>con TAP Express.</0>
+429| Industrias, distribuidores, autopartes, agronegocio y comercio que despachan bultos mayores al tamaño de encomienda, pero no completan un camión entero.
+430| La cotización considera peso, dimensiones, valor de la mercancía y la ruta entre origen y destino.
+431| La carga se consolida con otras de la misma ruta en el centro de distribución.
+432| Entrega en la sucursal de destino o en la dirección del cliente, según lo acordado.
+433| Seguro de carga por el valor declarado.
+434| Verificación de bultos en la recogida y en la entrega.
+435| Seguimiento por el área del cliente y por el SAC.
+436| ¿Cuál es el tamaño máximo de una carga fraccionada?
+437| Pallets estándar y bultos hasta la capacidad de los camiones furgón de la flota. Para cargas especiales, el equipo evalúa en la cotización.
+438| ¿Hacen carga completa (camión entero)?
+439| Sí, bajo consulta. Informe el volumen total y la ruta en la cotización.
+440| ¿Cómo se calcula el flete?
+441| Por el peso o por el cubicaje, el que sea mayor, más el valor declarado para el seguro y la distancia de la ruta.
+442| Flota de TAP Express en el centro de distribución
+443| Valijas y documentos | TAP Express
+444| Valijas y documentos <0>con TAP Express.</0>
+445| Bancos y cooperativas, estudios contables y jurídicos, cadenas de tiendas, notarías y empresas con sucursales en distintas ciudades de la región.
+446| Las valijas precintadas se recogen en el horario acordado y siguen en la ruta diaria.
+447| Cada valija tiene registro de remitente, destinatario y hora de entrega.
+448| Las rutas fijas permiten contratos mensuales con recogida programada en días definidos.
+449| Precinto y verificación en el mostrador.
+450| Comprobante de entrega con firma.
+451| Seguro incluido y rastreo del vehículo.
+452| ¿Hacen recogida programada de valijas?
+453| Sí. Los contratos mensuales tienen recogida en días fijos en su empresa. Escriba la frecuencia deseada en las observaciones de la cotización.
+454| ¿Los documentos llegan el mismo día?
+455| Entre ciudades de la misma sucursal, muchas veces sí. Entre sucursales distintas el plazo es de hasta 18 horas.
+456| ¿Cómo funciona el precinto?
+457| La valija se precinta en el envío y el precinto se verifica en la entrega. Cualquier divergencia se registra en el comprobante.
+458| Firma digital de la recepción en la tableta
+459| Rastreo de encomiendas | TAP Express
+460| ¿Dónde está mi <0>encomienda?</0>
+461| Consulte aquí mismo, sin salir del sitio. Informe el CNPJ del remitente y la contraseña de rastreo entregada por TAP para ver todas las encomiendas de los últimos 30 días. También puede consultar por la clave de la factura.
+462| Remitente (CNPJ + contraseña)
+463| Clave de la NF-e
+464| Encomienda (CNPJ + clave)
+465| Clave de acceso de la NF-e (44 números)
+466| CNPJ del remitente, destinatario o pagador
+467| Clave de rastreo
+468| CNPJ del remitente
+469| Contraseña
+470| Muestra todas las encomiendas enviadas por ese CNPJ en los últimos 30 días, con estado y previsión de entrega.
+471| La clave de la NF-e está en el DANFE que acompaña la mercancía, justo debajo del código de barras.
+472| Cada encomienda recibe un código en la recogida y se escanea a la salida del origen, a la llegada al centro de distribución y en la sucursal de destino.
+473| El vehículo se rastrea por satélite durante toda la ruta.
+474| En la entrega, el cliente firma en la tableta del conductor y el comprobante digital queda disponible al instante.
+475| ¿Dónde encuentro el código de rastreo?
+476| En el comprobante de recogida o en el correo/WhatsApp enviado por la sucursal. La factura también sirve para localizar la encomienda.
+477| El estado no se actualiza. ¿Qué hacer?
+478| El portal se actualiza con cada lectura en las sucursales. Si pasaron más de 24 horas sin cambios, hable con la sucursal de destino o con el SAC +55 18 3918-7777.
+479| ¿Puedo rastrear por WhatsApp?
+480| Sí. Envíe el código al WhatsApp central y el equipo responde con la posición actual.
+481| Comprobante digital firmado en la entrega
+482| Rastree sus encomiendas de TAP Express aquí mismo: el CNPJ del remitente y la contraseña muestran todos los envíos de los últimos 30 días; también por la clave de la NF-e. Vehículos rastreados por satélite y comprobante de entrega digital.
+483| Rastreo TAP Express
+484| Escriba o pegue los 44 números de la clave
+485| Informada por TAP en la recogida
+486| Contraseña de rastreo entregada por TAP
+487| Cliente firmando la recepción en la tableta del conductor
+488| Cotización de flete en línea | TAP Express
+489| Cotización de flete en <0>3 pasos.</0>
+490| Origen y destino, qué va a viajar y sus datos. TAPIA registra el pedido con protocolo y el equipo comercial responde en horario comercial.
+491| Abrir la cotización ahora
+492| Qué necesita informar
+493| Ciudad de origen y de destino (el formulario muestra al instante si la ciudad está en la red).
+494| Tipo: encomienda, valija o carga fraccionada.
+495| Bultos, peso y, si los conoce, dimensiones y valor de la mercancía para el seguro.
+496| Nombre, WhatsApp y correo electrónico para la respuesta.
+497| Otros canales
+498| WhatsApp central: <0>+55 18 99109-6441</0>
+499| Teléfono: <0>+55 18 3918-7777</0>
+500| Correo: <0>recepcao@taptransportes.com.br</0>
+501| Cada pedido se convierte en un protocolo
+502| Pida su cotización de flete en 3 pasos con TAPIA: origen, destino, carga y contacto. Respuesta del equipo comercial en horario comercial.
+503| Cotización TAP Express
+504| Agente registrando un pedido de cotización
+505| TAPIA, la asistente inteligente de TAP Express
+506| Conozca a <0>TAPIA.</0>
+507| La inteligencia de TAP Express que orienta cada conversación: cotización, rastreo, cobertura por ciudad y atención humana, siempre con contexto.
+508| Lo que hace hoy
+509| Abre la cotización en 3 pasos y verifica si la ciudad está en la red.
+510| Lo lleva al portal de rastreo.
+511| Muestra en el mapa qué sucursal atiende cada ciudad y en qué días.
+512| Lo deriva al WhatsApp del equipo con el resumen de la conversación.
+513| Lo que nunca hace
+514| Inventar precio, plazo, estado de entrega o sucursal.
+515| Prometer integraciones que todavía no existen.
+516| Sustituir a la persona que cierra la atención.
+517| ¿TAPIA da el precio del flete?
+518| No. Registra el pedido con protocolo y el equipo comercial confirma precio y plazo. TAPIA nunca inventa valores.
+519| ¿TAPIA funciona en WhatsApp?
+520| Hoy orienta en el sitio y deriva al WhatsApp central con el contexto de la conversación. La integración directa está en la hoja de ruta.
+521| ¿Quién responde después de TAPIA?
+522| Personas de la sucursal responsable de su ciudad o de la central en Presidente Prudente.
+523| TAPIA orienta cotización, rastreo y cobertura por ciudad en el sitio de TAP Express y deriva a la atención humana con contexto. Inteligencia que mueve.
+526| TAPIA, asistente virtual de TAP Express
+527| Contacto | TAP Express
+528| Hable con TAP, <0>de persona a persona.</0>
+529| Central en Presidente Prudente y sucursales en cada región. Elija el canal que prefiera.
+530| Teléfono central · SAC 24h
+532| Casa matriz y centro de distribución
+533| Carretera SP 270 Raposo Tavares, km 556, Regente Feijó, región de Presidente Prudente, SP, Brasil. <0>Cómo llegar</0>.
+534| Sucursales
+535| Cada sucursal tiene teléfono propio. Vea direcciones y ciudades atendidas en <0>sucursales</0> o busque su ciudad en <1>ciudades atendidas</1>.
+537| Atención en la sucursal
+538| Teléfono +55 18 3918-7777, WhatsApp +55 18 99109-6441 y correo recepcao@taptransportes.com.br. Casa matriz en la carretera SP 270, km 556, Regente Feijó, Presidente Prudente.
+539| Contacto TAP Express
+540| Atención en la recepción de la sucursal de TAP Express
+541| Red TAP | Sucursales de TAP Express en SP, PR y MS
+542| 20 sucursales y bases <0>en tres estados.</0>
+543| Distribución desde Regente Feijó (Presidente Prudente) hacia el oeste paulista, el norte de Paraná y Mato Grosso do Sul. Toque una sucursal para ver dirección, teléfono, foto y ciudades atendidas.
+544| Mapa de la red
+545| Toque una sucursal en el mapa para ver la foto, las ciudades atendidas y los días de ruta. O busque su ciudad.
+546| Red TAP · <0>SP · PR · MS</0>
+547| São Paulo
+549| 19 localidades →
+551| 4 localidades →
+553| 6 localidades →
+555| 5 localidades →
+559| 3 localidades →
+562| 7 localidades →
+566| 10 localidades →
+568| 1 localidad →
+570| Base de atención · dirección por confirmar<0/>+55 18 3918-7777
+571| Paraná
+576| Mato Grosso do Sul
+578| Direcciones, teléfonos y ciudades atendidas de las 20 sucursales y bases de TAP Express en São Paulo, Paraná y Mato Grosso do Sul.
+579| Trabaje con nosotros | Vacantes para conductores y equipo | TAP Express
+580| Carreras · Trabaje con nosotros
+581| Quien mueve TAP <0>es gente de la región.</0>
+582| Conductores, equipos de patio, atención y comercial: son las personas de nuestras 20 sucursales las que convierten la urgencia en entrega a tiempo. Vea las vacantes abiertas o deje su currículum en el banco de talentos.
+583| Valoración de quien está en la carretera
+584| Un conductor en TAP no es solo quien maneja. Es quien representa a la empresa en la puerta del cliente, conoce cada ciudad de la ruta y cuida la carga como si fuera propia. Por eso la operación está pensada para quien conduce:
+585| <0>Rutas regionales y fijas.</0> La red cubre SP, PR y MS con rutas diarias entre sucursales vecinas. Usted conoce el camino, a los clientes y vuelve a su base.
+586| <0>Flota cuidada y rastreada.</0> Camiones revisados y monitoreados por satélite, con apoyo de la central 24 horas en cualquier punto de la ruta.
+587| <0>Voz en la operación.</0> Quien está en la carretera ayuda a diseñar la ruta. La sugerencia de un conductor se convierte en mejora de proceso.
+588| <0>Crecimiento desde adentro.</0> Ayudantes que se vuelven conductores, conductores que se vuelven líderes de patio y de sucursal. La preferencia siempre es para quien ya está en la casa.
+589| Cultura TAP
+590| Desde 2001 TAP crece con un estilo simple: cumplir lo acordado, tratar bien a quien está del otro lado del mostrador y resolver el problema sin pasárselo al siguiente. Nuestros valores son <0>innovación</0>, <1>rapidez con seguridad</1>, <2>capital humano</2> y <3>responsabilidad social</3>. En la práctica eso significa equipos pequeños por sucursal, jefes que conocen a cada persona por su nombre y decisiones rápidas.
+591| Beneficios
+592| Los beneficios varían según la vacante y la sucursal y se describen en cada anuncio abajo. En todas las contrataciones formales encontrará registro laboral, salario al día y los beneficios legales. Las vacantes de conductor informan también el modelo de remuneración y la ruta.
+593| ¿Necesito experiencia para ser conductor en TAP?
+594| Para camión furgón y remolque pedimos licencia C, D o E y experiencia con carga. Para utilitarios, licencia B y ganas de aprender: la sucursal entrena en la ruta.
+595| ¿Cómo funciona la selección?
+596| Su candidatura entra al panel del equipo de personas de TAP. Si el perfil coincide con una vacante, llamamos o escribimos por WhatsApp para una conversación en la sucursal más cercana.
+597| ¿Puedo postularme sin vacante abierta?
+598| Sí. Elija "Banco de talentos" en el formulario. Cuando se abra una vacante en su región, el equipo se pone en contacto.
+599| ¿Las rutas son regionales?
+600| Sí. La red cubre el oeste paulista, el norte de Paraná y Mato Grosso do Sul, con rutas diarias entre las sucursales y las ciudades atendidas.
+601| Conductor de TAP en el patio de la sucursal
+602| Vacantes abiertas
+603| Oportunidades <0>ahora.</0>
+604| Las vacantes de abajo las publica el equipo de TAP y se actualizan en tiempo real.
+605| Cargando vacantes…
+606| Candidatura
+607| Envíe su currículum
+608| Lleva dos minutos. Si prefiere, adjunte el currículum en PDF o Word.
+609| Vacante
+610| Banco de talentos (sin vacante específica)
+611| Ciudad donde vive
+612| Categoría de la licencia de conducir
+613| No tengo / no aplica
+618| Experiencia en el área
+619| Sin experiencia
+620| Hasta 1 año
+621| 1 a 3 años
+622| 3 a 5 años
+623| Más de 5 años
+624| Currículum (PDF o Word, hasta 5 MB)
+625| Cuéntenos un poco sobre usted
+626| Enviar candidatura
+627| Candidatura recibida. ¡Gracias!
+628| El equipo de TAP analiza el perfil y se pone en contacto por el WhatsApp o correo informado. ¡Buena suerte!
+629| Equipo de TAP en el patio
+630| Vacantes abiertas en TAP Express para conductores, operación, atención y comercial en SP, PR y MS. Rutas regionales, flota rastreada y crecimiento desde adentro. Envíe su currículum.
+631| Carreras TAP Express
+632| Conductor de TAP Express junto al camión en el patio de la sucursal
+633| Rutas que ya hizo, tipo de vehículo, disponibilidad, qué busca.
+634| Equipo de TAP Express frente a la flota en el patio de la sucursal
+635| Política de privacidad | TAP Express
+636| Cómo TAP cuida <0>sus datos.</0>
+637| Esta página explica, en lenguaje directo, qué recopilamos en el sitio, para qué lo usamos y cómo pedir la eliminación.
+638| Qué recopilamos
+639| <0>Cotización:</0> nombre, teléfono o WhatsApp, correo, empresa, CNPJ, ciudades de origen y destino y datos de la carga. Sirven para responder el pedido de flete.
+640| <0>Trabaje con nosotros:</0> nombre, contacto, ciudad, licencia de conducir, experiencia y currículum. Sirven para el proceso de selección.
+641| <0>Rastreo:</0> la clave de la factura, el CNPJ y la contraseña de rastreo se envían al portal SSW para la consulta y no se guardan. Si pide actualizaciones, guardamos nombre, WhatsApp y correo con la fecha del consentimiento.
+642| Para qué lo usamos
+643| Para atender el pedido que hizo, avisarle sobre la entrega cuando lo solicite y, si lo autoriza, enviar comunicaciones de TAP por WhatsApp y correo. No vendemos ni compartimos datos con terceros más allá de lo necesario para la operación, como el sistema de transporte SSW.
+644| Sus derechos
+645| Puede pedir la corrección, la copia o la eliminación de sus datos y cancelar la recepción de mensajes en cualquier momento por el correo <0>recepcao@taptransportes.com.br</0> o por WhatsApp <1>+55 18 99109-6441</1>.
+646| Responsable
+647| TAP Express Eireli ME, CNPJ 03.053.802/0001-58, carretera SP 270 Raposo Tavares, km 556, Regente Feijó, SP, Brasil. Actualizado el 08/09/2026.
+648| Qué recopila TAP Express en el sitio, para qué lo usa y cómo pedir la eliminación de sus datos.
+649| Política de privacidad TAP Express
+650| TAP no hace mudanzas. Trabajamos con encomiendas, valijas y carga fraccionada entre las ciudades de la red. Si es una carga de ese tipo, puedo cotizarla ahora.
+651| La clave de la NF-e tiene 44 números. Usted escribió {n}.
+652| Todavía no atendemos “{q}”. Hable con TAP: +55 18 3918-7777
+653| Anotado. Para no dejarlo sin respuesta, voy a derivar su mensaje a la atención humana por WhatsApp con todo el contexto.
+654| Atendida por la sucursal
+655| Atención diaria
+656| Atención:
+657| Autorizo a TAP Express a enviarme actualizaciones de esta encomienda y comunicaciones por WhatsApp y correo electrónico. Leí la <0>política de privacidad</0>.
+658| Postularme
+659| Cargando…
+660| Ciudad atendida
+661| ¡Claro! Nuestro equipo atiende por el WhatsApp central en horario comercial. Lo llevo allí con el contexto de esta conversación.
+662| Recogida
+663| Las recogidas programadas se acuerdan con la sucursal de su región. Voy a abrir la cotización: escriba la frecuencia deseada en las observaciones y el equipo arma la rutina con usted.
+664| Verifique los datos o hable con la sucursal por WhatsApp.
+665| Consultando el rastreo…
+666| Deje su contacto y TAP le avisa por WhatsApp o correo en cada nueva etapa.
+667| Deje su currículum en el banco de talentos abajo. Cuando se abra una vacante en su región, el equipo se pone en contacto.
+668| Destinatario
+669| Destino
+670| Dimensiones
+671| Entregado el
+672| Enviando…
+673| Enviar cotización
+674| Envíe su currículum por el formulario de abajo.
+675| Error al cargar el historial.
+676| Falla de conexión. Intente de nuevo.
+677| Fuente: portal SSW · consultado el
+678| Flete pagado por
+679| Historial no disponible por el momento.
+680| Hub de distribución
+681| Informe el CNPJ completo y la clave de rastreo.
+682| Informe el CNPJ del remitente y la contraseña.
+683| Marque la aceptación para continuar.
+684| No hay vacantes abiertas en este momento
+685| Nombre
+686| Nuestra red tiene 20 sucursales y 104 localidades. Le muestro en el mapa: escriba la ciudad en el buscador para ver quién la atiende.
+687| Factura / recogida
+688| No encontramos esa ciudad en la red, pero puede continuar: nuestro equipo verifica la ruta.
+689| No fue posible cargar las vacantes ahora
+690| El plazo es de hasta 18 horas para las ciudades atendidas. Algunas ciudades más pequeñas tienen día fijo de entrega, como martes y jueves. Los días aparecen junto a cada ciudad en <0>ciudades atendidas</0>.
+691| Ocultar historial
+692| Origen
+693| Para rastrear, use el portal oficial de TAP. Abriendo en una nueva pestaña…
+694| ¡Perfecto! Voy a abrir la cotización en 3 pasos. Dígame de dónde hacia dónde va su encomienda.
+695| Peso
+696| Puedo preparar la cotización ahora mismo. Abriendo los 3 pasos…
+697| Complete los campos destacados.
+698| Previsión de entrega
+699| ¡Listo! Va a recibir las actualizaciones de esta entrega. Gracias.
+700| ¡Qué bien! Las vacantes abiertas están en la página Trabaje con nosotros, y el currículum va directo a nuestra central de candidatos. Abriendo…
+701| ¿Quiere recibir las actualizaciones de esta entrega?
+702| Quiero cotizar un envío.
+703| Quiero hablar con un especialista.
+704| Quiero programar recogidas.
+705| Quiero rastrear una encomienda.
+706| Quiero recibirlas
+707| Requisitos
+708| Respuesta completa del portal
+709| Sin estado
+710| Intentar de nuevo
+711| Tipo
+712| Cambiar quién paga el flete solo es posible mientras aún no se haya pagado. El pagador actual debe registrar la manifestación de desacuerdo en el plazo de la SEFAZ. La sucursal que emitió el CT-e orienta el procedimiento. ¿Quiere que lo lleve a su WhatsApp?
+713| Sucursal
+714| Sucursal TAP Express
+715| Use Ctrl + rueda para hacer zoom en el mapa
+716| Use dos dedos para mover el mapa
+717| Use ⌘ + rueda para hacer zoom en el mapa
+718| Valor de la factura
+719| Ver comprobante de entrega
+720| Ver historial
+721| Vista territorial de la región
+722| Puede rastrear aquí en el sitio, con la clave de la factura o el CNPJ y la clave de rastreo. Abriendo la página…
+723| Volumen {m3} m³ · cubicaje {kg} kg (300 kg/m³)
+724| abrir en el portal
+725| atención
+726| clic para ver
+727| o llame al +55 18 3918-7777
+728| ■ Detener recorrido
+729| ✓ Ciudad atendida por la red TAP
+730| El CNPJ o la contraseña no coinciden. Verifique los datos entregados por TAP.
+731| CNPJ o contraseña no reconocidos por el portal.
+732| Correo electrónico inválido.
+733| Envíe el currículum en PDF o Word.
+734| Informe la clave de la NF-e (44 números), o el CNPJ con la clave de rastreo, o el CNPJ con la contraseña de remitente.
+735| Informe su nombre y un WhatsApp válido con código de área.
+736| Informe bultos, peso, dimensiones y el valor de la factura.
+738| Demasiadas consultas en poco tiempo. Espere unos minutos.
+739| Demasiadas solicitudes. Intente de nuevo en unos minutos o llame al +55 18 3918-7777.
+740| Demasiados intentos. Espere unos minutos.
+741| Demasiados envíos en poco tiempo. Intente más tarde.
+743| No se encontró nada.
+744| No fue posible registrar ahora.
+745| No fue posible registrar ahora. Llame al +55 18 3918-7777.
+746| No fue posible registrar ahora. Intente de nuevo o escriba al WhatsApp +55 18 99109-6441.
+747| No fue posible guardar el currículum.
+748| El currículum debe tener hasta 5 MB.
+749| El portal de rastreo no respondió. Intente de nuevo en unos instantes.
+750| El portal no respondió.
+751| Complete nombre, teléfono y ciudad.
+752| Complete nombre, teléfono, origen y destino.
+753| Es necesario aceptar recibir las comunicaciones.
