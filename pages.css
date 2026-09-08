@@ -64,3 +64,7 @@ dd .go-links a:hover { color: var(--green); }
 .tile-foot { align-items: center; gap: 12px; }
 .tile-foot .unit-wa { font-size: 12px; padding: 7px 13px 7px 10px; }
 .tile-foot .go-links { margin-left: auto; }
+.tile-foot { flex-wrap: wrap; gap: 8px; padding: 0 20px 18px; }
+.tile-foot .unit-wa { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 15px; border-radius: 999px; font-family: var(--display); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; line-height: 1; white-space: nowrap; background: #25a244; color: #fff; }
+.tile-foot .unit-wa:hover { background: #1e8a39; }
+.tile-foot .go-links { margin-left: auto; gap: 14px; }

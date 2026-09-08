@@ -343,3 +343,15 @@ section[data-theme="light"] .go-links a:hover { color: #1f8f36 !important; }
 section[data-theme="light"] .faq summary { color: #08150f; }
 
 .foot-admin { color: rgba(242,247,243,0.45); font-size: 12px; border-bottom: 1px dotted rgba(242,247,243,0.3); } .foot-admin:hover { color: var(--green); }
+
+/* ===== Unit card actions (redesign) ===== */
+.unit-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; padding-top: 18px; }
+.unit-links .unit-wa, .unit-links .unit-more { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 16px; border-radius: 999px; font-family: var(--display); font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; line-height: 1; white-space: nowrap; margin: 0 !important; border-bottom: 0 !important; transition: background .2s, border-color .2s, color .2s, transform .2s; order: 0; }
+.unit-links .unit-wa { background: #25a244; color: #fff !important; }
+.unit-links .unit-wa:hover { background: #1e8a39; transform: translateY(-1px); }
+.unit-links .unit-wa svg { width: 15px; height: 15px; }
+.unit-links .unit-more { border: 1px solid rgba(8,21,15,0.18); color: #08150f !important; background: transparent; }
+.unit-links .unit-more:hover { border-color: var(--green); color: #1f8f36 !important; }
+.unit-links .go-links { width: 100%; justify-content: flex-end; margin: 6px 0 0 0; gap: 14px; }
+section[data-theme="dark"] .unit-links .unit-more { border-color: rgba(242,247,243,0.22); color: var(--ink) !important; }
+@media (max-width: 480px) { .unit-links .unit-wa, .unit-links .unit-more { flex: 1 1 auto; } }
