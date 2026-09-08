@@ -330,17 +330,17 @@ section[data-theme="light"] .go-links a:hover { color: #1f8f36 !important; }
 .unit-links .unit-wa { order: -1; }
 
 /* ===== FAQ ===== */
-.faq { padding: 110px 0; }
+.faq-home { padding: 110px 0; }
 .faq-list { max-width: 860px; margin: 34px auto 0; display: grid; gap: 10px; }
-.faq details { border: 1px solid rgba(8,21,15,0.12); border-radius: 16px; background: rgba(255,255,255,0.7); padding: 0 22px; transition: border-color .3s; }
-.faq details[open] { border-color: rgba(57,181,74,0.55); }
-.faq summary { list-style: none; cursor: pointer; padding: 18px 40px 18px 0; font-family: var(--display); font-weight: 600; font-size: 1.05rem; position: relative; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 10px; height: 10px; border-right: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: translateY(-70%) rotate(45deg); transition: transform .3s; }
-.faq details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
-.faq details > div { padding: 0 0 20px; color: var(--muted); font-size: 15px; line-height: 1.6; }
-.faq details > div a { color: #1f8f36; border-bottom: 1px solid rgba(31,143,54,0.4); }
-section[data-theme="light"] .faq summary { color: #08150f; }
+.faq-home details { border: 1px solid rgba(8,21,15,0.12); border-radius: 16px; background: rgba(255,255,255,0.7); padding: 0 22px; transition: border-color .3s; }
+.faq-home details[open] { border-color: rgba(57,181,74,0.55); }
+.faq-home summary { list-style: none; cursor: pointer; padding: 18px 40px 18px 0; font-family: var(--display); font-weight: 600; font-size: 1.05rem; position: relative; }
+.faq-home summary::-webkit-details-marker { display: none; }
+.faq-home summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 10px; height: 10px; border-right: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: translateY(-70%) rotate(45deg); transition: transform .3s; }
+.faq-home details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.faq-home details > div { padding: 0 0 20px; color: var(--muted); font-size: 15px; line-height: 1.6; }
+.faq-home details > div a { color: #1f8f36; border-bottom: 1px solid rgba(31,143,54,0.4); }
+section[data-theme="light"] .faq-home summary { color: #08150f; }
 
 .foot-admin { opacity: .55; font-size: 12px !important; } .foot-admin:hover { opacity: 1; }
 
