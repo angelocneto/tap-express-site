@@ -135,7 +135,7 @@ def js_keys():
             k = m.group(2) if m.group(2) is not None else m.group(3)
             keys.add(k.replace('\\"', '"').replace("\\'", "'"))
     return keys
-EXTRA_JS = {"seg", "ter", "qua", "qui", "sex", "Encomenda expressa", "Malote / documentos", "Carga fracionada", "Remetente", "Destinatário"}
+EXTRA_JS = {"{n} encomendas encontradas", "{n} encomenda encontrada", "Notas sem informação no portal: {n}", "Nota sem informação no portal: {n}", "Nenhuma encomenda encontrada para esses dados. Confira o CNPJ, o número da nota e a senha de rastreio.", "seg", "ter", "qua", "qui", "sex", "Encomenda expressa", "Malote / documentos", "Carga fracionada", "Remetente", "Destinatário"}
 def php_keys():
     keys = set()
     for f in os.listdir("api"):

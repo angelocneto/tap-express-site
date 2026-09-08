@@ -185,6 +185,8 @@
 "pages": [
 "/",
 "/",
+"/",
+"/",
 "sobre/",
 "servicos/",
 "servicos/encomendas-expressas/",
@@ -198,7 +200,7 @@
 "carreiras/",
 "privacidade/"
 ],
-"n": 26
+"n": 52
 },
 "EN": {
 "pages": [
@@ -644,7 +646,7 @@
 ],
 "n": 1
 },
-"A TAPIA leva você ao portal de rastreamento com o código da encomenda ou a nota fiscal.": {
+"A TAPIA leva você ao rastreamento do site: CNPJ do remetente, número da nota e senha, e a encomenda aparece.": {
 "pages": [
 "/"
 ],
@@ -1346,7 +1348,7 @@
 ],
 "n": 1
 },
-"Aqui no site, em <0>Rastreamento</0>: informe a chave da nota fiscal eletrônica (DANFE) ou o CNPJ com a chave de rastreio. A TAPIA, no canto da tela, também leva você até lá.": {
+"Aqui no site, em <0>Rastreamento</0>: informe o CNPJ ou CPF do remetente, o número da nota fiscal e a senha de rastreio fornecida pela TAP. São sempre esses três dados. A TAPIA, no canto da tela, também leva você até lá.": {
 "pages": [
 "/"
 ],
@@ -1414,7 +1416,7 @@
 ],
 "n": 1
 },
-"Informe o código da encomenda ou a nota fiscal e veja em que etapa a entrega está.": {
+"Informe o número da nota fiscal. Na próxima tela, complete com o CNPJ do remetente e a senha de rastreio.": {
 "pages": [
 "/"
 ],
@@ -2638,7 +2640,7 @@
 ],
 "n": 1
 },
-"O rastreamento é feito no próprio site, em https://www.tapexpress.com.br/rastreamento/, com a chave da NF-e ou o CNPJ e a chave de rastreio. Os dados vêm do portal SSW, com o código da encomenda ou nota fiscal. Todos os veículos têm rastreamento via satélite.": {
+"O rastreamento é feito no próprio site, em https://www.tapexpress.com.br/rastreamento/, com três dados: CNPJ ou CPF do remetente, número da nota fiscal e senha de rastreio fornecida pela TAP. Os dados vêm do portal SSW. Todos os veículos têm rastreamento via satélite.": {
 "pages": [
 "/"
 ],
@@ -3210,17 +3212,12 @@
 ],
 "n": 2
 },
-"Chave da NF-e (44 números)": {
+"Número da nota fiscal": {
 "pages": [
+"/",
 "/"
 ],
-"n": 1
-},
-"Código de rastreio": {
-"pages": [
-"/"
-],
-"n": 1
+"n": 2
 },
 "Fechar": {
 "pages": [
@@ -3978,7 +3975,7 @@
 ],
 "n": 2
 },
-"Pelo portal de rastreamento, com o código da encomenda ou a nota fiscal, e pelo comprovante de entrega assinado.": {
+"Pelo rastreamento no site, com o CNPJ do remetente, o número da nota e a senha de rastreio, e pelo comprovante de entrega assinado.": {
 "pages": [
 "servicos/encomendas-expressas/"
 ],
@@ -4202,67 +4199,37 @@
 ],
 "n": 1
 },
-"Consulte aqui mesmo, sem sair do site. Informe o CNPJ do remetente e a senha de rastreio fornecida pela TAP para ver todas as encomendas dos últimos 30 dias. Também dá para consultar pela chave da nota fiscal.": {
+"Consulte aqui mesmo, sem sair do site. Informe o CNPJ ou CPF do remetente, o número da nota fiscal e a senha de rastreio fornecida pela TAP.": {
 "pages": [
 "rastreamento/"
 ],
 "n": 1
 },
-"Remetente (CNPJ + senha)": {
+"Rastreamento pelo remetente": {
 "pages": [
 "rastreamento/"
 ],
 "n": 1
 },
-"Chave da NF-e": {
+"CNPJ / CPF do remetente": {
 "pages": [
 "rastreamento/"
 ],
 "n": 1
 },
-"Encomenda (CNPJ + chave)": {
+"Senha de rastreio": {
 "pages": [
 "rastreamento/"
 ],
 "n": 1
 },
-"Chave de acesso da NF-e (44 números)": {
+"Número da nota fiscal, pedido ou coleta": {
 "pages": [
 "rastreamento/"
 ],
 "n": 1
 },
-"CNPJ do remetente, destinatário ou pagador": {
-"pages": [
-"rastreamento/"
-],
-"n": 1
-},
-"Chave de rastreio": {
-"pages": [
-"rastreamento/"
-],
-"n": 1
-},
-"CNPJ do remetente": {
-"pages": [
-"rastreamento/"
-],
-"n": 1
-},
-"Senha": {
-"pages": [
-"rastreamento/"
-],
-"n": 1
-},
-"Mostra todas as encomendas enviadas por esse CNPJ nos últimos 30 dias, com situação e previsão de entrega.": {
-"pages": [
-"rastreamento/"
-],
-"n": 1
-},
-"A chave da NF-e está no DANFE que acompanha a mercadoria, logo abaixo do código de barras.": {
+"Os três dados são obrigatórios. Sem a senha? Peça à unidade TAP que atende a sua empresa.": {
 "pages": [
 "rastreamento/"
 ],
@@ -4286,13 +4253,37 @@
 ],
 "n": 1
 },
-"Onde encontro o código de rastreio?": {
+"Quais dados preciso para rastrear?": {
 "pages": [
 "rastreamento/"
 ],
 "n": 2
 },
-"No comprovante de coleta ou no e-mail/WhatsApp enviado pela unidade. A nota fiscal também serve para localizar a encomenda.": {
+"Três dados, sempre: o CNPJ ou CPF do remetente, o número da nota fiscal (ou do pedido/coleta) e a senha de rastreio fornecida pela TAP. É o mesmo padrão do rastreamento pelo remetente no portal SSW.": {
+"pages": [
+"rastreamento/"
+],
+"n": 2
+},
+"Onde consigo a senha de rastreio?": {
+"pages": [
+"rastreamento/"
+],
+"n": 2
+},
+"Com a unidade TAP que atende a sua empresa ou pelo WhatsApp central (18) 99109-6441. A senha é do remetente e vale para todas as notas dele.": {
+"pages": [
+"rastreamento/"
+],
+"n": 2
+},
+"Posso consultar várias notas de uma vez?": {
+"pages": [
+"rastreamento/"
+],
+"n": 2
+},
+"Sim. Digite um número por linha, ou separe por vírgula, até 20 notas por consulta.": {
 "pages": [
 "rastreamento/"
 ],
@@ -4328,7 +4319,7 @@
 ],
 "n": 1
 },
-"Rastreie suas encomendas TAP Express aqui mesmo: CNPJ do remetente e senha mostram todos os envios dos últimos 30 dias; também pela chave da NF-e. Veículos rastreados via satélite e comprovante de entrega digital.": {
+"Rastreie suas encomendas TAP Express aqui mesmo com o CNPJ do remetente, o número da nota fiscal e a senha de rastreio. Situação, previsão de entrega, histórico e comprovante digital.": {
 "pages": [
 "rastreamento/"
 ],
@@ -4340,19 +4331,13 @@
 ],
 "n": 1
 },
-"Digite ou cole os 44 números da chave": {
+"Fornecida pela TAP": {
 "pages": [
 "rastreamento/"
 ],
 "n": 1
 },
-"Informada pela TAP na coleta": {
-"pages": [
-"rastreamento/"
-],
-"n": 1
-},
-"Senha de rastreio fornecida pela TAP": {
+"Um número por linha. Ex.: 9115": {
 "pages": [
 "rastreamento/"
 ],
@@ -5285,7 +5270,7 @@
 ],
 "n": 1
 },
-"<0>Rastreamento:</0> a chave da nota, o CNPJ e a senha de rastreio são repassados ao portal SSW para consulta e não ficam guardados. Se você pedir atualizações, guardamos nome, WhatsApp e e-mail com a data do aceite.": {
+"<0>Rastreamento:</0> o CNPJ ou CPF do remetente, os números das notas e a senha de rastreio são repassados ao portal SSW para consulta e não ficam guardados. Se você pedir atualizações, guardamos nome, WhatsApp e e-mail com a data do aceite.": {
 "pages": [
 "privacidade/"
 ],
@@ -5340,12 +5325,6 @@
 "n": 1
 },
 "A TAP não faz mudanças. Trabalhamos com encomendas, malotes e cargas fracionadas entre as cidades da rede. Se for uma carga desse tipo, posso cotar agora.": {
-"pages": [
-"js"
-],
-"n": 0
-},
-"A chave da NF-e tem 44 números. Você digitou {n}.": {
 "pages": [
 "js"
 ],
@@ -5423,7 +5402,7 @@
 ],
 "n": 0
 },
-"Confira os dados ou fale com a unidade pelo WhatsApp.": {
+"Confira o CNPJ, o número da nota e a senha de rastreio.": {
 "pages": [
 "js"
 ],
@@ -5525,18 +5504,6 @@
 ],
 "n": 0
 },
-"Informe o CNPJ completo e a chave de rastreio.": {
-"pages": [
-"js"
-],
-"n": 0
-},
-"Informe o CNPJ do remetente e a senha.": {
-"pages": [
-"js"
-],
-"n": 0
-},
 "Marque o aceite para continuar.": {
 "pages": [
 "js"
@@ -5597,7 +5564,13 @@
 ],
 "n": 0
 },
-"Para rastrear, use o portal oficial da TAP. Abrindo em nova aba…": {
+"Para rastrear você precisa do CNPJ do remetente, do número da nota e da senha de rastreio. Abrindo a página…": {
+"pages": [
+"js"
+],
+"n": 0
+},
+"Pedido": {
 "pages": [
 "js"
 ],
@@ -5622,6 +5595,12 @@
 "n": 0
 },
 "Preencha os campos destacados.": {
+"pages": [
+"js"
+],
+"n": 0
+},
+"Preencha os três campos: CNPJ ou CPF do remetente, número da nota e senha de rastreio.": {
 "pages": [
 "js"
 ],
@@ -5681,13 +5660,13 @@
 ],
 "n": 0
 },
-"Requisitos": {
+"Remetente": {
 "pages": [
 "js"
 ],
 "n": 0
 },
-"Resposta completa do portal": {
+"Requisitos": {
 "pages": [
 "js"
 ],
@@ -5771,7 +5750,7 @@
 ],
 "n": 0
 },
-"Você rastreia aqui no site, com a chave da nota fiscal ou o CNPJ e a chave de rastreio. Abrindo a página…": {
+"Você rastreia aqui no site com três dados: CNPJ do remetente, número da nota fiscal e senha de rastreio. Abrindo a página…": {
 "pages": [
 "js"
 ],
@@ -5819,18 +5798,6 @@
 ],
 "n": 0
 },
-"CNPJ ou senha não conferem. Confira os dados fornecidos pela TAP.": {
-"pages": [
-"api"
-],
-"n": 0
-},
-"CNPJ ou senha não reconhecidos pelo portal.": {
-"pages": [
-"api"
-],
-"n": 0
-},
 "E-mail inválido.": {
 "pages": [
 "api"
@@ -5843,7 +5810,7 @@
 ],
 "n": 0
 },
-"Informe a chave da NF-e (44 números), ou o CNPJ com a chave de rastreio, ou o CNPJ com a senha de remetente.": {
+"Informe o CNPJ ou CPF do remetente, o número da nota fiscal e a senha de rastreio.": {
 "pages": [
 "api"
 ],

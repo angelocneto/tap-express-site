@@ -1,6 +1,6 @@
 <?php
 // TAP Express — rastreamento embutido: consulta o portal SSW no servidor e devolve o resultado limpo (JSON).
-// Aceita: danfe (chave da NF-e, 44 dígitos) OU cnpj (remetente/destinatário/pagador) + chave.
+// Modo único, igual ao "Rastreamento pelo remetente" do SSW: CNPJ/CPF do remetente + números das notas (ou pedidos/coletas) + senha. Os três são obrigatórios.
 declare(strict_types=1);
 require_once dirname(__DIR__) . '/atendimento/db.php';
 ini_set('display_errors', '0');
@@ -8,10 +8,11 @@ header('Content-Type: application/json; charset=utf-8'); header('Cache-Control: 
 function out(int $code, array $b): void { http_response_code($code); echo json_encode($b, JSON_UNESCAPED_UNICODE); exit; }
 
 $in = $_SERVER['REQUEST_METHOD'] === 'POST' ? (json_decode(file_get_contents('php://input') ?: '', true) ?: $_POST) : $_GET;
-$danfe = preg_replace('/\D+/', '', (string)($in['danfe'] ?? ''));
 $cnpj = preg_replace('/\D+/', '', (string)($in['cnpj'] ?? ''));
-$chave = mb_substr(preg_replace('/[^\w\-\/.]/u', '', (string)($in['chave'] ?? '')), 0, 58);
 $senha = mb_substr((string)($in['senha'] ?? ''), 0, 58);
+// notas: aceita vários números separados por vírgula, ponto e vírgula, espaço ou quebra de linha (máx. 20)
+$notas = array_values(array_unique(array_filter(array_map(fn($n) => preg_replace('/\D+/', '', $n), preg_split('/[\s,;]+/u', (string)($in['notas'] ?? $in['nf'] ?? ''))), fn($n) => $n !== '' && strlen($n) <= 15)));
+$notas = array_slice($notas, 0, 20);
 if (!empty($in['website'])) out(200, ['ok' => false, 'erro' => 'Nada encontrado.']); // honeypot
 
 try {
@@ -54,90 +55,37 @@ if (!empty($in['detalhe_id']) && !empty($in['detalhe_md'])) {
 }
 
 
-if (strlen($danfe) === 44) { $url = 'https://ssw.inf.br/2/rastreamento_danfe'; $post = ['urlori' => '', 'danfe' => $danfe]; $modo = 'danfe'; }
-elseif (strlen($cnpj) === 14 && $chave !== '') { $url = 'https://ssw.inf.br/2/resultSSW'; $post = ['cnpj' => $cnpj, 'chave' => $chave]; $modo = 'chave'; }
-elseif (strlen($cnpj) === 14 && $senha !== '') { $url = 'https://ssw.inf.br/2/resultSSW'; $post = ['cnpj' => $cnpj, 'chave' => $senha, 'pwd' => '1']; $modo = 'senha'; } // o SSW valida a senha do remetente no campo chave
-else out(422, ['ok' => false, 'erro' => 'Informe a chave da NF-e (44 números), ou o CNPJ com a chave de rastreio, ou o CNPJ com a senha de remetente.']);
+if (!in_array(strlen($cnpj), [11, 14], true) || !$notas || $senha === '') out(422, ['ok' => false, 'erro' => 'Informe o CNPJ ou CPF do remetente, o número da nota fiscal e a senha de rastreio.']);
 
-
-if ($modo === 'senha') {
-    // rastreamento pelo remetente (30 dias): mesma consulta que o portal faz; senha errada vem com aviso explícito
-    [$code, $html] = ssw_get('https://ssw.inf.br/2/resultSSW_rem', ['cnpj' => $cnpj, 'senha' => $senha]);
-    if ($code === 0 || $code >= 500) out(502, ['ok' => false, 'erro' => 'O portal de rastreamento não respondeu. Tente de novo em instantes.']);
-    $main = preg_match('/<!--content-->(.*)<!--content-->/su', $html, $m) ? $m[1] : $html;
-    if (preg_match('/Nenhuma informa\S{0,3}o encontrada para CNPJ e senha/iu', $txt($main)) || str_contains($main, '**.***')) out(200, ['ok' => false, 'modo' => 'senha', 'quem' => '', 'motivo' => 'CNPJ ou senha não conferem. Confira os dados fornecidos pela TAP.', 'encomendas' => [], 'eventos' => [], 'html' => '', 'fonte' => 'SSW', 'consultado_em' => date('d/m/Y H:i')]);
-    $quem = ''; if (preg_match('/Remetente:<\/span>.*?<span[^>]*>([^<]*)<\/span>\s*<span[^>]*>([^<]*)<\/span>/su', $main, $q)) $quem = 'Remetente: ' . trim($q[2]) . ' · ' . trim($q[1]);
-    // páginas: a 1ª veio no POST; as demais por GET com a senha em hexadecimal
-    $paginas = [$main]; $total = 1;
-    if (preg_match('/Total:\s*(\d+)\s*p/u', $main, $tp)) $total = min((int)$tp[1], 6);
-    for ($pg = 2; $pg <= $total; $pg++) { [$c2, $h2] = ssw_get('https://ssw.inf.br/2/resultSSW_rem?cnpj=' . $cnpj . '&control=' . bin2hex($senha) . '&sswpg=' . $pg); if ($c2 === 200 && preg_match('/<!--content-->(.*)<!--content-->/su', $h2, $m2)) $paginas[] = $m2[1]; }
-    $enc = []; $dest = '';
-    foreach ($paginas as $pgHtml) {
-        if (!preg_match_all('/<tr[^>]*?(?:onclick="opx\(\'([^\']*)\'\)")?[^>]*>(.*?)<\/tr>/su', $pgHtml, $rows, PREG_SET_ORDER)) continue;
-        foreach ($rows as $r) {
-            $inner = $r[2];
-            if (str_contains($inner, 'Destinatario:')) { $dest = $txt(preg_replace('/.*Destinatario:/su', '', $inner)); continue; }
-            if (!preg_match_all('/<td[^>]*>(.*?)<\/td>/su', $inner, $tds) || count($tds[1]) < 3) continue;
-            $c = array_map($txt, $tds[1]); if (preg_match('/Fiscal|Coleta/u', $c[0]) && preg_match('/Situa/u', $c[2])) continue; if (trim(implode('', $c)) === '') continue;
-            $data = ''; $hora = ''; $unid = $c[1]; if (preg_match('/(\d{2}\/\d{2}\/\d{2,4})\s*\|?\s*(\d{2}:\d{2})?/u', $c[1], $d)) { $data = $d[1]; $hora = $d[2] ?? ''; $unid = trim(str_replace([$d[0], '|'], '', $c[1])); }
-            $sit = ''; $desc = $c[2]; if (preg_match('/<p class=titulo>(.*?)<\/p>(.*)$/su', $tds[1][2], $pm)) { $sit = preg_replace('/\s*\([A-Z0-9 ]{5,}\)$/u', '', $txt(preg_replace('/<font.*?<\/font>/su', '', $pm[1]))); $desc = $txt(preg_replace('/Mais detalhes/u', '', $pm[2])); }
-            $link = ''; if (preg_match('/opx\(\'\/2\/(?:ssw_)?SSWDetalhado\?id=([^&\']+)&md=([^\']+)\'\)/u', $r[0], $lk)) $link = $lk[1] . '|' . $lk[2];
-            $enc[] = ['destinatario' => $dest, 'nf' => trim(str_replace('|', ' · ', $c[0]), ' ·'), 'unidade' => $unid, 'data' => $data, 'hora' => $hora, 'situacao' => $sit ?: $desc, 'detalhe' => $sit ? $desc : '', 'link' => $link];
-        }
-    }
-    // enriquecimento pelo CSV: destino, previsão, entrega, CTRC, chave do CT-e
-    [$c3, $csv] = ssw_get('https://ssw.inf.br/2/resultSSW_rem?cnpj=' . $cnpj . '&output=csv&control=' . bin2hex($senha));
+// mesma consulta do portal (POST /2/resultSSW): cnpj, NR (uma nota por linha, CRLF) e chave = senha
+[$code, $html] = ssw_get('https://ssw.inf.br/2/resultSSW', ['cnpj' => $cnpj, 'NR' => implode("\r\n", $notas), 'chave' => $senha]);
+if ($code === 0 || $code >= 500) out(502, ['ok' => false, 'erro' => 'O portal de rastreamento não respondeu. Tente de novo em instantes.']);
+$main = preg_match('/<!--content-->(.*)<!--content-->/su', $html, $m) ? $m[1] : $html;
+$quem = ''; if (preg_match('/Remetente:<\/span>.*?<span[^>]*>([^<]*)<\/span>\s*<span[^>]*>([^<]*)<\/span>/su', $main, $q)) $quem = trim(trim($q[2]) . ' · ' . trim($q[1]), ' ·');
+$mascarado = str_contains($main, '**.***') || str_contains($quem, '*');
+$enc = []; $naoDisp = [];
+if (preg_match_all('/<tr[^>]*?(?:onclick="opx\(\'([^\']*)\'\)")?[^>]*>(.*?)<\/tr>/su', $main, $rows, PREG_SET_ORDER)) foreach ($rows as $r) {
+    $inner = $r[2];
+    if (!preg_match_all('/<td[^>]*>(.*?)<\/td>/su', $inner, $tds) || count($tds[1]) < 3) continue;
+    $c = array_map($txt, $tds[1]); if (preg_match('/Fiscal|Coleta/u', $c[0]) && preg_match('/Situa/u', $c[2])) continue; if (trim(implode('', $c)) === '') continue;
+    if (preg_match('/Informa\S{0,3}o n\S{0,3}o dispon/iu', $c[2])) { $naoDisp[] = trim(str_replace('|', ' ', $c[0])); continue; }
+    $data = ''; $hora = ''; $unid = $c[1]; if (preg_match('/(\d{2}\/\d{2}\/\d{2,4})\s*\|?\s*(\d{2}:\d{2})?/u', $c[1], $d)) { $data = $d[1]; $hora = $d[2] ?? ''; $unid = trim(str_replace([$d[0], '|'], '', $c[1])); }
+    $sit = ''; $desc = $c[2]; if (preg_match('/<p class=titulo>(.*?)<\/p>(.*)$/su', $tds[1][2], $pm)) { $sit = preg_replace('/\s*\([A-Z0-9 ]{5,}\)$/u', '', $txt(preg_replace('/<font.*?<\/font>/su', '', $pm[1]))); $desc = $txt(preg_replace('/Mais detalhes/u', '', $pm[2])); }
+    $link = ''; if (preg_match('/opx\(\'\/2\/(?:ssw_)?SSWDetalhado\?id=([^&\']+)&md=([^\']+)\'\)/u', $r[0], $lk)) $link = $lk[1] . '|' . $lk[2];
+    $nfp = array_map('trim', explode('|', $c[0]));
+    $enc[] = ['nf' => $nfp[0], 'pedido' => $nfp[1] ?? '', 'unidade' => $unid, 'data' => $data, 'hora' => $hora, 'situacao' => $sit ?: $desc, 'detalhe' => $sit ? $desc : '', 'link' => $link];
+}
+// enriquecimento pelo CSV do próprio resultado: remetente, destinatário, destino, previsão, entrega, CTRC, chave do CT-e
+if ($enc && preg_match('/href="(\/2\/resultSSW\?cnpj=[^"]*output=csv[^"]*)"/u', $main, $cl)) {
+    [$c3, $csv] = ssw_get('https://ssw.inf.br' . html_entity_decode($cl[1]));
     if ($c3 === 200 && stripos($csv, 'CNPJ/CPF Remetente') === 0) {
         $linhas = array_values(array_filter(array_map('trim', preg_split('/\r\n|\n|\r/', $csv)))); $head = array_map('trim', str_getcsv(array_shift($linhas), ';')); $byNf = [];
-        foreach ($linhas as $ln) { $cols = str_getcsv($ln, ';'); if (count($cols) < 10) continue; $row = []; foreach ($head as $i => $k) $row[$k] = trim((string)($cols[$i] ?? '')); $byNf[preg_replace('/\s+/', '', $row['Nota Fiscal/Nro Coleta'] ?? '')][] = $row; }
-        foreach ($enc as &$e) { $k = preg_replace('/\s+/', '', explode('·', $e['nf'])[0]); $rows = $byNf[$k] ?? []; $row = null; foreach ($rows as $cand) { if (mb_strtoupper($cand['Destinatario'] ?? '') === mb_strtoupper($e['destinatario'])) { $row = $cand; break; } } $row = $row ?? ($rows[0] ?? null);
-            if ($row) { $e['ctrc'] = $row['CTRC'] ?? ''; $e['destino'] = trim(($row['Cidade Destino'] ?? '') . ' / ' . ($row['UF Destino'] ?? ''), ' /'); $e['previsao'] = $row['Previsao de Entrega'] ?? ''; $e['entrega'] = $row['Data Entrega'] ?? ''; $e['inclusao'] = $row['Data Inclusao'] ?? ''; $e['cte'] = preg_replace('/\D/', '', $row['CTe'] ?? ''); $e['pedido'] = $row['Nro Pedido'] ?? ''; } }
+        foreach ($linhas as $ln) { $cols = str_getcsv($ln, ';'); if (count($cols) < 10) continue; $row = []; foreach ($head as $i => $k) $row[$k] = trim((string)($cols[$i] ?? '')); $byNf[preg_replace('/\D+/', '', $row['Nota Fiscal/Nro Coleta'] ?? '')][] = $row; if (!$quem && !empty($row['Remetente'])) $quem = $row['Remetente'] . ' · ' . ($row['CNPJ/CPF Remetente'] ?? ''); }
+        foreach ($enc as &$e) { $rows = $byNf[preg_replace('/\D+/', '', $e['nf'])] ?? []; $row = $rows[0] ?? null; foreach ($rows as $cand) if (($cand['Data/Hora da Ocorrencia'] ?? '') === trim($e['data'] . ' ' . $e['hora'])) { $row = $cand; break; }
+            if ($row) { $e['destinatario'] = $row['Destinatario'] ?? ''; $e['ctrc'] = $row['CTRC'] ?? ''; $e['destino'] = trim(($row['Cidade Destino'] ?? '') . ' / ' . ($row['UF Destino'] ?? ''), ' /'); $e['previsao'] = $row['Previsao de Entrega'] ?? ''; $e['entrega'] = $row['Data Entrega'] ?? ''; $e['inclusao'] = $row['Data Inclusao'] ?? ''; $e['cte'] = preg_replace('/\D/', '', $row['CTe'] ?? ''); if (!$e['pedido']) $e['pedido'] = $row['Nro Pedido'] ?? ''; } }
         unset($e);
     }
-    out(200, ['ok' => count($enc) > 0, 'modo' => 'senha', 'quem' => $quem, 'motivo' => $enc ? '' : 'Nenhuma encomenda deste remetente nos últimos 30 dias.', 'total' => count($enc), 'encomendas' => $enc, 'eventos' => [], 'html' => '', 'fonte' => 'SSW', 'consultado_em' => date('d/m/Y H:i')]);
 }
-$ch = curl_init($url);
-curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_POSTFIELDS => http_build_query($post), CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 3, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8,
-    CURLOPT_USERAGENT => 'Mozilla/5.0 (compatible; TAPExpress-Rastreio/1.0; +https://www.tapexpress.com.br)', CURLOPT_HTTPHEADER => ['Accept: text/html', 'Accept-Language: pt-BR']]);
-$html = curl_exec($ch); $code = curl_getinfo($ch, CURLINFO_HTTP_CODE); $cerr = curl_error($ch);
-if ($html === false || $code >= 500) out(502, ['ok' => false, 'erro' => 'O portal de rastreamento não respondeu. Tente de novo em instantes.', 'detalhe' => $cerr]);
-if (!mb_check_encoding($html, 'UTF-8')) $html = mb_convert_encoding($html, 'UTF-8', 'ISO-8859-1');
-
-// recorta o bloco de conteúdo do SSW (entre os marcadores <!--content-->)
-$main = $html;
-if (preg_match('/<!--content-->(.*)<!--content-->/su', $html, $m)) $main = $m[1];
-elseif (preg_match('/<body[^>]*>(.*)<\/body>/su', $html, $m)) $main = $m[1];
-$main = preg_replace('/<(script|style|form|select|button|svg|iframe|noscript)\b.*?<\/\1>/su', ' ', $main);
-$txt = fn($x) => trim(preg_replace('/\s+/u', ' ', html_entity_decode(strip_tags(str_replace(['<br>', '<br/>', '<br />'], ' | ', $x)), ENT_QUOTES, 'UTF-8')));
-
-// cabeçalho: remetente/destinatário e a tabela de ocorrências (N Fiscal | Unidade + Data/hora | Situação)
-$quem = ''; if (preg_match('/<span[^>]*>\s*(Remetente|Destinat[aá]rio|Pagador):\s*<\/span>.*?<span[^>]*>([^<]*)<\/span>\s*<span[^>]*>([^<]*)<\/span>/su', $main, $q)) $quem = trim($q[1] . ': ' . trim($q[2]) . ' ' . trim($q[3]));
-$eventos = []; $cabecalho = false;
-if (preg_match_all('/<tr[^>]*>(.*?)<\/tr>/su', $main, $trs)) {
-    foreach ($trs[1] as $tr) {
-        if (!preg_match_all('/<td[^>]*>(.*?)<\/td>/su', $tr, $tds) || count($tds[1]) < 3) continue;
-        $c = array_map($txt, $tds[1]);
-        if (preg_match('/Situa/u', $c[2]) && preg_match('/Fiscal|Coleta/u', $c[0])) { $cabecalho = true; continue; }
-        if (!$cabecalho || trim(implode('', $c)) === '') continue;
-        $data = ''; $hora = ''; $unid = $c[1];
-        if (preg_match('/(\d{2}\/\d{2}\/\d{2,4})\s*(\d{2}:\d{2})?/u', $c[1], $d)) { $data = $d[1]; $hora = $d[2] ?? ''; $unid = trim(str_replace([$d[0], '|'], ['', ''], $c[1])); }
-        $nf = trim(str_replace('|', ' · ', $c[0]));
-        $eventos[] = ['data' => $data, 'hora' => $hora, 'descricao' => $c[2], 'detalhe' => trim(($unid ? $unid : '') . ($nf ? ' · NF/Coleta ' . $nf : ''), ' ·'), 'unidade' => $unid, 'nf' => $nf];
-    }
-}
-// mais recente primeiro
-usort($eventos, function ($x, $y) { $k = fn($e) => preg_replace('/(\d{2})\/(\d{2})\/(\d{2,4})/', '$3$2$1', $e['data']) . str_replace(':', '', $e['hora']); return strcmp($k($y), $k($x)); });
-
-// fallback: HTML limpo do bloco (sem atributos), útil quando o layout do SSW mudar
-$clean = strip_tags(preg_replace('/<(input|img|hr)\b[^>]*>/iu', '', $main), '<table><tr><td><th><p><b><strong><br><div><span><ul><li><h1><h2><h3><h4>');
-$clean = preg_replace('/<(\w+)\s+[^>]*>/u', '<$1>', $clean); $clean = preg_replace('/\s{2,}/u', ' ', $clean);
-foreach (['Digite ou capture-a com leitor de código de barras.', 'Rastreamento das mercadorias transportadas por todas as transportadoras usuárias do SSW podem ser realizadas por até 90 dias após ocorrida a entrega.', 'As informações resultantes são anonimizadas, conforme LGPD.', 'Download em CSV', 'Voltar', 'Para clientes'] as $mn) $clean = str_ireplace($mn, '', $clean);
-$clean = preg_replace('/<(div|span|p|li|td|tr|table|ul|b|strong)>\s*(&nbsp;|\s)*<\/\1>/u', '', $clean); $clean = preg_replace('/<(div|span|p|li|td|tr|table|ul|b|strong)>\s*(&nbsp;|\s)*<\/\1>/u', '', $clean);
-$txtLower = mb_strtolower($txt($main));
-$formDeNovo = (bool)preg_match('/digite ou capture|chave da nf-e|name="danfe"|id="chave"/iu', $txtLower . ' ' . mb_strtolower($html));
-$naoEncontrado = $formDeNovo || !$eventos && (bool)preg_match('/n[aã]o (foi )?encontrad|nenhum (registro|resultado)|inv[aá]lid|n[aã]o localiz|sem informa/u', $txtLower);
-$motivo = ''; $mascarado = str_contains($quem, '*');
-if ($mascarado && !$eventos) { $clean = ''; $naoEncontrado = true; $motivo = 'CNPJ ou senha não reconhecidos pelo portal.'; }
-elseif ($formDeNovo) { $clean = ''; $naoEncontrado = true; $motivo = $modo === 'danfe' ? 'Chave não localizada no portal.' : 'CNPJ ou chave/senha não reconhecidos pelo portal.'; }
-elseif (!$eventos && $cabecalho) { $clean = ''; $naoEncontrado = true; $motivo = $modo === 'senha' ? 'Nenhuma encomenda deste remetente nos últimos 30 dias no portal, ou a senha não confere.' : 'Nenhuma ocorrência registrada para esta chave.'; }
-out(200, ['ok' => !$naoEncontrado, 'modo' => $modo, 'quem' => $quem, 'motivo' => $motivo, 'eventos' => $eventos, 'html' => mb_substr($clean, 0, 20000), 'fonte' => 'SSW', 'consultado_em' => date('d/m/Y H:i')]);
+$motivo = '';
+if (!$enc) $motivo = $mascarado ? 'CNPJ ou senha não conferem. Confira os dados fornecidos pela TAP.' : 'Nenhuma encomenda encontrada para esses dados. Confira o CNPJ, o número da nota e a senha de rastreio.';
+out(200, ['ok' => count($enc) > 0, 'modo' => 'remetente', 'quem' => $quem, 'motivo' => $motivo, 'total' => count($enc), 'nao_encontradas' => $naoDisp, 'encomendas' => $enc, 'eventos' => [], 'html' => '', 'fonte' => 'SSW', 'consultado_em' => date('d/m/Y H:i')]);

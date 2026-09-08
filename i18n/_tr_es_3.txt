@@ -1,0 +1,33 @@
+K|{n} encomendas encontradas|{n} encomiendas encontradas
+K|{n} encomenda encontrada|{n} encomienda encontrada
+K|Notas sem informação no portal: {n}|Facturas sin información en el portal: {n}
+K|Nota sem informação no portal: {n}|Factura sin información en el portal: {n}
+K|Nenhuma encomenda encontrada para esses dados. Confira o CNPJ, o número da nota e a senha de rastreio.|No se encontró ninguna encomienda con esos datos. Verifique el CNPJ, el número de la factura y la contraseña de rastreo.
+074| TAPIA lo lleva al rastreo del sitio: CNPJ del remitente, número de la factura y contraseña, y la encomienda aparece.
+167| Aquí en el sitio, en <0>Rastreo</0>: informe el CNPJ o CPF del remitente, el número de la factura y la contraseña de rastreo entregada por TAP. Siempre son esos tres datos. TAPIA, en la esquina de la pantalla, también lo lleva hasta allí.
+176| Informe el número de la factura. En la siguiente pantalla, complete con el CNPJ del remitente y la contraseña de rastreo.
+261| El rastreo se hace en el propio sitio, en https://www.tapexpress.com.br/rastreamento/, con tres datos: CNPJ o CPF del remitente, número de la factura y contraseña de rastreo entregada por TAP. Los datos vienen del portal SSW. Todos los vehículos tienen rastreo satelital.
+338| Número de la factura
+423| Por el rastreo en el sitio, con el CNPJ del remitente, el número de la factura y la contraseña de rastreo, y por el comprobante de entrega firmado.
+460| Consulte aquí mismo, sin salir del sitio. Informe el CNPJ o CPF del remitente, el número de la factura y la contraseña de rastreo entregada por TAP.
+461| Rastreo por remitente
+462| CNPJ / CPF del remitente
+463| Contraseña de rastreo
+464| Número de la factura, pedido o recogida
+465| Los tres datos son obligatorios. ¿Sin contraseña? Pídala a la sucursal TAP que atiende a su empresa.
+469| ¿Qué datos necesito para rastrear?
+470| Tres datos, siempre: el CNPJ o CPF del remitente, el número de la factura (o del pedido/recogida) y la contraseña de rastreo entregada por TAP. Es el mismo estándar del rastreo por remitente en el portal SSW.
+471| ¿Dónde consigo la contraseña de rastreo?
+472| Con la sucursal TAP que atiende a su empresa o por el WhatsApp central +55 18 99109-6441. La contraseña es del remitente y vale para todas sus facturas.
+473| ¿Puedo consultar varias facturas a la vez?
+474| Sí. Escriba un número por línea, o sepárelos por coma, hasta 20 facturas por consulta.
+480| Rastree sus encomiendas de TAP Express aquí mismo con el CNPJ del remitente, el número de la factura y la contraseña de rastreo. Estado, previsión de entrega, historial y comprobante digital.
+482| Entregada por TAP
+483| Un número por línea. Ej.: 9115
+638| <0>Rastreo:</0> el CNPJ o CPF del remitente, los números de las facturas y la contraseña de rastreo se envían al portal SSW para la consulta y no se guardan. Si pide actualizaciones, guardamos nombre, WhatsApp y correo con la fecha del consentimiento.
+660| Verifique el CNPJ, el número de la factura y la contraseña de rastreo.
+687| Para rastrear necesita el CNPJ del remitente, el número de la factura y la contraseña de rastreo. Abriendo la página…
+688| Pedido
+693| Complete los tres campos: CNPJ o CPF del remitente, número de la factura y contraseña de rastreo.
+718| Puede rastrear aquí en el sitio con tres datos: CNPJ del remitente, número de la factura y contraseña de rastreo. Abriendo la página…
+728| Informe el CNPJ o CPF del remitente, el número de la factura y la contraseña de rastreo.

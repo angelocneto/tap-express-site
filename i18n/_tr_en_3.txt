@@ -1,0 +1,33 @@
+K|{n} encomendas encontradas|{n} shipments found
+K|{n} encomenda encontrada|{n} shipment found
+K|Notas sem informação no portal: {n}|Invoices with no information on the portal: {n}
+K|Nota sem informação no portal: {n}|Invoice with no information on the portal: {n}
+K|Nenhuma encomenda encontrada para esses dados. Confira o CNPJ, o número da nota e a senha de rastreio.|No shipment found for these details. Check the CNPJ, the invoice number and the tracking password.
+074| TAPIA takes you to the website's tracking: shipper's CNPJ, invoice number and password, and your shipment appears.
+167| Right here on the website, under <0>Tracking</0>: enter the shipper's CNPJ or CPF, the invoice number and the tracking password provided by TAP. It is always those three details. TAPIA, in the corner of the screen, can also take you there.
+176| Enter the invoice number. On the next screen, complete with the shipper's CNPJ and the tracking password.
+261| Tracking is done on the website itself, at https://www.tapexpress.com.br/rastreamento/, with three details: the shipper's CNPJ or CPF, the invoice number and the tracking password provided by TAP. Data comes from the SSW portal. Every vehicle is satellite-tracked.
+338| Invoice number
+423| Through tracking on the website, with the shipper's CNPJ, the invoice number and the tracking password, and through the signed proof of delivery.
+460| Check right here, without leaving the website. Enter the shipper's CNPJ or CPF, the invoice number and the tracking password provided by TAP.
+461| Tracking by shipper
+462| Shipper's CNPJ / CPF
+463| Tracking password
+464| Invoice, order or pickup number
+465| All three details are required. No password? Ask the TAP branch that serves your company.
+469| What do I need to track?
+470| Three details, always: the shipper's CNPJ or CPF, the invoice number (or order/pickup number) and the tracking password provided by TAP. It is the same standard as tracking by shipper on the SSW portal.
+471| Where do I get the tracking password?
+472| From the TAP branch that serves your company or on the central WhatsApp +55 18 99109-6441. The password belongs to the shipper and works for all of their invoices.
+473| Can I check several invoices at once?
+474| Yes. Type one number per line, or separate them with commas, up to 20 invoices per query.
+480| Track your TAP Express shipments right here with the shipper's CNPJ, the invoice number and the tracking password. Status, estimated delivery, history and digital proof of delivery.
+482| Provided by TAP
+483| One number per line. E.g. 9115
+638| <0>Tracking:</0> the shipper's CNPJ or CPF, the invoice numbers and the tracking password are passed to the SSW portal for the query and are not stored. If you request updates, we store your name, WhatsApp and e-mail with the date of consent.
+660| Check the CNPJ, the invoice number and the tracking password.
+687| To track you need the shipper's CNPJ, the invoice number and the tracking password. Opening the page…
+688| Order
+693| Fill in all three fields: shipper's CNPJ or CPF, invoice number and tracking password.
+718| You can track right here on the website with three details: shipper's CNPJ, invoice number and tracking password. Opening the page…
+728| Enter the shipper's CNPJ or CPF, the invoice number and the tracking password.
