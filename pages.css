@@ -113,3 +113,20 @@ section[data-theme="light"] .track-form2 { background: #fff; } section[data-them
 .ship-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 14px; font-size: 14px; }
 .ship-grid small { display: block; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
 .ship p { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
+
+.track-total { font-family: var(--display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #9df0a8; margin: 0 0 10px; }
+.ship header { align-items: flex-start; } .ship header time { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; }
+.ship.ok header b { color: #9df0a8; } .ship.go header b { color: #ffd866; } .ship.new header b { color: var(--ink); }
+.ship-more { background: transparent; border: 1px solid rgba(242,247,243,.22); color: var(--ink); border-radius: 999px; padding: 7px 14px; font-family: var(--display); font-weight: 600; font-size: 12px; cursor: pointer; white-space: nowrap; }
+.ship-more:hover { border-color: var(--green); color: #9df0a8; } .ship-more[disabled] { opacity: .6; }
+.ship-hist { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(242,247,243,.1); } .ship-hist .timeline { margin-bottom: 6px; }
+.lead-box { margin-top: 22px; padding: 22px; border-radius: 20px; border: 1px solid rgba(57,181,74,.35); background: linear-gradient(180deg, rgba(57,181,74,.12), rgba(57,181,74,.04)); }
+.lead-box h3 { font-family: var(--display); font-size: 1.15rem; margin: 0 0 6px; } .lead-box p { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+.lead-form .row3 { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr; gap: 12px; }
+.lead-form label { display: block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 6px 0; }
+.lead-form input:not([type=checkbox]) { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(242,247,243,.18); background: rgba(255,255,255,.05); color: var(--ink); font-size: 14px; }
+.lead-form input:focus { outline: none; border-color: var(--green); }
+.lead-check { display: flex !important; gap: 10px; align-items: flex-start; text-transform: none !important; letter-spacing: 0 !important; font-size: 13px !important; color: var(--muted) !important; margin: 14px 0 4px !important; line-height: 1.5; }
+.lead-check input { margin-top: 3px; accent-color: var(--green); } .lead-check a { color: #9df0a8; }
+.lead-status { font-size: 13px; color: #9df0a8; }
+@media (max-width: 720px) { .lead-form .row3 { grid-template-columns: 1fr; } }

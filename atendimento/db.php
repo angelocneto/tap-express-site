@@ -57,6 +57,7 @@ function tap_db(): PDO {
     $pdo->exec('CREATE TABLE IF NOT EXISTS clientes (
         id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, cnpj TEXT, telefone TEXT, email TEXT, cidade TEXT, uf TEXT, observacoes TEXT, criado_em TEXT NOT NULL, atualizado_em TEXT NOT NULL
     )');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS leads (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, whatsapp TEXT, email TEXT, origem TEXT, contexto TEXT, aceite INTEGER NOT NULL DEFAULT 0, aceite_em TEXT, ip TEXT, user_agent TEXT, status TEXT NOT NULL DEFAULT "novo", observacoes TEXT, criado_em TEXT NOT NULL)');
     $pdo->exec('CREATE TABLE IF NOT EXISTS senha_reset (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, token_hash TEXT NOT NULL, expira_em TEXT NOT NULL, usado INTEGER NOT NULL DEFAULT 0, criado_em TEXT NOT NULL)');
     $pdo->exec('CREATE TABLE IF NOT EXISTS vagas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -91,6 +92,7 @@ function tap_protocolo(PDO $pdo): string {
     return $p;
 }
 
+const TAP_LEAD_STATUS = ['novo' => 'Novo', 'contato' => 'Em contato', 'cliente' => 'Virou cliente', 'descartado' => 'Descartado'];
 const TAP_MODULOS = ['atendimento' => 'Atendimento', 'clientes' => 'Clientes', 'rh' => 'RH', 'assinaturas' => 'Assinaturas', 'usuarios' => 'Usuários'];
 const TAP_NIVEIS = ['' => 'Sem acesso', 'ver' => 'Só vê', 'editar' => 'Vê e edita'];
 const TAP_STATUS = ['novo' => 'Novo', 'atendimento' => 'Em atendimento', 'cotado' => 'Cotado', 'fechado' => 'Fechado', 'perdido' => 'Perdido'];

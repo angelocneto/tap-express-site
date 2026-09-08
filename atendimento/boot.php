@@ -52,7 +52,7 @@ function tap_admin_head(string $titulo, string $ativo): void {
     global $h, $user;
     echo '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="robots" content="noindex,nofollow" /><title>TAP Express · ' . $h($titulo) . '</title><link rel="icon" href="../assets/favicon.png" /><link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" /><link rel="stylesheet" href="admin.css?v=' . filemtime(__DIR__ . '/admin.css') . '" /></head><body><div class="wrap">';
     $links = [
-        ['atendimento', 'cotacoes.php', 'Atendimento'], ['clientes', 'clientes.php', 'Clientes'], ['rh', 'candidatos.php', 'Candidatos'], ['rh', 'vagas.php', 'Vagas'], ['assinaturas', 'assinaturas.php', 'Assinaturas'], ['usuarios', 'usuarios.php', 'Usuários'],
+        ['atendimento', 'cotacoes.php', 'Atendimento'], ['atendimento', 'leads.php', 'Leads'], ['clientes', 'clientes.php', 'Clientes'], ['rh', 'candidatos.php', 'Candidatos'], ['rh', 'vagas.php', 'Vagas'], ['assinaturas', 'assinaturas.php', 'Assinaturas'], ['usuarios', 'usuarios.php', 'Usuários'],
     ];
     echo '<header class="top"><a class="brand" href="index.php"><img src="../assets/logo_cor.png" alt="TAP Express"/><span>Painel interno</span></a><nav class="menu">';
     foreach ($links as [$mod, $file, $label]) if (tap_can($mod) && file_exists(__DIR__ . '/' . $file)) echo '<a class="' . ($ativo === basename($file, '.php') ? 'on' : '') . '" href="' . $file . '">' . $label . '</a>';
