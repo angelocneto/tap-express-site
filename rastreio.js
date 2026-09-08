@@ -2,7 +2,7 @@
 (function () {
   const form = document.getElementById("trackForm"); if (!form) return;
   const out = document.getElementById("trackResult"), tabs = form.querySelectorAll("[data-mode]"), panes = form.querySelectorAll("[data-pane]");
-  let mode = "danfe";
+  let mode = "senha";
   tabs.forEach(b => b.addEventListener("click", () => { mode = b.dataset.mode; tabs.forEach(x => x.classList.toggle("is-on", x === b)); panes.forEach(p => p.hidden = p.dataset.pane !== mode); }));
   const danfe = form.querySelector("[name=danfe]"); if (danfe) danfe.addEventListener("input", () => { danfe.value = danfe.value.replace(/\D+/g, "").slice(0, 44); });
   const maskCnpj = (cnpj) => cnpj && cnpj.addEventListener("input", () => { let d = cnpj.value.replace(/\D+/g, "").slice(0, 14); cnpj.value = d.replace(/^(\d{2})(\d)/, "$1.$2").replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3").replace(/\.(\d{3})(\d)/, ".$1/$2").replace(/(\d{4})(\d)/, "$1-$2"); });
