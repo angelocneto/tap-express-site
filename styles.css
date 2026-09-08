@@ -323,6 +323,9 @@ section[data-theme="light"] .go-links a { color: rgba(8,21,15,0.5) !important; }
 section[data-theme="light"] .go-links a:hover { color: #1f8f36 !important; }
 .unit-wa { display: inline-flex; align-items: center; gap: 7px; font-family: var(--display); font-size: 12.5px; font-weight: 600; letter-spacing: .01em; line-height: 1; text-transform: none; color: #fff !important; background: #25a244; border-radius: 999px; padding: 8px 14px 8px 11px; border-bottom: 0 !important; margin-top: 0 !important; transition: background .2s, transform .2s; }
 .unit-wa svg { width: 15px; height: 15px; flex: none; display: block; }
+.unit-wa, .tile-foot .unit-wa { white-space: nowrap; flex: none; }
+.unit-links { justify-content: flex-start; }
+.unit-links .go-links { margin-left: auto; }
 .unit-wa:hover { background: #1e8a39; transform: translateY(-1px); }
 .unit-links .unit-wa { order: -1; }
 
