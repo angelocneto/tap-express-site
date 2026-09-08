@@ -155,14 +155,14 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
 <?php if ($view === 'setup'): ?>
   <div class="auth card"><img src="../assets/logo_branca.png" alt="TAP Express" style="height:40px;margin-bottom:18px"/>
     <h1>Primeiro acesso</h1><p>Crie o usuário administrador da área de atendimento. Só é possível uma vez.</p>
-    <?php if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
+    <?php if ($err) echo "<div class='msg err'>{$h($err)}</div>"; ?>
     <form method="post"><input type="hidden" name="action" value="setup"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/>
       <label>Nome</label><input name="nome" required/><label>E-mail</label><input type="email" name="email" required/><label>Senha (mín. 8 caracteres)</label><div class="pw"><div class="pw"><input type="password" name="senha" minlength="8" required/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
       <div style="margin-top:18px"><button class="btn p" type="submit">Criar acesso</button></div></form></div>
 <?php elseif ($view === 'login'): ?>
   <div class="auth card"><img src="../assets/logo_branca.png" alt="TAP Express" style="height:40px;margin-bottom:18px"/>
     <h1>Área de atendimento</h1><p>Entre para ver e responder as cotações do site.</p>
-    <?php if ($msg) echo "<div class='msg ok'>$h($msg)</div>"; if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
+    <?php if ($msg) echo "<div class='msg ok'>{$h($msg)}</div>"; if ($err) echo "<div class='msg err'>{$h($err)}</div>"; ?>
     <form method="post"><input type="hidden" name="action" value="login"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/>
       <label>E-mail</label><input type="email" name="email" required autofocus/><label>Senha</label><div class="pw"><input type="password" name="senha" required/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
       <div style="margin-top:18px;display:flex;align-items:center;gap:16px"><button class="btn p" type="submit">Entrar</button><a class="link" href="index.php?v=esqueci">Esqueci minha senha</a></div></form></div>
@@ -178,7 +178,7 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
 <?php elseif ($view === 'redefinir'): ?>
   <div class="auth card"><img src="../assets/logo_branca.png" alt="TAP Express" style="height:40px;margin-bottom:18px"/>
     <h1>Nova senha</h1><p>Escolha uma senha com pelo menos 8 caracteres.</p>
-    <?php if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
+    <?php if ($err) echo "<div class='msg err'>{$h($err)}</div>"; ?>
     <form method="post"><input type="hidden" name="action" value="redefinir"/><input type="hidden" name="csrf" value="<?= $csrf ?>"/><input type="hidden" name="t" value="<?= $h($_GET['t'] ?? '') ?>"/>
       <label>Nova senha</label><div class="pw"><input type="password" name="senha" minlength="8" required autofocus/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
       <label>Repita a nova senha</label><div class="pw"><input type="password" name="senha2" minlength="8" required/><button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path class="e-open" d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle class="e-open" cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button></div>
@@ -187,7 +187,7 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px;margin-top:20px
   <div class="top"><a href="index.php"><img src="../assets/logo_branca.png" alt="TAP Express"/></a>
     <div class="who">Atendimento · <b><?= $h($user['nome']) ?></b></div>
     <div><a class="btn p" href="vagas.php">Vagas</a> <a class="btn p" href="candidatos.php">Candidatos</a> <a class="btn" href="../" target="_blank">Ver site</a> <a class="btn" href="?a=csv">Exportar CSV</a> <a class="btn" href="?v=usuarios">Usuários</a> <a class="btn" href="?a=logout">Sair</a></div></div>
-  <?php if ($msg) echo "<div class='msg ok'>$h($msg)</div>"; if ($err) echo "<div class='msg err'>$h($err)</div>"; ?>
+  <?php if ($msg) echo "<div class='msg ok'>{$h($msg)}</div>"; if ($err) echo "<div class='msg err'>{$h($err)}</div>"; ?>
 
   <?php if ($view === 'ver'): $id = (int)($_GET['id'] ?? 0); $q = $pdo->prepare('SELECT * FROM cotacoes WHERE id = ?'); $q->execute([$id]); $c = $q->fetch(); if (!$c) { echo '<div class="empty">Cotação não encontrada.</div>'; } else {
     $n = $pdo->prepare('SELECT * FROM notas WHERE cotacao_id = ? ORDER BY id DESC'); $n->execute([$id]); $notas = $n->fetchAll(); $tel = $digits($c['telefone']); if (strlen($tel) <= 11) $tel = '55' . $tel; ?>

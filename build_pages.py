@@ -52,7 +52,7 @@ def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/og-h
     <div><h5>Navegação</h5><a href="/sobre/">Sobre a empresa</a><a href="/servicos/">Serviços</a><a href="/unidades/">Rede TAP</a><a href="/cidades/">Cidades atendidas</a><a href="/tapia/">TAPIA</a><a href="/carreiras/">Carreiras</a><a href="/contato/">Contato</a></div>
     <div><h5>Cliente</h5><a href="/rastreamento/">Rastreamento</a><a href="/cotacao/">Cotação online</a><a href="tel:+551839187777">SAC (18) 3918-7777</a><a href="https://wa.me/{WA}" target="_blank" rel="noopener">WhatsApp</a></div>
     <div><h5>Redes</h5><a href="https://www.instagram.com/tap.transportes/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/taptransportes/" target="_blank" rel="noopener">Facebook</a></div>
-  </div><div class="wrap footer-bottom"><span>© {YEAR} TAP Express · Transportes</span><span>Precisão regional. Velocidade que move negócios.</span></div></footer>
+  </div><div class="wrap footer-bottom"><span>© {YEAR} TAP Express · Transportes</span><span>Precisão regional. Velocidade que move negócios.</span><a class="foot-admin" href="/atendimento/" rel="nofollow">Área interna</a></div></footer>
 {WIDGET}
   <script src="/data/rede.js?v={V}"></script>
   <script src="/cotacao.js?v={V}"></script>{extra_js}
