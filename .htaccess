@@ -2,6 +2,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   # tapexpress.com.br: força https e www (não afeta o subdomínio de homologação)
+  # subdomínio de homologação desativado: tudo vai para o domínio oficial
+  RewriteCond %{HTTP_HOST} ^tap\.amodesenvolvimento\.com\.br$ [NC]
+  RewriteRule ^(.*)$ https://www.tapexpress.com.br/$1 [R=301,L]
   RewriteCond %{HTTP_HOST} ^tapexpress\.com\.br$ [NC]
   RewriteRule ^(.*)$ https://www.tapexpress.com.br/$1 [R=301,L]
   RewriteCond %{HTTP_HOST} ^www\.tapexpress\.com\.br$ [NC]
