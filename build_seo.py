@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fundação SEO/GEO: JSON-LD, meta OG, sitemap, robots, llms.txt e páginas por unidade. Rode antes do commit."""
 import json, re, os, html, datetime
-BASE="https://tap.amodesenvolvimento.com.br"  # troque para https://www.tapexpress.com.br na virada do domínio
+BASE="https://www.tapexpress.com.br"
 rede=json.loads(re.search(r'window\.TAP_REDE = (\{.*\});', open('data/rede.js',encoding='utf-8').read(), re.S).group(1))
 units=rede['units']; wa=rede['wa']; today=datetime.date.today().isoformat()
 PIN='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>'

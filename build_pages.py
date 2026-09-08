@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Subpáginas do site TAP Express (SEO/GEO). Gera /sobre, /servicos/*, /rastreamento, /cotacao, /tapia, /contato, /unidades/, /cidades/*. Rode antes de build_seo.py."""
 import json, re, os, html, datetime, unicodedata
-BASE="https://tap.amodesenvolvimento.com.br"
+BASE="https://www.tapexpress.com.br"
 WA_TXT="Ol%C3%A1!%20Estou%20no%20site%20da%20TAP%20Express%20e%20quero%20falar%20com%20o%20atendimento."
 rede=json.loads(re.search(r'window\.TAP_REDE = (\{.*\});', open('data/rede.js',encoding='utf-8').read(), re.S).group(1))
 units=rede['units']; WA=rede['wa']; EMAIL=rede['email']; YEAR=datetime.date.today().year; YEARS=YEAR-2001
