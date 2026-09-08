@@ -48,6 +48,15 @@ function tap_db(): PDO {
         nome TEXT NOT NULL, email TEXT UNIQUE NOT NULL, senha_hash TEXT NOT NULL, criado_em TEXT NOT NULL
     )');
     $pdo->exec('CREATE TABLE IF NOT EXISTS rate (ip TEXT, ts INTEGER)');
+    // usuários: master, permissões por módulo (JSON) e ativo
+    $uh = array_column($pdo->query('PRAGMA table_info(usuarios)')->fetchAll(PDO::FETCH_ASSOC), 'name');
+    foreach (['master' => 'INTEGER NOT NULL DEFAULT 0', 'permissoes' => 'TEXT', 'ativo' => 'INTEGER NOT NULL DEFAULT 1'] as $col => $type) {
+        if (!in_array($col, $uh, true)) $pdo->exec("ALTER TABLE usuarios ADD COLUMN $col $type");
+    }
+    if ((int)$pdo->query('SELECT COUNT(*) FROM usuarios WHERE master = 1')->fetchColumn() === 0) $pdo->exec('UPDATE usuarios SET master = 1 WHERE id = (SELECT MIN(id) FROM usuarios)');
+    $pdo->exec('CREATE TABLE IF NOT EXISTS clientes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, cnpj TEXT, telefone TEXT, email TEXT, cidade TEXT, uf TEXT, observacoes TEXT, criado_em TEXT NOT NULL, atualizado_em TEXT NOT NULL
+    )');
     $pdo->exec('CREATE TABLE IF NOT EXISTS senha_reset (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, token_hash TEXT NOT NULL, expira_em TEXT NOT NULL, usado INTEGER NOT NULL DEFAULT 0, criado_em TEXT NOT NULL)');
     $pdo->exec('CREATE TABLE IF NOT EXISTS vagas (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -82,6 +91,8 @@ function tap_protocolo(PDO $pdo): string {
     return $p;
 }
 
+const TAP_MODULOS = ['atendimento' => 'Atendimento', 'clientes' => 'Clientes', 'rh' => 'RH', 'assinaturas' => 'Assinaturas', 'usuarios' => 'Usuários'];
+const TAP_NIVEIS = ['' => 'Sem acesso', 'ver' => 'Só vê', 'editar' => 'Vê e edita'];
 const TAP_STATUS = ['novo' => 'Novo', 'atendimento' => 'Em atendimento', 'cotado' => 'Cotado', 'fechado' => 'Fechado', 'perdido' => 'Perdido'];
 const TAP_CAND_STATUS = ['novo' => 'Novos', 'triagem' => 'Triagem', 'entrevista' => 'Entrevista', 'aprovado' => 'Aprovados', 'reprovado' => 'Reprovados'];
 const TAP_AREAS = ['Motorista', 'Operação e armazém', 'Atendimento e administrativo', 'Comercial', 'Tecnologia'];

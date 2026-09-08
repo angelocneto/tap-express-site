@@ -1,8 +1,11 @@
 <?php
 // Gerenciador de vagas: cria, edita, ativa e desativa. Vagas ativas aparecem ao vivo em /carreiras/.
 require_once __DIR__ . '/auth.php';
+tap_require('rh');
+$edit = tap_can('rh', 'editar');
 $msg = ''; $err = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$edit) { if (isset($_POST['ajax'])) { http_response_code(403); echo json_encode(['ok' => false]); exit; } $err = 'Seu acesso é só de leitura neste módulo.'; }
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!hash_equals($csrf, $_POST['csrf'] ?? '')) { $err = 'Sessão expirada. Tente novamente.'; }
     else {
         $a = $_POST['action'] ?? ''; $id = (int)($_POST['id'] ?? 0); $now = tap_now();

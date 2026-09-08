@@ -342,7 +342,7 @@ section[data-theme="light"] .go-links a:hover { color: #1f8f36 !important; }
 .faq details > div a { color: #1f8f36; border-bottom: 1px solid rgba(31,143,54,0.4); }
 section[data-theme="light"] .faq summary { color: #08150f; }
 
-.foot-admin { color: rgba(242,247,243,0.45); font-size: 12px; border-bottom: 1px dotted rgba(242,247,243,0.3); } .foot-admin:hover { color: var(--green); }
+.foot-admin { opacity: .55; font-size: 12px !important; } .foot-admin:hover { opacity: 1; }
 
 /* ===== Unit card actions (redesign) ===== */
 .unit-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; padding-top: 18px; }

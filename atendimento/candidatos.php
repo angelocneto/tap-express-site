@@ -1,8 +1,11 @@
 <?php
 // Kanban de candidatos: arraste entre colunas para mudar o status. Detalhe com notas e currículo.
 require_once __DIR__ . '/auth.php';
+tap_require('rh');
+$edit = tap_can('rh', 'editar');
 $msg = ''; $err = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$edit) { if (isset($_POST['ajax'])) { http_response_code(403); echo json_encode(['ok' => false]); exit; } $err = 'Seu acesso é só de leitura neste módulo.'; }
+elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!hash_equals($csrf, $_POST['csrf'] ?? '')) { http_response_code(403); if (isset($_POST['ajax'])) { echo json_encode(['ok' => false]); exit; } $err = 'Sessão expirada.'; }
     else {
         $a = $_POST['action'] ?? ''; $id = (int)($_POST['id'] ?? 0); $now = tap_now();
@@ -22,7 +25,7 @@ $vagaF = isset($_GET['vaga']) ? (int)$_GET['vaga'] : 0;
 $vagas = $pdo->query('SELECT id, titulo FROM vagas ORDER BY titulo')->fetchAll(); $vmap = []; foreach ($vagas as $v) $vmap[$v['id']] = $v['titulo'];
 $sql = 'SELECT * FROM candidaturas' . ($vagaF ? ' WHERE vaga_id = ' . $vagaF : '') . ' ORDER BY atualizado_em DESC'; $cands = $pdo->query($sql)->fetchAll();
 $digits = fn($t) => preg_replace('/\D+/', '', (string)$t);
-tap_admin_head('Candidatos', 'candidatos');
+tap_admin_head("Candidatos", "candidatos");
 if ($msg) echo "<div class='msg ok'>{$h($msg)}</div>"; if ($err) echo "<div class='msg err'>{$h($err)}</div>";
 ?>
 <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px">
