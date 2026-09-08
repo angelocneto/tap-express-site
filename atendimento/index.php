@@ -104,6 +104,11 @@ if ($user) {
 
 $view = $user ? ($_GET['v'] ?? 'lista') : ($hasUsers ? (in_array($_GET['v'] ?? '', ['esqueci', 'redefinir'], true) ? $_GET['v'] : 'login') : 'setup');
 if (($_GET['redefinida'] ?? '') === '1') $msg = 'Senha redefinida. Entre com a nova senha.';
+if ($view === 'redefinir' && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // link precisa existir, não ter sido usado e estar dentro da 1 hora
+    $q = $pdo->prepare('SELECT id FROM senha_reset WHERE token_hash = ? AND usado = 0 AND expira_em > ?'); $q->execute([hash('sha256', (string)($_GET['t'] ?? '')), date('Y-m-d H:i:s')]);
+    if (!$q->fetch()) { header('Location: index.php?v=esqueci&expirado=1'); exit; }
+}
 $filtro = $_GET['s'] ?? 'abertas'; $busca = trim($_GET['q'] ?? '');
 $statusBadge = fn($s) => '<span class="badge b-' . $h($s) . '">' . $h(TAP_STATUS[$s] ?? $s) . '</span>';
 $digits = fn($t) => preg_replace('/\D+/', '', (string)$t);
