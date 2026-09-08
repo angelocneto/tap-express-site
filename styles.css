@@ -321,3 +321,6 @@ h2 span { color: var(--green); }
 .go-links svg { opacity: .8; }
 section[data-theme="light"] .go-links a { color: rgba(8,21,15,0.5) !important; }
 section[data-theme="light"] .go-links a:hover { color: #1f8f36 !important; }
+.unit-wa { display: inline-flex; align-items: center; gap: 5px; font-family: var(--display); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #fff !important; background: #25a244; border-radius: 999px; padding: 6px 11px; border-bottom: 0 !important; margin-top: 0 !important; }
+.unit-wa:hover { background: #1e8a39; }
+.unit-links .unit-wa { order: -1; }

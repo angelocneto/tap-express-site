@@ -137,7 +137,7 @@
   function renderDetail(u, city) {
     const d = u.hub ? "Centro de distribuição · matriz" : `${Math.round(km(HUB, u.c))} km do hub · Presidente Prudente`;
     const legenda = u.fotoTipo === "aerea" ? "Vista territorial da região" : "Unidade TAP Express · " + u.n;
-    const wa = REDE.wa ? `https://wa.me/${REDE.wa}?text=${encodeURIComponent("Olá! Estou no site da TAP Express e quero atendimento sobre a unidade de " + u.n + ".")}` : "";
+    const waNum = u.wa || REDE.wa; const wa = waNum ? `https://wa.me/${waNum}?text=${encodeURIComponent("Olá! Estou no site da TAP Express e quero atendimento sobre a unidade de " + u.n + ".")}` : "";
     detail.innerHTML = `
       ${u.foto ? `<figure class="map-photo" data-src="${u.foto}" data-cap="${legenda}"><img src="${u.foto}" alt="${legenda}" loading="lazy" /><figcaption>${legenda} <span>ampliar ⤢</span></figcaption></figure>` : ""}
       <p class="kicker">${city ? "Cidade atendida" : (u.hub ? "Hub de distribuição" : "Unidade " + u.uf)}</p>

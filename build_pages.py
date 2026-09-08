@@ -151,7 +151,12 @@ def go_links(u):
     if not u.get('addr') or 'confirmação' in u['addr']: return ''
     lng,lat=u['c']
     return f'<span class="go-links"><a href="https://www.google.com/maps/search/?api=1&query={lat},{lng}" target="_blank" rel="noopener" title="Abrir no Google Maps">{PIN}Google Maps</a><a href="https://waze.com/ul?ll={lat},{lng}&navigate=yes" target="_blank" rel="noopener" title="Abrir no Waze">{PIN}Waze</a></span>'
-def unit_tiles(uf): return ''.join(f'<div class="tile tile-photo"><a class="tile-link" href="/unidades/{u["slug"]}/"><figure><img src="/{u.get("foto") or "assets/frota_06-v2.jpg"}" alt="{esc("Unidade TAP Express em "+u["n"])}" loading="lazy" /></figure><div class="tile-body"><h3>{esc(u["n"])}</h3><p>{esc(u["addr"])}<br/>{esc(u["phone"])}</p><small>{1+len(u["cities"])} localidades →</small></div></a><div class="tile-foot">{go_links(u)}</div></div>' for u in units if u['uf']==uf)
+from urllib.parse import quote as _q
+WAI='<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4 5.2 5.2 0 0 0 3.1.6 2.6 2.6 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .2-1.2c-.1-.2-.3-.2-.5-.3z"/></svg>'
+def wa_link(u):
+    if not u.get('wa'): return ''
+    return f'<a class="unit-wa" href="https://wa.me/{u["wa"]}?text={_q("Olá! Estou no site da TAP Express e quero atendimento da unidade de "+u["n"]+".")}" target="_blank" rel="noopener">{WAI}WhatsApp</a>'
+def unit_tiles(uf): return ''.join(f'<div class="tile tile-photo"><a class="tile-link" href="/unidades/{u["slug"]}/"><figure><img src="/{u.get("foto") or "assets/frota_06-v2.jpg"}" alt="{esc("Unidade TAP Express em "+u["n"])}" loading="lazy" /></figure><div class="tile-body"><h3>{esc(u["n"])}</h3><p>{esc(u["addr"])}<br/>{esc(u["phone"])}</p><small>{1+len(u["cities"])} localidades →</small></div></a><div class="tile-foot">{wa_link(u)}{go_links(u)}</div></div>' for u in units if u['uf']==uf)
 hero=f'<p class="kicker">Rede TAP</p><h1>{N_UNITS} unidades e bases <span>em três estados.</span></h1><p class="sub">Distribuição a partir de Regente Feijó (Presidente Prudente) para o oeste paulista, o norte do Paraná e o Mato Grosso do Sul. Toque em uma unidade para ver endereço, telefone, foto e cidades atendidas.</p>'
 _idx=open('index.html',encoding='utf-8').read()
 _a=_idx.index('<div class="mapwrap reveal">'); _b=_idx.index('</aside>',_a); _b=_idx.index('</div>',_b)+len('</div>')

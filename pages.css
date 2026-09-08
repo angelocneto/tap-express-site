@@ -61,3 +61,6 @@ section[data-theme="light"] .vaga { color: var(--ink); }
 dd .go-links { display: flex; gap: 12px; margin-top: 6px; }
 dd .go-links a { font-size: 11px; color: rgba(242,247,243,0.55); display: inline-flex; align-items: center; gap: 4px; }
 dd .go-links a:hover { color: var(--green); }
+.tile-foot { align-items: center; gap: 12px; }
+.tile-foot .unit-wa { font-size: 11px; padding: 5px 10px; }
+.tile-foot .go-links { margin-left: auto; }
