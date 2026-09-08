@@ -131,6 +131,19 @@
     errEl.textContent = "";
     if (i === steps.length - 1) summary();
   }
+  // medidas do volume: três campos compõem "C × L × A cm" e mostram volume e cubagem (300 kg/m³)
+  const dimIn = ["dim_c", "dim_l", "dim_a"].map(n => form.querySelector(`[name="${n}"]`));
+  if (dimIn.every(Boolean)) {
+    const hidden = form.querySelector('[name="dimensoes"]'), hint = document.getElementById("dimsHint");
+    const lab = { dimC: "C", dimL: "L", dimA: "A" };
+    const upd = () => {
+      const v = dimIn.map(i => parseFloat(String(i.value).replace(",", ".")) || 0);
+      hidden.value = v.every(x => x > 0) ? `${v[0]} × ${v[1]} × ${v[2]} cm` : "";
+      Object.entries(lab).forEach(([id, k], idx) => { const t = document.getElementById(id); if (t) t.textContent = v[idx] > 0 ? `${k} ${v[idx]}` : k; });
+      if (hint) { if (v.every(x => x > 0)) { const m3 = v[0] * v[1] * v[2] / 1e6; hint.textContent = `Volume ${m3.toFixed(3).replace(".", ",")} m³ · cubagem ${(m3 * 300).toFixed(1).replace(".", ",")} kg (300 kg/m³)`; } else hint.textContent = "Preencha as três medidas do maior volume."; }
+    };
+    dimIn.forEach(i => i.addEventListener("input", upd)); upd();
+  }
   function validate(i) {
     const s = steps[i]; let ok = true;
     s.querySelectorAll("[required]").forEach(f => { const bad = f.type === "radio" ? !s.querySelector(`[name="${f.name}"]:checked`) : !f.value.trim(); f.style.borderColor = bad ? "#ff6b5a" : ""; if (bad) ok = false; });
@@ -153,7 +166,7 @@
     if (step < steps.length - 1) { show(step + 1); return; }
     if (sent) return;
     btnNext.disabled = true; btnNext.textContent = "Enviando…";
-    const data = {}; ["origem", "destino", "tipo", "volumes", "peso", "dimensoes", "valor", "nome", "empresa", "email", "telefone", "observacoes", "website"].forEach(k => data[k] = val(k));
+    const data = {}; ["origem", "destino", "tipo", "volumes", "peso", "dimensoes", "valor", "pagador", "coleta_data", "cnpj", "nome", "empresa", "email", "telefone", "observacoes", "website"].forEach(k => data[k] = val(k));
     data.pagina = document.getElementById("qPagina").value;
     try {
       const r = await fetch("/api/cotacao.php", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });

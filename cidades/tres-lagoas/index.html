@@ -10,7 +10,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/assets/favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=202609081401" /><link rel="stylesheet" href="/theme.css?v=202609081401" /><link rel="stylesheet" href="/cotacao.css?v=202609081401" /><link rel="stylesheet" href="/pages.css?v=202609081401" />
+  <link rel="stylesheet" href="/styles.css?v=202609081414" /><link rel="stylesheet" href="/theme.css?v=202609081414" /><link rel="stylesheet" href="/cotacao.css?v=202609081414" /><link rel="stylesheet" href="/pages.css?v=202609081414" />
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "Transporte de encomendas em Três Lagoas", "description": "Três Lagoas tem uma unidade própria da TAP Express: Av. Cap. Olinto Mancini, 2955 · Jardim Alvorada, telefone (67) 2104-6776. Atendimento em todos os dias úteis, com coleta e entrega no balcão da unidade.", "url": "https://www.tapexpress.com.br/cidades/tres-lagoas/", "provider": {"@type": "Organization", "name": "TAP Express", "@id": "https://www.tapexpress.com.br/#organization"}, "areaServed": [{"@type": "State", "name": "São Paulo"}, {"@type": "State", "name": "Paraná"}, {"@type": "State", "name": "Mato Grosso do Sul"}], "serviceType": "Transporte de encomendas em Três Lagoas"}, {"@context": "https://schema.org", "@type": "LocalBusiness", "@id": "https://www.tapexpress.com.br/unidades/tres-lagoas/#local", "name": "TAP Express · Três Lagoas", "url": "https://www.tapexpress.com.br/unidades/tres-lagoas/", "telephone": "+556721046776", "address": {"@type": "PostalAddress", "streetAddress": "Av. Cap. Olinto Mancini, 2955 · Jardim Alvorada", "addressLocality": "Três Lagoas", "addressRegion": "MS", "addressCountry": "BR"}, "areaServed": {"@type": "City", "name": "Três Lagoas"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "TAP Express", "item": "https://www.tapexpress.com.br/"}, {"@type": "ListItem", "position": 2, "name": "Cidades", "item": "https://www.tapexpress.com.br/cidades/"}, {"@type": "ListItem", "position": 3, "name": "Três Lagoas", "item": "https://www.tapexpress.com.br/cidades/tres-lagoas/"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qual unidade da TAP Express atende Três Lagoas?", "acceptedAnswer": {"@type": "Answer", "text": "A unidade de Três Lagoas, MS: Av. Cap. Olinto Mancini, 2955 · Jardim Alvorada, telefone (67) 2104-6776."}}, {"@type": "Question", "name": "Em que dias a TAP passa em Três Lagoas?", "acceptedAnswer": {"@type": "Answer", "text": "Todos os dias úteis, porque a cidade tem unidade própria."}}, {"@type": "Question", "name": "Qual o prazo de entrega para Três Lagoas?", "acceptedAnswer": {"@type": "Answer", "text": "Até 18 horas a partir da coleta entre as cidades da rede, respeitando os dias de atendimento da cidade."}}, {"@type": "Question", "name": "Como peço uma cotação?", "acceptedAnswer": {"@type": "Answer", "text": "Pelo formulário em 3 passos no site, pela TAPIA ou pelo WhatsApp (18) 99109-6441. Você recebe um protocolo e a equipe responde em horário comercial."}}]}]</script>
 </head>
 <body data-theme="dark">
@@ -90,7 +90,18 @@
             </div>
             <div><label>Volumes</label><input name="volumes" type="number" min="1" step="1" required placeholder="1" /></div>
             <div><label>Peso total (kg)</label><input name="peso" type="number" min="0" step="0.1" required placeholder="Ex.: 12,5" /></div>
-            <div><label>Dimensões (C × L × A)</label><input name="dimensoes" required placeholder="Ex.: 40 × 30 × 20 cm" /></div>
+            <div class="full dims"><label>Medidas do volume (cm)</label>
+              <div class="dims-wrap">
+                <svg class="cube" viewBox="0 0 170 140" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M30 45 L95 20 L150 45 L85 70 Z" fill="rgba(57,181,74,.16)"/><path d="M30 45 L85 70 L85 130 L30 105 Z" fill="rgba(57,181,74,.06)"/><path d="M85 70 L150 45 L150 105 L85 130 Z" fill="rgba(57,181,74,.1)"/></g><g class="dim-lines" stroke="#c9a75b" stroke-width="1.2" stroke-dasharray="3 3"><path d="M30 112 L85 137"/><path d="M92 137 L157 112"/><path d="M22 45 L22 105"/></g><g class="dim-txt" font-family="Inter,system-ui" font-size="11" fill="#c9a75b" font-weight="600"><text id="dimC" x="42" y="134">C</text><text id="dimL" x="120" y="134">L</text><text id="dimA" x="4" y="78">A</text></g></svg>
+                <div class="dims-fields">
+                  <div><label>Comprimento</label><input name="dim_c" type="number" min="1" step="0.1" inputmode="decimal" required placeholder="40" /></div>
+                  <div><label>Largura</label><input name="dim_l" type="number" min="1" step="0.1" inputmode="decimal" required placeholder="30" /></div>
+                  <div><label>Altura</label><input name="dim_a" type="number" min="1" step="0.1" inputmode="decimal" required placeholder="20" /></div>
+                </div>
+                <input type="hidden" name="dimensoes" />
+                <small class="dims-hint" id="dimsHint">Preencha as três medidas do maior volume.</small>
+              </div>
+            </div>
             <div><label>Valor da nota fiscal (R$)</label><input name="valor" type="number" min="0" step="0.01" required placeholder="Compõe o frete e o seguro" /></div>
             <div><label>Quem paga o frete</label><select name="pagador"><option value="Remetente">Remetente (quem envia)</option><option value="Destinatário">Destinatário (quem recebe)</option></select></div>
             <div><label>Data desejada da coleta</label><input name="coleta_data" type="date" /></div>
@@ -127,8 +138,8 @@
   </aside>
 
 
-  <script src="/data/rede.js?v=202609081401"></script>
-  <script src="/cotacao.js?v=202609081401"></script>
+  <script src="/data/rede.js?v=202609081414"></script>
+  <script src="/cotacao.js?v=202609081414"></script>
   <script>document.getElementById("burger").addEventListener("click",()=>{document.getElementById("burger").classList.toggle("is-open");document.getElementById("mobileMenu").classList.toggle("is-open")});document.querySelectorAll('[data-open-quote]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));document.querySelectorAll('.years-since').forEach(e=>e.textContent=25);</script>
 </body>
 </html>

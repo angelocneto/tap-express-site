@@ -65,3 +65,11 @@ function tap_eye(): string {
     return '<button type="button" class="eye" aria-label="Mostrar ou ocultar a senha" data-eye><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12s3.8-7 10.5-7 10.5 7 10.5 7-3.8 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/><path class="e-shut" d="M3 3l18 18" style="display:none"/></svg></button>';
 }
 function tap_msgs(string $msg, string $err): void { global $h; if ($msg) echo "<div class='msg ok'>{$h($msg)}</div>"; if ($err) echo "<div class='msg err'>{$h($err)}</div>"; }
+
+// cubo com as medidas (C × L × A) a partir do texto salvo em dimensoes
+function tap_cubo(?string $dim, int $w = 92): string {
+    if (!$dim || !preg_match('/(\d+(?:[.,]\d+)?)\D+(\d+(?:[.,]\d+)?)\D+(\d+(?:[.,]\d+)?)/u', $dim, $m)) return '';
+    [$c, $l, $a] = [$m[1], $m[2], $m[3]]; $h = fn($v) => htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
+    $m3 = ((float)str_replace(',', '.', $c) * (float)str_replace(',', '.', $l) * (float)str_replace(',', '.', $a)) / 1e6;
+    return '<span class="cubo" title="' . $h("$c × $l × $a cm · " . number_format($m3, 3, ',', '.') . ' m³ · cubagem ' . number_format($m3 * 300, 1, ',', '.') . ' kg') . '"><svg viewBox="0 0 170 140" width="' . $w . '" height="' . (int)($w * 140 / 170) . '"><g fill="none" stroke="#1f8f36" stroke-width="2" stroke-linejoin="round"><path d="M30 45 L95 20 L150 45 L85 70 Z" fill="#e6f4ea"/><path d="M30 45 L85 70 L85 130 L30 105 Z" fill="#f3f6f3"/><path d="M85 70 L150 45 L150 105 L85 130 Z" fill="#dcefe1"/></g><g font-family="Inter,system-ui" font-size="17" font-weight="700" fill="#0b1a12"><text x="38" y="138">' . $h($c) . '</text><text x="112" y="138">' . $h($l) . '</text><text x="0" y="82">' . $h($a) . '</text></g></svg><em>' . $h(number_format($m3, 3, ',', '.')) . ' m³</em></span>';
+}

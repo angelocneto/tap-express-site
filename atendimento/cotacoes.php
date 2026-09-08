@@ -46,7 +46,7 @@ if ($modo === 'ver') {
         <div class="kv">
           <div>Recebida</div><div><?= $fmtData($c['criado_em']) ?></div><div>Origem</div><div><?= $h($c['origem']) ?></div><div>Destino</div><div><?= $h($c['destino']) ?></div>
           <div>Tipo</div><div><?= $h($c['tipo']) ?></div><div>Volumes</div><div><?= $h($c['volumes']) ?></div><div>Peso</div><div><?= $c['peso'] !== null ? $h($c['peso']) . ' kg' : '' ?></div>
-          <div>Dimensões</div><div><?= $h($c['dimensoes']) ?></div><div>Valor da NF</div><div><?= $c['valor_mercadoria'] !== null ? 'R$ ' . number_format((float)$c['valor_mercadoria'], 2, ',', '.') : '' ?></div>
+          <div>Dimensões</div><div><?= $h($c['dimensoes']) ?> <?= tap_cubo($c['dimensoes'], 110) ?></div><div>Valor da NF</div><div><?= $c['valor_mercadoria'] !== null ? 'R$ ' . number_format((float)$c['valor_mercadoria'], 2, ',', '.') : '' ?></div>
           <div>Paga o frete</div><div><?= $h($c['pagador'] ?? '') ?></div><div>Coleta desejada</div><div><?= !empty($c['coleta_data']) ? $h(implode('/', array_reverse(explode('-', $c['coleta_data'])))) : '' ?></div>
           <div>Empresa</div><div><?= $h($c['empresa']) ?></div><div>CNPJ</div><div><?= $h($c['cnpj'] ?? '') ?></div><div>Telefone</div><div><a href="tel:+<?= $tel ?>"><?= $h($c['telefone']) ?></a></div><div>E-mail</div><div><?= $h($c['email']) ?></div>
           <div>Observações</div><div><?= nl2br($h($c['observacoes'])) ?></div><div>Página</div><div><?= $h($c['origem_pagina']) ?></div></div></div>
@@ -89,6 +89,7 @@ if ($modo === 'kanban') {
       <small><?= $h($c['origem']) ?> → <?= $h($c['destino']) ?></small>
       <small><?= $h($c['tipo']) ?><?= $c['volumes'] ? ' · ' . $h($c['volumes']) . ' vol' : '' ?><?= $c['peso'] !== null ? ' · ' . $h($c['peso']) . ' kg' : '' ?><?= $c['valor_mercadoria'] !== null ? ' · NF R$ ' . number_format((float)$c['valor_mercadoria'], 2, ',', '.') : '' ?></small>
       <small><?= $fmtData($c['criado_em']) ?></small>
+      <?= tap_cubo($c['dimensoes'], 84) ?>
       <div class="acts"><a href="cotacoes.php?v=ver&id=<?= $c['id'] ?>">Detalhes</a><a href="<?= $walink ?>" target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
   <?php endforeach; ?></div>
