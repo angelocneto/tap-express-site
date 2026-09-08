@@ -41,10 +41,10 @@ seo=f'''
   <meta name="geo.region" content="BR-SP" /><meta name="geo.placename" content="Presidente Prudente" />
   <meta property="og:type" content="website" /><meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="TAP Express" />
-  <meta property="og:title" content="TAP Express — Onde a urgência encontra domínio regional" />
+  <meta property="og:title" content="TAP Express: onde a urgência encontra domínio regional" />
   <meta property="og:description" content="Precisão regional. Velocidade que move negócios. 20 unidades, 104 localidades em SP, PR e MS, entrega em até 18 horas." />
-  <meta property="og:url" content="{BASE}/" /><meta property="og:image" content="{BASE}/assets/hero.jpg" />
-  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="TAP Express — Precisão regional. Velocidade que move negócios." /><meta name="twitter:image" content="{BASE}/assets/hero.jpg" />
+  <meta property="og:url" content="{BASE}/" /><meta property="og:image" content="{BASE}/assets/og-home.jpg" />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="TAP Express: Precisão regional. Velocidade que move negócios." /><meta name="twitter:image" content="{BASE}/assets/og-home.jpg" />
   <script type="application/ld+json">{json.dumps(ld_home,ensure_ascii=False)}</script>
   <!-- seo:end -->'''
 h=h.replace('<link rel="icon" href="assets/favicon.png" />','<link rel="icon" href="assets/favicon.png" />'+seo,1)

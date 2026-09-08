@@ -16,7 +16,7 @@ WIDGET=WIDGET.replace('src="assets/','src="/assets/').replace('poster="assets/',
 V=re.search(r'\?v=(\d+)',index_html); V=V.group(1) if V else str(YEAR)
 PAGES=[]  # (url, priority, changefreq, title)
 
-def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/hero.jpg", crumbs=None, extra_js=""):
+def layout(url, title, desc, body, ld, theme="dark", og_image=BASE+"/assets/og-home.jpg", crumbs=None, extra_js=""):
     ldj=json.dumps(ld,ensure_ascii=False)
     crumb_html=''.join(f'<a href="{c[1]}">{esc(c[0])}</a><span>›</span>' for c in (crumbs or [("TAP Express","/")]))
     page=f'''<!DOCTYPE html>
@@ -188,7 +188,7 @@ for c in cities:
 <h2>Perguntas frequentes</h2>{faq_html(fq)}</div>
 <figure class="side-photo"><img src="{('/'+u['foto']) if u.get('foto') else '/assets/frota.jpg'}" alt="{esc('Unidade TAP Express em ' + u['n'])}" /><figcaption>Unidade TAP Express em {esc(u['n'])} · <a href="/unidades/{u['slug']}/" style="color:var(--green)">ver unidade</a></figcaption></figure></div></section>'''
     ld=[service_ld(f"Transporte de encomendas em {c['n']}",serv,url),{"@context":"https://schema.org","@type":"LocalBusiness","@id":f"{BASE}/unidades/{u['slug']}/#local","name":f"TAP Express · {u['n']}","url":f"{BASE}/unidades/{u['slug']}/","telephone":u['tel'],"address":{"@type":"PostalAddress","streetAddress":u['addr'],"addressLocality":u['n'],"addressRegion":u['uf'],"addressCountry":"BR"},"areaServed":{"@type":"City","name":c['n']}},bc(("TAP Express",BASE+"/"),("Cidades",BASE+"/cidades/"),(c['n'],url)),faq_ld(fq)]
-    write(f'cidades/{s}',url,f"Transportadora em {c['n']} {c['uf']} | TAP Express",f"Transporte de encomendas, malotes e cargas em {c['n']}, {c['uf']}, pela unidade TAP Express de {u['n']}. {('Atendimento às ' + dias_txt + '. ') if c['d'] else ''}Entrega em até 18 horas e seguro incluso.",hero,body,ld,prio="0.6",crumbs=[("TAP Express","/"),("Cidades","/cidades/"),(c['n'],f"/cidades/{s}/")],og_image=(BASE+'/'+u['foto']) if u.get('foto') else BASE+'/assets/hero.jpg')
+    write(f'cidades/{s}',url,f"Transportadora em {c['n']} {c['uf']} | TAP Express",f"Transporte de encomendas, malotes e cargas em {c['n']}, {c['uf']}, pela unidade TAP Express de {u['n']}. {('Atendimento às ' + dias_txt + '. ') if c['d'] else ''}Entrega em até 18 horas e seguro incluso.",hero,body,ld,prio="0.6",crumbs=[("TAP Express","/"),("Cidades","/cidades/"),(c['n'],f"/cidades/{s}/")],og_image=(BASE+'/'+u['foto']) if u.get('foto') else BASE+'/assets/og-home.jpg')
 # índice de cidades
 def city_links(uf): return ''.join(f'<a class="tile" href="/cidades/{c["slug"]}/"><h3>{esc(c["n"])}</h3><p>via {esc(c["unit"]["n"])}{(" · " + esc(c["d"].replace(",", "/"))) if c["d"] else ""}</p></a>' for c in cities if c['uf']==uf)
 hero=f'<p class="kicker">Cidades atendidas</p><h1>{len(cities)} localidades <span>na rede TAP.</span></h1><p class="sub">Encontre sua cidade e veja qual unidade atende, em que dias e como pedir a cotação. Prefere o mapa? <a href="/#unidades" style="color:var(--green)">Abra o mapa interativo</a>.</p>'
