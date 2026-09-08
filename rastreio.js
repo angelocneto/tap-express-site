@@ -23,7 +23,10 @@
       if (j.eventos && j.eventos.length) {
         html += '<ol class="timeline">' + j.eventos.map((ev, i) => `<li class="${i === 0 ? "is-last" : ""}"><time>${esc(ev.data)}${ev.hora ? " · " + esc(ev.hora) : ""}</time><b>${esc(ev.descricao)}</b>${ev.detalhe ? `<small>${esc(ev.detalhe)}</small>` : ""}</li>`).join("") + "</ol>";
       }
-      if (!j.ok && !(j.eventos && j.eventos.length)) html += `<div class="track-msg err">${esc(j.motivo || "Não encontramos essa encomenda.")} Confira os dados ou fale com a unidade pelo WhatsApp.</div>`;
+      if (j.encomendas && j.encomendas.length) {
+        html += '<div class="ship-list">' + j.encomendas.map(e => `<article class="ship"><header><b>${esc(e.situacao || "Sem situação")}</b><span>${esc(e.ocorrencia)}</span></header><div class="ship-grid">${e.nf ? `<div><small>Nota / coleta</small>${esc(e.nf)}</div>` : ""}${e.ctrc ? `<div><small>CTRC</small>${esc(e.ctrc)}</div>` : ""}${e.destinatario ? `<div><small>Destinatário</small>${esc(e.destinatario)}</div>` : ""}${e.destino ? `<div><small>Destino</small>${esc(e.destino)}</div>` : ""}${e.unidade ? `<div><small>Unidade</small>${esc(e.unidade)}</div>` : ""}${e.previsao ? `<div><small>Previsão de entrega</small>${esc(e.previsao)}</div>` : ""}${e.entrega ? `<div><small>Entregue em</small>${esc(e.entrega)}</div>` : ""}${e.inclusao ? `<div><small>Coletado em</small>${esc(e.inclusao)}</div>` : ""}</div>${e.detalhe ? `<p>${esc(e.detalhe)}</p>` : ""}</article>`).join("") + "</div>";
+      }
+      if (!j.ok && !(j.eventos && j.eventos.length) && !(j.encomendas && j.encomendas.length)) html += `<div class="track-msg err">${esc(j.motivo || "Não encontramos essa encomenda.")} Confira os dados ou fale com a unidade pelo WhatsApp.</div>`;
       if (j.html) html += `<details class="track-raw"${j.eventos && j.eventos.length ? "" : " open"}><summary>Resposta completa do portal</summary><div class="track-raw-body">${j.html}</div></details>`;
       html += `<p class="track-foot">Fonte: portal SSW · consultado em ${esc(j.consultado_em)} · <a href="https://ssw.inf.br/2/rastreamento" target="_blank" rel="noopener">abrir no portal</a></p>`;
       show(html);

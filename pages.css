@@ -105,3 +105,11 @@ dd .go-links a:hover { color: var(--green); }
 section[data-theme="light"] .track-form2 { background: #fff; } section[data-theme="light"] .track-form2 input { background: #fff; color: #08150f; }
 @media (max-width: 640px) { .track-form2 .row2 { grid-template-columns: 1fr; } }
 .track-quem { font-size: 13px; color: var(--muted); margin: 0 0 10px; }
+
+.ship-list { display: grid; gap: 12px; margin-bottom: 16px; }
+.ship { border: 1px solid rgba(242,247,243,.12); border-radius: 16px; padding: 16px 18px; background: rgba(255,255,255,.035); }
+.ship header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; margin-bottom: 10px; }
+.ship header b { font-family: var(--display); font-size: 15px; color: #9df0a8; } .ship header span { font-size: 12px; color: var(--muted); }
+.ship-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px 14px; font-size: 14px; }
+.ship-grid small { display: block; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.ship p { margin: 10px 0 0; font-size: 13px; color: var(--muted); }

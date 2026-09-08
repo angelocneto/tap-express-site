@@ -27,6 +27,27 @@ elseif (strlen($cnpj) === 14 && $chave !== '') { $url = 'https://ssw.inf.br/2/re
 elseif (strlen($cnpj) === 14 && $senha !== '') { $url = 'https://ssw.inf.br/2/resultSSW'; $post = ['cnpj' => $cnpj, 'chave' => $senha, 'pwd' => '1']; $modo = 'senha'; } // o SSW valida a senha do remetente no campo chave
 else out(422, ['ok' => false, 'erro' => 'Informe a chave da NF-e (44 números), ou o CNPJ com a chave de rastreio, ou o CNPJ com a senha de remetente.']);
 
+if ($modo === 'senha') {
+    // lista de encomendas do remetente nos últimos 30 dias: o SSW exporta CSV; "control" é a senha em hexadecimal
+    $csvUrl = 'https://ssw.inf.br/2/resultSSW?cnpj=' . $cnpj . '&output=csv&contrnr=&control=' . bin2hex($senha);
+    $ch = curl_init($csvUrl);
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 3, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8, CURLOPT_USERAGENT => 'Mozilla/5.0 (compatible; TAPExpress-Rastreio/1.0; +https://www.tapexpress.com.br)']);
+    $csv = curl_exec($ch); $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if ($csv === false || $code >= 500) out(502, ['ok' => false, 'erro' => 'O portal de rastreamento não respondeu. Tente de novo em instantes.']);
+    if (!mb_check_encoding($csv, 'UTF-8')) $csv = mb_convert_encoding($csv, 'UTF-8', 'ISO-8859-1');
+    if (stripos($csv, '<html') !== false || stripos($csv, 'CNPJ/CPF Remetente') === false) out(200, ['ok' => false, 'modo' => 'senha', 'quem' => '', 'motivo' => 'CNPJ ou senha não reconhecidos pelo portal.', 'eventos' => [], 'encomendas' => [], 'html' => '', 'fonte' => 'SSW', 'consultado_em' => date('d/m/Y H:i')]);
+    $linhas = array_values(array_filter(array_map('trim', preg_split('/\r\n|\n|\r/', $csv)), fn($l) => $l !== ''));
+    $head = array_map(fn($x) => trim($x), str_getcsv(array_shift($linhas), ';'));
+    $enc = [];
+    foreach ($linhas as $ln) {
+        $cols = str_getcsv($ln, ';'); if (count($cols) < 5) continue; $r = [];
+        foreach ($head as $i => $k) $r[$k] = trim((string)($cols[$i] ?? ''));
+        $enc[] = ['ctrc' => $r['CTRC'] ?? '', 'nf' => $r['Nota Fiscal/Nro Coleta'] ?? '', 'pedido' => $r['Nro Pedido'] ?? '', 'inclusao' => $r['Data Inclusao'] ?? '', 'destinatario' => $r['Destinatario'] ?? '', 'destino' => trim(($r['Cidade Destino'] ?? '') . ' ' . ($r['UF Destino'] ?? '')), 'unidade' => $r['Unidade'] ?? '', 'ocorrencia' => $r['Data/Hora da Ocorrencia'] ?? '', 'situacao' => $r['Situacao'] ?? '', 'detalhe' => $r['Detalhe'] ?? '', 'entrega' => $r['Data Entrega'] ?? '', 'previsao' => $r['Previsao de Entrega'] ?? '', 'cte' => $r['CTe'] ?? ''];
+    }
+    $quem = 'Remetente ' . preg_replace('/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/', '$1.$2.$3/$4-$5', $cnpj) . ($enc ? ' · ' . ($enc[0]['remetente'] ?? '') : '');
+    if ($enc && !empty($linhas)) { $first = str_getcsv($linhas[0], ';'); $idx = array_search('Remetente', $head, true); if ($idx !== false && !empty($first[$idx])) $quem = 'Remetente: ' . trim($first[$idx]) . ' · ' . preg_replace('/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/', '$1.$2.$3/$4-$5', $cnpj); }
+    out(200, ['ok' => count($enc) > 0, 'modo' => 'senha', 'quem' => $quem, 'motivo' => $enc ? '' : 'Nenhuma encomenda deste remetente nos últimos 30 dias no portal.', 'eventos' => [], 'encomendas' => $enc, 'html' => '', 'fonte' => 'SSW', 'consultado_em' => date('d/m/Y H:i')]);
+}
 $ch = curl_init($url);
 curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_POSTFIELDS => http_build_query($post), CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 3, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8,
     CURLOPT_USERAGENT => 'Mozilla/5.0 (compatible; TAPExpress-Rastreio/1.0; +https://www.tapexpress.com.br)', CURLOPT_HTTPHEADER => ['Accept: text/html', 'Accept-Language: pt-BR']]);
